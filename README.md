@@ -1,3 +1,3 @@
-# react-redux-registration-login-example
+# react-app
 
 React + Warehouse
