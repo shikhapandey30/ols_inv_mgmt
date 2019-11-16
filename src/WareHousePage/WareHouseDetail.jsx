@@ -5,7 +5,7 @@ import { Header } from '../Header';
 import { userActions } from '../_actions';
 import { Footer } from '../Footer';
 
-class WareHouse extends React.Component {
+class WareHouseDetail extends React.Component {
     componentDidMount() {
       console.log("mount")
         this.props.dispatch(userActions.getAllwarehouse());
@@ -21,8 +21,9 @@ class WareHouse extends React.Component {
     } 
 
     render() {
-      const { user, allwarehouses } = this.props;
+      const { user, warehouse, allwarehouses } = this.props;
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
+      console.log("warehouse#####****", warehouse)
       console.log("allwarehouses#####****", allwarehouses)
       return (
         <div>
@@ -41,7 +42,7 @@ class WareHouse extends React.Component {
                     </a>
                   </div>
                 </div>
-                <h5 className="loading-msg">{allwarehouses.loading && <em>Loading All Warehouses .....</em>}</h5>
+                <h5 className="loading-msg">{warehouse.loading && <em>Loading All Warehouses .....</em>}</h5>
                 <table className="table table-bordered table table-border">
                   <thead>
                     <tr className="filters">
@@ -56,9 +57,9 @@ class WareHouse extends React.Component {
                     </tr>  
                   </thead>
                   
-                  { allwarehouses.items && allwarehouses.items.length > 0 &&
+                  { warehouse.items && warehouse.items.length > 0 &&
                     <tbody>
-                    {allwarehouses.items.map((warehouse, index) =>
+                    {warehouse.items.map((warehouse, index) =>
                       <tr key={warehouse.id} >
                         <td>{index + 1}</td>
                         <td onClick={() => { this.fShow(warehouse) }} >{warehouse.name }</td>
@@ -84,13 +85,14 @@ class WareHouse extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { allwarehouses, authentication } = state;
+  const { warehouse, allwarehouses, authentication } = state;
   const { user } = authentication;
   return {
     user,
-    allwarehouses
+    allwarehouses,
+    warehouse
   };
 }
 
-const connectedWareHouse = connect(mapStateToProps)(WareHouse);
-export { connectedWareHouse as WareHouse };
+const connectedWareHouseDetail = connect(mapStateToProps)(WareHouseDetail);
+export { connectedWareHouseDetail as WareHouseDetail };

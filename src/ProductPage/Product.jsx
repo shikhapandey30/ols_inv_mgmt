@@ -6,10 +6,10 @@ import { userActions } from '../_actions';
 import { Footer } from '../Footer';
 
 class Product extends React.Component {
-    // componentDidMount() {
-    //   console.log("mount")
-    //     this.props.dispatch(userActions.getAll());
-    // }
+    componentDidMount() {
+      console.log("mount")
+        this.props.dispatch(userActions.getAllproduct());
+    }
 
     handleDeleteUser(id) {
         return (e) => this.props.dispatch(userActions.delete(id));

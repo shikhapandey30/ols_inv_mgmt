@@ -12,6 +12,7 @@ import { Product } from '../ProductPage';
 import { NewProduct } from '../ProductPage';
 import { WareHouse } from '../WareHousePage';
 import { NewWareHouse } from '../WareHousePage';
+import { WareHouseDetail } from '../WareHousePage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
 
@@ -38,11 +39,12 @@ class App extends React.Component {
                 <Route path="/Header" component={Header} />
                 <Route path="/Footer" component={Footer} />
                 <Route path="/products" component={Product} />
-                <Route path="/new-product" component={NewProduct} />
-                <Route path="/warehouse" component={WareHouse} />
-                <Route path="/new-warehouse" component={NewWareHouse} />
+                <Route path="/new-product" component={NewProduct} />                
                 <Route path="/login" component={LoginPage} />
                 <Route path="/register" component={RegisterPage} />
+                <Route path="/warehouse" component={WareHouse} />
+                <Route path="/warehousedetail" component={WareHouseDetail} />
+                <Route path="/new-warehouse" component={NewWareHouse} />
                 <Redirect from="*" to="/" />
               </Switch>
             </Router>

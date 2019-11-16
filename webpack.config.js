@@ -8,8 +8,8 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
-                loader: 'babel-loader'
+              test: /\.jsx?$/,
+              loader: 'babel-loader'
             }
         ]
     },
@@ -18,13 +18,17 @@ module.exports = {
     })],
     devServer: {
         historyApiFallback: true,
-       https: false,       
+       https: false, 
+       proxy: {
+      '/internal': 'http://localhost:8084'
+        }      
     },
     
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'http://18.217.112.188:8084/warehouse_user'
+            apiUrlLogin: 'http://18.217.112.188:8084/warehouse_user',
+            apiUrl: 'http://18.217.112.188:8084/api/v1/inventory'
         })
     }
 }

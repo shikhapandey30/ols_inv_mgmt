@@ -6,6 +6,8 @@ export const userService = {
     logout,
     register,
     getAllwarehouse,
+    getwarehousedetail,
+    getAllproduct,
     getById,
     update,
     delete: _delete
@@ -18,12 +20,13 @@ function login(username, password) {
         body: JSON.stringify({ username, password })
     };
 
-    return fetch(`${config.apiUrl}/login`, requestOptions)
-        .then(handleResponse)
-        .then(user => {
-            localStorage.setItem('user', JSON.stringify(user));
-            return user;
-        });
+    return fetch(`${config.apiUrlLogin}/login`, requestOptions)
+      .then(handleResponse)
+      .then(user => {
+          localStorage.setItem('user', JSON.stringify(user));
+          return user;
+
+      });
 }
 
 function logout() {
@@ -33,13 +36,43 @@ function logout() {
 function getAllwarehouse() {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+    headers: authHeader()
+    // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+    // headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
   };
-    return fetch("http://18.217.112.188:8084/api/v1/inventory/warehouses", requestOptions)
+    return fetch(`${config.apiUrl}/warehouses`, requestOptions)
     .then(handleResponse)
     .then(allwarehouses => {
       console.log("Response",allwarehouses)
-        return JSON.parse(allwarehouses);
+        return allwarehouses.data;
+    });
+}
+
+function getwarehousedetail(warehouse) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+  };
+   console.log("warehouse")
+    return fetch(`${config.apiUrl}/warehouses/${warehouse.id}`, requestOptions)
+    .then(handleResponse)
+    .then(warehouse => {
+      console.log("warehouse_Response$$$$$$$$$$$$",warehouse)
+       return [warehouse.data];
+    });
+}
+
+
+function getAllproduct() {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+  };
+    return fetch(`${config.apiUrl}/warehouses`, requestOptions)
+    .then(handleResponse)
+    .then(allproducts => {
+      console.log("Response",allproducts)
+        return JSON.parse(allproducts);
     });
 }
 
