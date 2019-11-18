@@ -15,6 +15,9 @@ import { NewWareHouse } from '../WareHousePage';
 import { WareHouseDetail } from '../WareHousePage';
 import { ProductDetail } from '../ProductPage';
 import { WareHouseDelete } from '../WareHousePage';
+import { Category } from '../CategoryPage';
+import { NewCategory } from '../CategoryPage';
+import { CategoryDetail } from '../CategoryPage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
 
@@ -41,7 +44,10 @@ class App extends React.Component {
                 <Route path="/Header" component={Header} />
                 <Route path="/Footer" component={Footer} />
                 <Route path="/products" component={Product} />
-                <Route path="/new-product" component={NewProduct} />                
+                <Route path="/new-product" component={NewProduct} />
+                <Route path="/new-category" component={NewCategory} />   
+                <Route path="/categories" component={Category} />
+                <Route path="/category/:id" component={CategoryDetail} />             
                 <Route path="/login" component={LoginPage} />
                 <Route path="/register" component={RegisterPage} />
                 <Route exact path="/warehouses" component={WareHouse} />

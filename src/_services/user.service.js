@@ -10,6 +10,7 @@ export const userService = {
     getAllproduct,
     getproductdetail,
     getAllcategory,
+    getcategorydetail,
     getById,
     update,
     delete: _delete
@@ -122,6 +123,21 @@ function getAllcategory() {
     .then(allcategories => {
       console.log("Response",allcategories)
       return allcategories.data;
+    });
+}
+
+function getcategorydetail(categoryID) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+    // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+    // headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
+  };
+    return fetch(`${config.apiUrl}/categories/${categoryID}`, requestOptions)
+    .then(handleResponse)
+    .then(category => {
+      console.log("Response",category)
+      return category.data;
     });
 }
 

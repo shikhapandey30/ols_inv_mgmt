@@ -50,7 +50,7 @@ class NewWareHouse extends React.Component {
       axios.post(`${config.apiUrl}/warehouses`, warehouse)
       .then(response => {
         this.setState({ locations: response.data });
-        window.location = "/warehouse"
+        window.location = "/warehouses"
       })
     }
 

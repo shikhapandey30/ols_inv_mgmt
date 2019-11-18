@@ -12,6 +12,7 @@ export const userActions = {
     getAllproduct,
     getproductdetail,
     getAllcategory,
+    getcategorydetail,
     delete: _delete
 };
 
@@ -95,6 +96,21 @@ function getwarehousedetail(warehouseID) {
   function request() { return { type: userConstants.GETWAREHOUSEDETAIL_REQUEST } }
   function success(warehouse) { return { type: userConstants.GETWAREHOUSEDETAIL_SUCCESS, warehouse } }
   function failure(error) { return { type: userConstants.GETWAREHOUSEDETAIL, error } }
+}
+
+function getcategorydetail(categoryID) {
+  return dispatch => {
+      dispatch(request());
+      userService.getcategorydetail(categoryID)
+          .then(
+              category => dispatch(success(category)),
+              error => dispatch(failure(error.toString()))
+          );
+  };
+
+  function request() { return { type: userConstants.GETCATEGORYDETAIL_REQUEST } }
+  function success(category) { return { type: userConstants.GETCATEGORYDETAIL_SUCCESS, category } }
+  function failure(error) { return { type: userConstants.GETCATEGORYDETAIL, error } }
 }
 
 function getproductdetail(productID) {
