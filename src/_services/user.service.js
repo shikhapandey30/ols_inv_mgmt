@@ -8,6 +8,8 @@ export const userService = {
     getAllwarehouse,
     getwarehousedetail,
     getAllproduct,
+    getproductdetail,
+    getAllcategory,
     getById,
     update,
     delete: _delete
@@ -63,6 +65,21 @@ function getwarehousedetail(warehouseID) {
     });
 }
 
+function getproductdetail(productID) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+    // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+    // headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
+  };
+    return fetch(`${config.apiUrl}/products/${productID}`, requestOptions)
+    .then(handleResponse)
+    .then(product => {
+      console.log("Response",product)
+      return product.data;
+    });
+}
+
 
 function getAllproduct() {
   const requestOptions = {
@@ -92,6 +109,21 @@ function getAllproduct() {
 //         return JSON.parse(allwarehouses);
 //     });
 // }
+
+function getAllcategory() {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+    // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+    // headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
+  };
+    return fetch(`${config.apiUrl}/categories`, requestOptions)
+    .then(handleResponse)
+    .then(allcategories => {
+      console.log("Response",allcategories)
+      return allcategories.data;
+    });
+}
 
 
 function getById(id) {

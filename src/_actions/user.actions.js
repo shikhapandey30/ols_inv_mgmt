@@ -10,6 +10,8 @@ export const userActions = {
     getAllwarehouse,
     getwarehousedetail,
     getAllproduct,
+    getproductdetail,
+    getAllcategory,
     delete: _delete
 };
 
@@ -95,6 +97,21 @@ function getwarehousedetail(warehouseID) {
   function failure(error) { return { type: userConstants.GETWAREHOUSEDETAIL, error } }
 }
 
+function getproductdetail(productID) {
+  return dispatch => {
+      dispatch(request());
+      userService.getproductdetail(productID)
+          .then(
+              product => dispatch(success(product)),
+              error => dispatch(failure(error.toString()))
+          );
+  };
+
+  function request() { return { type: userConstants.GETPRODUCTDETAIL_REQUEST } }
+  function success(product) { return { type: userConstants.GETPRODUCTDETAIL_SUCCESS, product } }
+  function failure(error) { return { type: userConstants.GETPRODUCTDETAIL, error } }
+}
+
 function getAllproduct() {
     return dispatch => {
         dispatch(request());
@@ -109,6 +126,22 @@ function getAllproduct() {
     function success(allproducts) { return { type: userConstants.GETALLPRODUCT_SUCCESS, allproducts } }
     function failure(error) { return { type: userConstants.GETALLPRODUCT, error } }
 }
+
+function getAllcategory() {
+  return dispatch => {
+    dispatch(request());
+    userService.getAllcategory()
+    .then(
+      allcategories => dispatch(success(allcategories)),
+      error => dispatch(failure(error.toString()))
+    );
+  };
+
+  function request() { return { type: userConstants.GETALLCATEGORY_REQUEST } }
+  function success(allcategories) { return { type: userConstants.GETALLCATEGORY_SUCCESS, allcategories } }
+  function failure(error) { return { type: userConstants.GETALLCATEGORY, error } }
+}
+
 
 function _delete(id) {
   return dispatch => {

@@ -36,6 +36,7 @@ class Product extends React.Component {
                     <tr className="filters">
                       <th>S.No</th>
                       <th>ID</th>
+                      <th>Name</th>
                       <th>Code</th>
                       
                     </tr>  
@@ -46,7 +47,8 @@ class Product extends React.Component {
                     {allproducts.items.map((product, index) =>
                       <tr key={product.id} >
                         <td>{index + 1}</td>
-                        <td>{product.id}</td>
+                        <td><Link to={"/product/" + product.id}>{product.id}</Link></td>
+                        <td>{product.name}</td>
                         <td>{product.code}</td>
                         
                       </tr>

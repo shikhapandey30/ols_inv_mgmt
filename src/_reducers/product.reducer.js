@@ -1,16 +1,16 @@
 import { userConstants } from '../_constants';
-export function allproducts(state = {}, action) {
+export function product(state = {}, action) {
   switch (action.type) {
-    case userConstants.GETALLPRODUCT_REQUEST:
+    case userConstants.GETPRODUCTDETAIL_REQUEST:
 
       return {
         loading: true
       };
-    case userConstants.GETALLPRODUCT_SUCCESS:
+    case userConstants.GETPRODUCTDETAIL_SUCCESS:
       return {
-        items: action.allproducts
+        items: action.product
       };
-    case userConstants.GETALLPRODUCT_FAILURE:
+    case userConstants.GETPRODUCTDETAIL_FAILURE:
       return { 
         error: action.error
       };
