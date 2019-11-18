@@ -7,23 +7,13 @@ import { Footer } from '../Footer';
 
 class WareHouse extends React.Component {
     componentDidMount() {
-      console.log("mount")
-        this.props.dispatch(userActions.getAllwarehouse());
+      this.props.dispatch(userActions.getAllwarehouse());
     }
-
-    handleDeleteUser(id) {
-        return (e) => this.props.dispatch(userActions.delete(id));
-    }
-
-    fShow(warehouse) {
-      const { dispatch } = this.props;
-      dispatch(userActions.getwarehousedetail(warehouse));
-    } 
 
     render() {
       const { user, allwarehouses } = this.props;
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
-      console.log("allwarehouses#####****", allwarehouses)
+      console.log("allwarehouses", allwarehouses)
       return (
         <div>
           <Header />
@@ -34,7 +24,7 @@ class WareHouse extends React.Component {
                   <h3 className="panel-title"> 
                    
                    <a href="/products"><button type="button" className="btn btn-default">Product</button></a>
-                    <a href="/warehouse"><button type="button" className="btn btn-default active">Warehouse</button></a></h3>
+                    <a href="/warehouses"><button type="button" className="btn btn-default active">Warehouse</button></a></h3>
 
                   <div className="pull-right">
                     <a href="/new-warehouse" className="btn btn-primary btn-xs pull-right"><b>+</b> Add new Warehouse
@@ -61,7 +51,7 @@ class WareHouse extends React.Component {
                     {allwarehouses.items.map((warehouse, index) =>
                       <tr key={warehouse.id} >
                         <td>{index + 1}</td>
-                        <td onClick={() => { this.fShow(warehouse) }} >{warehouse.name }</td>
+                        <td><Link to={"/warehousedetail/" + warehouse.id}>{warehouse.name}</Link></td>
                         <td>{warehouse.id}</td>
                         <td>{warehouse.address}</td>
                         <td>{warehouse.city}</td>
@@ -75,7 +65,6 @@ class WareHouse extends React.Component {
                   }  
                 </table>
               </div>
-              <center><button type="button" className="btn btn-default active">Submit</button></center>
             </div>
           </div>
         </div>  

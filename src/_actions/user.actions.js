@@ -66,12 +66,12 @@ function register(user) {
 
 function getAllwarehouse() {
   return dispatch => {
-      dispatch(request());
-      userService.getAllwarehouse()
-          .then(
-              allwarehouses => dispatch(success(allwarehouses)),
-              error => dispatch(failure(error.toString()))
-          );
+    dispatch(request());
+    userService.getAllwarehouse()
+    .then(
+      allwarehouses => dispatch(success(allwarehouses)),
+      error => dispatch(failure(error.toString()))
+    );
   };
 
   function request() { return { type: userConstants.GETALLWAREHOUSE_REQUEST } }
@@ -79,19 +79,20 @@ function getAllwarehouse() {
   function failure(error) { return { type: userConstants.GETALLWAREHOUSE, error } }
 }
 
-function getwarehousedetail(warehouse) {
-    return dispatch => {
-        dispatch(request());
-        userService.getwarehousedetail(warehouse)
-            .then(
-                warehouse => dispatch(success(warehouse)),
-                history.push(`warehousedetail/${warehouse.id}`),
-                error => dispatch(failure(error.toString()))
-            );
-    };
-    function request() { return { type: userConstants.GETWAREHOUSEDETAIL_REQUEST } }
-    function success(warehouse) { return { type: userConstants.GETWAREHOUSEDETAIL_SUCCESS, warehouse } }
-    function failure(error) { return { type: userConstants.GETWAREHOUSEDETAIL, error } }
+
+function getwarehousedetail(warehouseID) {
+  return dispatch => {
+      dispatch(request());
+      userService.getwarehousedetail(warehouseID)
+          .then(
+              warehouse => dispatch(success(warehouse)),
+              error => dispatch(failure(error.toString()))
+          );
+  };
+
+  function request() { return { type: userConstants.GETWAREHOUSEDETAIL_REQUEST } }
+  function success(warehouse) { return { type: userConstants.GETWAREHOUSEDETAIL_SUCCESS, warehouse } }
+  function failure(error) { return { type: userConstants.GETWAREHOUSEDETAIL, error } }
 }
 
 function getAllproduct() {

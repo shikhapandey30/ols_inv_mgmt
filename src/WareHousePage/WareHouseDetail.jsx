@@ -4,27 +4,27 @@ import { connect } from 'react-redux';
 import { Header } from '../Header';
 import { userActions } from '../_actions';
 import { Footer } from '../Footer';
+import axios from 'axios';
+import config from 'config';
+
 
 class WareHouseDetail extends React.Component {
-    componentDidMount() {
-      console.log("mount")
-        this.props.dispatch(userActions.getAllwarehouse());
+    componentDidMount(warehouse) {
+      this.props.dispatch(userActions.getwarehousedetail(this.props.match.params.id));
     }
 
-    handleDeleteUser(id) {
-        return (e) => this.props.dispatch(userActions.delete(id));
+    warehouseDelete = (id) => {
+        console.log("******************************************", id)
+        axios.delete(`${config.apiUrl}/warehouses/${id}`)
+        .then(response => {
+          this.setState({ locations: response.data });
+          window.location = "/warehouses"
+        })
     }
-
-    fShow(warehouse) {
-      const { dispatch } = this.props;
-      dispatch(userActions.getwarehousedetail(warehouse));
-    } 
 
     render() {
-      const { user, warehouse, allwarehouses } = this.props;
+      const { user, warehouse } = this.props
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
-      console.log("warehouse#####****", warehouse)
-      console.log("allwarehouses#####****", allwarehouses)
       return (
         <div>
           <Header />
@@ -32,51 +32,54 @@ class WareHouseDetail extends React.Component {
             <div className="">
               <div className="panel panel-primary filterable">
                 <div className="panel-heading">
-                  <h3 className="panel-title"> 
-                   
-                   <a href="/products"><button type="button" className="btn btn-default">Product</button></a>
-                    <a href="/warehouse"><button type="button" className="btn btn-default active">Warehouse</button></a></h3>
-
-                  <div className="pull-right">
-                    <a href="/new-warehouse" className="btn btn-primary btn-xs pull-right"><b>+</b> Add new Warehouse
-                    </a>
-                  </div>
+                  { warehouse.items && 
+                    <h3 className="panel-title"> 
+                     {warehouse.items.name}
+                    </h3>
+                  }
+                  { warehouse.items && 
+                    <div className="pull-right">
+                      <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.warehouseDelete(warehouse.items.id)};}}>Delete</button>
+                    </div>
+                  }
                 </div>
-                <h5 className="loading-msg">{warehouse.loading && <em>Loading All Warehouses .....</em>}</h5>
-                <table className="table table-bordered table table-border">
-                  <thead>
-                    <tr className="filters">
-                      <th>S.No</th>
-                      <th>Warehouse Name</th>
-                      <th>Warehouse ID</th>
-                      <th>Warehouse Address</th>
-                      <th>Warehouse City</th>
-                      <th>Warehouse State</th>
-                      <th>Warehouse Country</th>
-                      <th>Warehouse Landmark</th>
-                    </tr>  
-                  </thead>
-                  
-                  { warehouse.items && warehouse.items.length > 0 &&
+                { warehouse.items && 
+                  <table className="table table-bordered table table-border">
+                    
                     <tbody>
-                    {warehouse.items.map((warehouse, index) =>
-                      <tr key={warehouse.id} >
-                        <td>{index + 1}</td>
-                        <td onClick={() => { this.fShow(warehouse) }} >{warehouse.name }</td>
-                        <td>{warehouse.id}</td>
-                        <td>{warehouse.address}</td>
-                        <td>{warehouse.city}</td>
-                        <td>{warehouse.state}</td>
-                        <td>{warehouse.country}</td>
-                        <td>{warehouse.landmark}</td>
+                      <tr>
+                        <td>Warehouse ID</td>
+                        <td>{warehouse.items.id}</td>
                       </tr>
-                      
-                    )}  
+                      <tr>
+                        <td>Warehouse Name</td>
+                        <td>{warehouse.items.name}</td>
+                      </tr>
+                      <tr>
+                        <td>Warehouse Address</td>
+                        <td>{warehouse.items.address}</td>
+                      </tr>
+                      <tr>
+                        <td>Warehouse City</td>
+                        <td>{warehouse.items.city}</td>
+                      </tr>
+                      <tr>
+                        <td>Warehouse State</td>
+                        <td>{warehouse.items.state}</td>
+                      </tr>
+                      <tr>
+                        <td>Warehouse Country</td>
+                        <td>{warehouse.items.country}</td>
+                      </tr>
+                      <tr>
+                        <td>Warehouse Landmark</td>
+                        <td>{warehouse.items.landmark}</td>
+                      </tr>
                     </tbody>
-                  }  
-                </table>
+
+                  </table>
+                }
               </div>
-              <center><button type="button" className="btn btn-default active">Submit</button></center>
             </div>
           </div>
         </div>  
@@ -85,11 +88,10 @@ class WareHouseDetail extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { warehouse, allwarehouses, authentication } = state;
+  const { warehouseid, warehouse, authentication } = state;
   const { user } = authentication;
   return {
     user,
-    allwarehouses,
     warehouse
   };
 }

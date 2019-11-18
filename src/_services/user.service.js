@@ -44,21 +44,22 @@ function getAllwarehouse() {
     .then(handleResponse)
     .then(allwarehouses => {
       console.log("Response",allwarehouses)
-        return allwarehouses.data;
+      return allwarehouses.data;
     });
 }
 
-function getwarehousedetail(warehouse) {
+function getwarehousedetail(warehouseID) {
   const requestOptions = {
     method: 'GET',
     headers: authHeader()
+    // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+    // headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
   };
-   console.log("warehouse")
-    return fetch(`${config.apiUrl}/warehouses/${warehouse.id}`, requestOptions)
+    return fetch(`${config.apiUrl}/warehouses/${warehouseID}`, requestOptions)
     .then(handleResponse)
     .then(warehouse => {
-      console.log("warehouse_Response$$$$$$$$$$$$",warehouse)
-       return [warehouse.data];
+      console.log("Response",warehouse)
+      return warehouse.data;
     });
 }
 
@@ -66,13 +67,14 @@ function getwarehousedetail(warehouse) {
 function getAllproduct() {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+    headers: authHeader()
+    // headers: { 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
   };
-    return fetch(`${config.apiUrl}/warehouses`, requestOptions)
+    return fetch(`${config.apiUrl}/products`, requestOptions)
     .then(handleResponse)
     .then(allproducts => {
       console.log("Response",allproducts)
-        return JSON.parse(allproducts);
+      return allproducts.data;
     });
 }
 

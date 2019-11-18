@@ -7,23 +7,13 @@ import { Footer } from '../Footer';
 
 class Product extends React.Component {
     componentDidMount() {
-      console.log("mount")
-        this.props.dispatch(userActions.getAllproduct());
-    }
-
-    handleDeleteUser(id) {
-        return (e) => this.props.dispatch(userActions.delete(id));
-    }
-
-    fProfile(user) {
-        const { dispatch } = this.props;
-        dispatch(userActions.getAllprofile(user.id));
+      this.props.dispatch(userActions.getAllproduct());
     }
 
     render() {
-      const { user, users } = this.props;
+      const { user, allproducts } = this.props;
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
-      console.log("users", users)
+      console.log("allproducts*******************************", allproducts)
       return (
         <div>
           <Header />
@@ -33,64 +23,39 @@ class Product extends React.Component {
                 <div className="panel-heading">
                   <h3 className="panel-title"> 
                    <a href="/products"><button type="button" className="btn btn-default active">Product</button></a>
-                    <a href="/warehouse"><button type="button" className="btn btn-default">Warehouse</button></a></h3>
+                    <a href="/warehouses"><button type="button" className="btn btn-default">Warehouse</button></a></h3>
 
                   <div className="pull-right">
                     <a href="/new-product" className="btn btn-primary btn-xs pull-right"><b>+</b> Add new Product
                     </a>
                   </div>
                 </div>
+                <h5 className="loading-msg">{allproducts.loading && <em>Loading All Products .....</em>}</h5>
                 <table className="table table-bordered table table-border">
                   <thead>
                     <tr className="filters">
-                      <th>Check Box</th>
                       <th>S.No</th>
-                      <th>Product Name</th>
-                      <th>Product ID</th>
+                      <th>ID</th>
+                      <th>Code</th>
+                      
                     </tr>  
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td><input type="Checkbox" /></td>
-                      <td>1</td>
-                      <td>Product 1</td>
-                      <td>Product ID 1</td>
-                    </tr>
-                    <tr>
-                      <td><input type="Checkbox" /></td>
-                      <td>2</td>
-                      <td>Product 2</td>
-                      <td>Product ID 2</td>
-                    </tr>
-                    <tr>
-                      <td><input type="Checkbox" /></td>
-                      <td>3</td>
-                      <td>Product 3</td>
-                      <td>Product ID 3</td>
-                    </tr>
-                    <tr>
-                      <td><input type="Checkbox" /></td>
-                      <td>4</td>
-                      <td>Product 4</td>
-                      <td>Product ID 4</td>
-                    </tr>
-                    <tr>
-                      <td><input type="Checkbox" /></td>
-                      <td>5</td>
-                      <td>Product 5</td>
-                      <td>Product ID 5</td>
-                    </tr>
-                    <tr>
-                      <td><input type="Checkbox" /></td>
-                      <td>6</td>
-                      <td>Product 6</td>
-                      <td>Product ID 6</td>
-                    </tr>
-                  </tbody>
+                  
+                  { allproducts.items && allproducts.items.length > 0 &&
+                    <tbody>
+                    {allproducts.items.map((product, index) =>
+                      <tr key={product.id} >
+                        <td>{index + 1}</td>
+                        <td>{product.id}</td>
+                        <td>{product.code}</td>
+                        
+                      </tr>
+                      
+                    )}  
+                    </tbody>
+                  }  
                 </table>
               </div>
-              <button type="button" className="btn btn-default active">Submit</button>
-              <button type="button" className="btn btn-default active pull-right">Delete</button>
             </div>
           </div>
         </div>  
@@ -99,11 +64,11 @@ class Product extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { users, authentication } = state;
+  const { allproducts, authentication } = state;
   const { user } = authentication;
   return {
     user,
-    users
+    allproducts
   };
 }
 

@@ -13,6 +13,12 @@ module.exports = {
             }
         ]
     },
+
+    // output: {
+    //     path: __dirname,
+    //     filename: '../src/main.js'
+    // },
+
     plugins: [new HtmlWebpackPlugin({
         template: './src/index.html'
     })],
