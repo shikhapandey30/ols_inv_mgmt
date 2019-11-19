@@ -12,12 +12,17 @@ import { Product } from '../ProductPage';
 import { NewProduct } from '../ProductPage';
 import { WareHouse } from '../WareHousePage';
 import { NewWareHouse } from '../WareHousePage';
+import { WareHouseAllUser } from '../WareHousePage';
 import { WareHouseDetail } from '../WareHousePage';
 import { ProductDetail } from '../ProductPage';
 import { WareHouseDelete } from '../WareHousePage';
+import { WareHouseEdit } from '../WareHousePage';
 import { Category } from '../CategoryPage';
 import { NewCategory } from '../CategoryPage';
 import { CategoryDetail } from '../CategoryPage';
+import { Inventory } from '../InventoryPage';
+import { InventoryDetail } from '../InventoryPage';
+import { NewInventory } from '../InventoryPage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
 
@@ -47,11 +52,16 @@ class App extends React.Component {
                 <Route path="/new-product" component={NewProduct} />
                 <Route path="/new-category" component={NewCategory} />   
                 <Route path="/categories" component={Category} />
-                <Route path="/category/:id" component={CategoryDetail} />             
+                <Route path="/category/:id" component={CategoryDetail} />
+                <Route path="/inventories" component={Inventory} />
+                <Route path="/inventory/:id" component={InventoryDetail} />
+                <Route path="/new-inventory" component={NewInventory} />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/register" component={RegisterPage} />
                 <Route exact path="/warehouses" component={WareHouse} />
                 <Route path="/product/:id" component={ProductDetail} />
+                <Route path="/warehouse/:id/user" component={WareHouseAllUser} />
+                <Route path="/warehouse/:id/edit" component={WareHouseEdit} />
                 <Route path="/warehouse/:id" component={WareHouseDetail} />
 
                 <Route path="/new-warehouse" component={NewWareHouse} />

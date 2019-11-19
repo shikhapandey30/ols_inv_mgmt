@@ -35,6 +35,7 @@ class WareHouseDetail extends React.Component {
                   { warehouse.items && 
                     <h3 className="panel-title"> 
                      {warehouse.items.name}
+                    
                     </h3>
                   }
                   { warehouse.items && 

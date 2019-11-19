@@ -5,12 +5,15 @@ export const userService = {
     login,
     logout,
     register,
+    warehouseuser,
     getAllwarehouse,
     getwarehousedetail,
     getAllproduct,
     getproductdetail,
     getAllcategory,
     getcategorydetail,
+    getAllinventory,
+    getinventorydetail,
     getById,
     update,
     delete: _delete
@@ -63,6 +66,22 @@ function getwarehousedetail(warehouseID) {
     .then(warehouse => {
       console.log("Response",warehouse)
       return warehouse.data;
+    });
+}
+
+function warehouseuser(warehouseID) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+    // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+    // headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
+  };
+    return fetch(`${config.apiUrl}/warehouses/1000/users`, requestOptions)
+    .then(handleResponse)
+    .then(warehouseuser => {
+      debugger
+      console.log("Response@@@@@@@@@@@@",warehouseuser)
+      return warehouseuser.data;
     });
 }
 
@@ -138,6 +157,36 @@ function getcategorydetail(categoryID) {
     .then(category => {
       console.log("Response",category)
       return category.data;
+    });
+}
+
+function getAllinventory() {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+    // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+    // headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
+  };
+    return fetch(`${config.apiUrl}/inventories`, requestOptions)
+    .then(handleResponse)
+    .then(allinventories => {
+      console.log("Response",allinventories)
+      return allinventories.data;
+    });
+}
+
+function getinventorydetail(inventoryID) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+    // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+    // headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
+  };
+    return fetch(`${config.apiUrl}/inventories/${inventoryID}`, requestOptions)
+    .then(handleResponse)
+    .then(inventory => {
+      console.log("Response",inventory)
+      return inventory.data;
     });
 }
 

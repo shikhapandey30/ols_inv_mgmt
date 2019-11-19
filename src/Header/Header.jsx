@@ -27,7 +27,7 @@ class Header extends React.Component {
                   <li><a href="javascript:void(0)">Master<span className="glyphicon glyphicon-chevron-down iconsize"></span></a>
                     <ul className="dropdown">
                     <li><a href="/categories">Categories</a></li>
-                      <li><a href="">Inventory</a></li>
+                      <li><a href="/inventories">Inventory</a></li>
                       <li><a href="/products">Set Up</a></li>
                     </ul>
                   </li>

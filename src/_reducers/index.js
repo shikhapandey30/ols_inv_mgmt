@@ -9,6 +9,9 @@ import { product } from './product.reducer';
 import { category } from './category.reducer';
 import { allproducts } from './allproducts.reducer';
 import { allcategories } from './allcategories.reducer';
+import { allinventories } from './allinventories.reducer';
+import { warehouseuser } from './warehouseuser.reducer';
+import { inventory } from './inventory.reducer';
 import { alert } from './alert.reducer';
 
 const rootReducer = combineReducers({
@@ -16,11 +19,14 @@ const rootReducer = combineReducers({
   registration,
   users,
   allwarehouses,
+  warehouseuser,
   warehouse,
   product,
   category,
   allproducts,
   allcategories,
+  allinventories,
+  inventory,
   alert
 });
 

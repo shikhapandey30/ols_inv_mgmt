@@ -7,12 +7,15 @@ export const userActions = {
     login,
     logout,
     register,
+    warehouseuser,
     getAllwarehouse,
     getwarehousedetail,
     getAllproduct,
     getproductdetail,
     getAllcategory,
     getcategorydetail,
+    getAllinventory,
+    getinventorydetail,
     delete: _delete
 };
 
@@ -67,6 +70,21 @@ function register(user) {
     function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
 }
 
+function warehouseuser(warehouseID) {
+  return dispatch => {
+      dispatch(request());
+      userService.warehouseuser(warehouseID)
+        .then(
+          warehouseuser => dispatch(success(warehouseuser)),
+          error => dispatch(failure(error.toString()))
+        );
+  };
+
+  function request() { return { type: userConstants.GETWAREHOUSET_REQUEST } }
+  function success(warehouseuser) { return { type: userConstants.GETWAREHOUSET_SUCCESS, warehouseuser } }
+  function failure(error) { return { type: userConstants.GETWAREHOUSET, error } }
+}
+
 function getAllwarehouse() {
   return dispatch => {
     dispatch(request());
@@ -97,6 +115,8 @@ function getwarehousedetail(warehouseID) {
   function success(warehouse) { return { type: userConstants.GETWAREHOUSEDETAIL_SUCCESS, warehouse } }
   function failure(error) { return { type: userConstants.GETWAREHOUSEDETAIL, error } }
 }
+
+
 
 function getcategorydetail(categoryID) {
   return dispatch => {
@@ -157,6 +177,37 @@ function getAllcategory() {
   function success(allcategories) { return { type: userConstants.GETALLCATEGORY_SUCCESS, allcategories } }
   function failure(error) { return { type: userConstants.GETALLCATEGORY, error } }
 }
+
+function getAllinventory() {
+  return dispatch => {
+    dispatch(request());
+    userService.getAllinventory()
+    .then(
+      allinventories => dispatch(success(allinventories)),
+      error => dispatch(failure(error.toString()))
+    );
+  };
+
+  function request() { return { type: userConstants.GETALLINVENTORY_REQUEST } }
+  function success(allinventories) { return { type: userConstants.GETALLINVENTORY_SUCCESS, allinventories} }
+  function failure(error) { return { type: userConstants.GETALLINVENTORY, error } }
+}
+
+function getinventorydetail(inventoryID) {
+  return dispatch => {
+      dispatch(request());
+      userService.getinventorydetail(inventoryID)
+          .then(
+              inventory => dispatch(success(inventory)),
+              error => dispatch(failure(error.toString()))
+          );
+  };
+
+  function request() { return { type: userConstants.GETINVENTORYDETAIL_REQUEST } }
+  function success(inventory) { return { type: userConstants.GETINVENTORYDETAIL_SUCCESS, inventory } }
+  function failure(error) { return { type: userConstants.GETINVENTORYDETAIL, error } }
+}
+
 
 
 function _delete(id) {
