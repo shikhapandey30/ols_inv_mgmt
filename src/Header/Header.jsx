@@ -29,6 +29,7 @@ class Header extends React.Component {
                     <li><a href="/categories">Categories</a></li>
                       <li><a href="/inventories">Inventory</a></li>
                       <li><a href="/products">Set Up</a></li>
+                      <li><a href="/vendors">Vendor</a></li>
                     </ul>
                   </li>
                   <li><a href="javascript:void(0)" >Transaction<span className="glyphicon"></span></a>

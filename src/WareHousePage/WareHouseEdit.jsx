@@ -20,7 +20,7 @@ class WareHouseEdit extends React.Component {
             warehouses: {
               name : '',
               city : '',
-                loaded: 0
+              loaded: 0
             },
             submitted: false
         };
@@ -51,15 +51,15 @@ class WareHouseEdit extends React.Component {
 
     render() {
       const { loggingIn, user,warehouse, users } = this.props;
-      let abc;
-      
       const { warehouses, submitted } = this.state;
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
-      if (warehouse.items) {
-        console.log("warehouse#########", warehouse.items.id)
-        const  abc  = warehouse.items.name;
-        console.log("abc#########", abc)
+      var abc =  abc;
+       console.log("abc*******#########", warehouse.items);
 
+      if (warehouse.items) {
+        console.log("warehouse#########", warehouse.items.id);
+        abc  = warehouse.items.name;
+        console.log("abc#########", abc)
       }
       return (
         <div>

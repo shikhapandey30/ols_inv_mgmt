@@ -14,6 +14,8 @@ export const userService = {
     getcategorydetail,
     getAllinventory,
     getinventorydetail,
+    getAllvendor,
+    getvendordetail,
     getById,
     update,
     delete: _delete
@@ -187,6 +189,35 @@ function getinventorydetail(inventoryID) {
     .then(inventory => {
       console.log("Response",inventory)
       return inventory.data;
+    });
+}
+
+function getAllvendor() {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+    // headers: { 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+  };
+    return fetch(`${config.apiUrl}/vendors`, requestOptions)
+    .then(handleResponse)
+    .then(allvendors => {
+      console.log("Response",allvendors)
+      return allvendors.data;
+    });
+}
+
+function getvendordetail(vendorID) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+    // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+    // headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
+  };
+    return fetch(`${config.apiUrl}/vendors/${vendorID}`, requestOptions)
+    .then(handleResponse)
+    .then(vendor => {
+      console.log("Response",vendor)
+      return vendor.data;
     });
 }
 

@@ -62,7 +62,7 @@ class NewWareHouse extends React.Component {
 
     render() {
       const { loggingIn, user, users } = this.props;
-        const { warehouse, submitted } = this.state;
+      const { warehouse, submitted } = this.state;
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
       console.log("users", users)
       return (
@@ -131,12 +131,6 @@ class NewWareHouse extends React.Component {
                   <input type="text" id="warehousezipcode" className="form-control" placeholder="WareHouse Zipcode" name="zipcode" value={warehouse.zipcode} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
-
-              
-
-              
-
-              
               <div className="form-group">
                 <div className="col-sm-9 col-sm-offset-2">
                   <button className="btn btn-primary btn-block">Submit</button>

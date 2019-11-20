@@ -16,6 +16,8 @@ export const userActions = {
     getcategorydetail,
     getAllinventory,
     getinventorydetail,
+    getAllvendor,
+    getvendordetail,
     delete: _delete
 };
 
@@ -116,8 +118,6 @@ function getwarehousedetail(warehouseID) {
   function failure(error) { return { type: userConstants.GETWAREHOUSEDETAIL, error } }
 }
 
-
-
 function getcategorydetail(categoryID) {
   return dispatch => {
       dispatch(request());
@@ -208,6 +208,35 @@ function getinventorydetail(inventoryID) {
   function failure(error) { return { type: userConstants.GETINVENTORYDETAIL, error } }
 }
 
+function getAllvendor() {
+    return dispatch => {
+        dispatch(request());
+        userService.getAllvendor()
+            .then(
+                allvendors => dispatch(success(allvendors)),
+                error => dispatch(failure(error.toString()))
+            );
+    };
+
+    function request() { return { type: userConstants.GETALLVENDOR_REQUEST } }
+    function success(allvendors) { return { type: userConstants.GETALLVENDOR_SUCCESS, allvendors } }
+    function failure(error) { return { type: userConstants.GETALLVENDOR, error } }
+}
+
+function getvendordetail(vendorID) {
+  return dispatch => {
+      dispatch(request());
+      userService.getvendordetail(vendorID)
+          .then(
+              vendor => dispatch(success(vendor)),
+              error => dispatch(failure(error.toString()))
+          );
+  };
+
+  function request() { return { type: userConstants.GETVANDORDETAIL_REQUEST } }
+  function success(vendor) { return { type: userConstants.GETVANDORDETAIL_SUCCESS, vendor } }
+  function failure(error) { return { type: userConstants.GETVANDORDETAIL, error } }
+}
 
 
 function _delete(id) {

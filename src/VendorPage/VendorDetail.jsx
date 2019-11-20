@@ -7,23 +7,22 @@ import { Footer } from '../Footer';
 import axios from 'axios';
 import config from 'config';
 
-
-class WareHouseDetail extends React.Component {
-    componentDidMount(warehouse) {
-      this.props.dispatch(userActions.getwarehousedetail(this.props.match.params.id));
+class VendorDetail extends React.Component {
+    componentDidMount(vendor) {
+      this.props.dispatch(userActions.getvendordetail(this.props.match.params.id));
     }
 
-    warehouseDelete = (id) => {
+    vendorDelete = (id) => {
         console.log("******************************************", id)
-        axios.delete(`${config.apiUrl}/warehouses/${id}`)
+        axios.delete(`${config.apiUrl}/vendors/${id}`)
         .then(response => {
           this.setState({ locations: response.data });
-          window.location = "/warehouses"
+          window.location = "/vendors"
         })
     }
 
     render() {
-      const { user, warehouse } = this.props
+      const { user, vendor } = this.props
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
       return (
         <div>
@@ -32,53 +31,53 @@ class WareHouseDetail extends React.Component {
             <div className="">
               <div className="panel panel-primary filterable">
                 <div className="panel-heading">
-                  { warehouse.items && 
+                  { vendor.items && 
                     <h3 className="panel-title"> 
-                     {warehouse.items.name}
-                    
+                     {vendor.items.name}
                     </h3>
                   }
-                  { warehouse.items && 
+                  { vendor.items && 
                     <div className="pull-right">
-                      <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.warehouseDelete(warehouse.items.id)};}}>Delete</button>
+                      <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.vendorDelete(vendor.items.id)};}}>Delete</button>
                     </div>
                   }
                 </div>
-                { warehouse.items && 
+                { vendor.items && 
                   <table className="table table-bordered table table-border">
-                    
                     <tbody>
                       <tr>
-                        <td>Warehouse ID</td>
-                        <td>{warehouse.items.id}
-                        </td>
+                        <td>Vendor ID</td>
+                        <td>{vendor.items.id}</td>
                       </tr>
                       <tr>
-                        <td>Warehouse Name</td>
-                        <td>{warehouse.items.name}</td>
+                        <td>Vendor Name</td>
+                        <td>{vendor.items.name}</td>
                       </tr>
                       <tr>
-                        <td>Warehouse Address</td>
-                        <td>{warehouse.items.address}</td>
+                        <td>Vendor Address</td>
+                        <td>{vendor.items.address}</td>
                       </tr>
                       <tr>
-                        <td>Warehouse City</td>
-                        <td>{warehouse.items.city}</td>
+                        <td>Vendor Landmark</td>
+                        <td>{vendor.items.landmark}</td>
                       </tr>
                       <tr>
-                        <td>Warehouse State</td>
-                        <td>{warehouse.items.state}</td>
+                        <td>Vendor Zipcode</td>
+                        <td>{vendor.items.zipcode}</td>
                       </tr>
                       <tr>
-                        <td>Warehouse Country</td>
-                        <td>{warehouse.items.country}</td>
+                        <td>Vendor City</td>
+                        <td>{vendor.items.city}</td>
                       </tr>
                       <tr>
-                        <td>Warehouse Landmark</td>
-                        <td>{warehouse.items.landmark}</td>
+                        <td>Vendor State</td>
+                        <td>{vendor.items.state}</td>
+                      </tr>
+                      <tr>
+                        <td>Vendor Country</td>
+                        <td>{vendor.items.country}</td>
                       </tr>
                     </tbody>
-
                   </table>
                 }
               </div>
@@ -90,13 +89,13 @@ class WareHouseDetail extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { warehouseid, warehouse, authentication } = state;
+  const { vendorid, vendor, authentication } = state;
   const { user } = authentication;
   return {
     user,
-    warehouse
+    vendor
   };
 }
 
-const connectedWareHouseDetail = connect(mapStateToProps)(WareHouseDetail);
-export { connectedWareHouseDetail as WareHouseDetail };
+const connectedVendorDetail = connect(mapStateToProps)(VendorDetail);
+export { connectedVendorDetail as VendorDetail };
