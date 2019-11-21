@@ -21,6 +21,7 @@ class WareHouseEdit extends React.Component {
       country:'',
       state:'',
       zipcode:'',
+      landmark:'',
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -30,7 +31,6 @@ class WareHouseEdit extends React.Component {
     this.getWarehouseDetails();
   }
   getWarehouseDetails(){
-    // window.location.reload(false);
     let warehouseId = this.props.match.params.id;
     axios.get(`${config.apiUrl}/warehouses/${warehouseId}`)
     .then(response => {
@@ -42,7 +42,8 @@ class WareHouseEdit extends React.Component {
         country: response.data.data.country,
         state: response.data.data.state,
         zipcode: response.data.data.zipcode,
-        id: response.data.data.id
+        id: response.data.data.id,
+        landmark: response.data.data.landmark
       }, () => {
         console.log(this.state);
       });
@@ -149,7 +150,12 @@ class WareHouseEdit extends React.Component {
                     </div>
                   </div>
 
-                  
+                  <div className="form-group">
+                    <label htmlFor="warehouselandmark" className="col-sm-2 control-label">Landmark</label>
+                    <div className="col-sm-9">
+                      <input className="form-control" type="text" name="landmark" ref="landmark" value={this.state.landmark} onChange={this.handleInputChange} />
+                    </div>
+                  </div>
 
                   <div className="form-group">
                     <div className="col-sm-9">
