@@ -32,7 +32,10 @@ class Header extends React.Component {
                       <li><a href="/vendors">Vendor</a></li>
                     </ul>
                   </li>
-                  <li><a href="javascript:void(0)" >Transaction<span className="glyphicon"></span></a>
+                  <li><a href="javascript:void(0)">Transaction<span className="glyphicon glyphicon-chevron-down iconsize"></span></a>
+                    <ul className="dropdown">
+                    <li><a href="/purchase-orders">Purchase Order</a></li>
+                    </ul>
                   </li>
                   <li><a href="javascript:void(0)" >Report<span className=""></span></a>
                   </li>

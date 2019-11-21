@@ -39,7 +39,7 @@ class ProductDetail extends React.Component {
                   }
                   { product.items && 
                     <div className="pull-right">
-                      <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.productDelete(product.items.id)};}}>Delete</button>
+                      <button className="btn btn-danger btn-style-product" onClick={() => {if(window.confirm('Delete the item?')){this.productDelete(product.items.id)};}}>Delete</button>
                     </div>
                   }
                 </div>
@@ -67,8 +67,10 @@ class ProductDetail extends React.Component {
                         <td>{product.items.description}</td>
                       </tr>
                       <tr>
-                        <td>Product imageUrl</td>
-                        <td>{product.items.imageUrl}</td>
+                        <td>Product image</td>
+                        <td>
+                        <a href={product.items.imageUrl}><img style={{width: 100, height: 100}} className='tc br3' alt='none' src={ product.items.imageUrl } /></a>
+                        </td>
                       </tr>
                       <tr>
                         <td>Product hsnCode</td>

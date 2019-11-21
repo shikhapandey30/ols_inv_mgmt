@@ -16,6 +16,8 @@ export const userService = {
     getinventorydetail,
     getAllvendor,
     getvendordetail,
+    getAllpuchaseorderslist,
+    getpurchaseorderdetail,
     getById,
     update,
     delete: _delete
@@ -218,6 +220,36 @@ function getvendordetail(vendorID) {
     .then(vendor => {
       console.log("Response",vendor)
       return vendor.data;
+    });
+}
+
+function getAllpuchaseorderslist() {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+    // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+    // headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
+  };
+    return fetch(`${config.apiUrl}/products`, requestOptions)
+    .then(handleResponse)
+    .then(allpuchaseorders => {
+      console.log("Response",allpuchaseorders)
+      return allpuchaseorders.data;
+    });
+}
+
+function getpurchaseorderdetail(purchaseorderID) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+    // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+    // headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
+  };
+    return fetch(`${config.apiUrl}/products/${purchaseorderID}`, requestOptions)
+    .then(handleResponse)
+    .then(purchaseorder => {
+      console.log("Response",purchaseorder)
+      return purchaseorder.data;
     });
 }
 

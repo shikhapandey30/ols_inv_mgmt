@@ -26,6 +26,9 @@ import { NewInventory } from '../InventoryPage';
 import { Vendor } from '../VendorPage';
 import { VendorDetail } from '../VendorPage';
 import { NewVendor } from '../VendorPage';
+import { PurchaseOrderListing } from '../PurchaseOrderPage';
+import { PurchaseOrderDetail } from '../PurchaseOrderPage';
+import { NewPurchaseOrder } from '../PurchaseOrderPage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
 
@@ -72,6 +75,9 @@ class App extends React.Component {
                 <Route path="/vendors" component={Vendor} />
                 <Route path="/vendor/:id" component={VendorDetail} />
                 <Route path="/new-vendor" component={NewVendor} />
+                <Route path="/purchase-orders" component={PurchaseOrderListing} />
+                <Route path="/purchase-order/:id" component={PurchaseOrderDetail} />
+                <Route path="/new-purchase-order" component={NewPurchaseOrder} />
 
                 <Redirect from="*" to="/" />
               </Switch>

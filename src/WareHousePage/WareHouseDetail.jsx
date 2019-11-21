@@ -39,8 +39,10 @@ class WareHouseDetail extends React.Component {
                     </h3>
                   }
                   { warehouse.items && 
-                    <div className="pull-right">
+                    <div className="pull-right btn-style">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.warehouseDelete(warehouse.items.id)};}}>Delete</button>
+                      <button className="btn btn-default">
+                      <Link to={"/warehouse/" + warehouse.items.id + "/edit"}>Edit</Link></button>
                     </div>
                   }
                 </div>

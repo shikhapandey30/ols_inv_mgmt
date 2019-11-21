@@ -18,6 +18,8 @@ export const userActions = {
     getinventorydetail,
     getAllvendor,
     getvendordetail,
+    getAllpuchaseorderslist,
+    getpurchaseorderdetail,
     delete: _delete
 };
 
@@ -236,6 +238,36 @@ function getvendordetail(vendorID) {
   function request() { return { type: userConstants.GETVANDORDETAIL_REQUEST } }
   function success(vendor) { return { type: userConstants.GETVANDORDETAIL_SUCCESS, vendor } }
   function failure(error) { return { type: userConstants.GETVANDORDETAIL, error } }
+}
+
+function getAllpuchaseorderslist() {
+    return dispatch => {
+        dispatch(request());
+        userService.getAllpuchaseorderslist()
+            .then(
+                allpuchaseorders => dispatch(success(allpuchaseorders)),
+                error => dispatch(failure(error.toString()))
+            );
+    };
+
+    function request() { return { type: userConstants.GETALLPURCHASEORDER_REQUEST } }
+    function success(allpuchaseorders) { return { type: userConstants.GETALLPURCHASEORDER_SUCCESS, allpuchaseorders } }
+    function failure(error) { return { type: userConstants.GETALLPURCHASEORDER, error } }
+}
+
+function getpurchaseorderdetail(purchaseorderID) {
+  return dispatch => {
+      dispatch(request());
+      userService.getpurchaseorderdetail(purchaseorderID)
+          .then(
+              purchaseorder => dispatch(success(purchaseorder)),
+              error => dispatch(failure(error.toString()))
+          );
+  };
+
+  function request() { return { type: userConstants.GETPURCHASEORDERDETAILDETAIL_REQUEST } }
+  function success(purchaseorder) { return { type: userConstants.GETPURCHASEORDERDETAILDETAIL_SUCCESS, purchaseorder } }
+  function failure(error) { return { type: userConstants.GETPURCHASEORDERDETAILDETAIL, error } }
 }
 
 

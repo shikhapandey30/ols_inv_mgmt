@@ -8,7 +8,6 @@ import axios from 'axios';
 import config from 'config';
 import { Route, Redirect } from 'react-router-dom';
 
-
 class NewProduct extends React.Component {
     
     constructor(props) {
@@ -25,11 +24,13 @@ class NewProduct extends React.Component {
               isActive: '',
               sgst: '',
               description: '',
+              selectedFile: null,
               loaded: 0
           },
           submitted: false
         };
         this.handleChange = this.handleChange.bind(this);
+        this.handleChanges = this.handleChanges.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -41,13 +42,27 @@ class NewProduct extends React.Component {
       });
     }
 
+    handleChanges(FileList) {
+      console.log(FileList[0].name);
+      const data = new FormData()
+      data.append('file', FileList[0], FileList[0].name)
+      axios.post(`${config.apiUrl}/images`, data)
+      .then(res => {
+        console.log(res.data)
+        alert('Image Successfully Uploaded, Please continue');
+        this.setState({
+            imageUrl: res.data.data
+          })
+      })
+      
+    }
 
     handleSubmit(event) {
       event.preventDefault();
       this.setState({ submitted: true });
       const { products } = this.state;
       const { dispatch } = this.props;
-      var product = { name: products.name, code: products.code, brandName: products.brandName, description: products.description, cgst: products.cgst, hsnCode: products.hsnCode, imageUrl: products.imageUrl, isActive: products.isActive, sgst: products.sgst,   category: { id: products.category} }
+      var product = { name: products.name, code: products.code, brandName: products.brandName, description: products.description, cgst: products.cgst, hsnCode: products.hsnCode, imageUrl: this.state.imageUrl, isActive: products.isActive, sgst: products.sgst,   category: { id: products.category} }
       axios.post(`${config.apiUrl}/products`, product)
       .then(response => {
         this.setState({ locations: response.data });
@@ -65,15 +80,23 @@ class NewProduct extends React.Component {
 
     render() {
       const { loggingIn, user, allcategories } = this.props;
-      const { products, category, submitted } = this.state;
+      const { products, category, imageUrl, submitted } = this.state;
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
+      console.log("imageUrl*******************************", imageUrl)
       console.log("allcategories*******************************", allcategories)
       return (
         <div>
           <Header />
           <div className="container">
+          <div className="product-img-upload">
+            
+          </div>
           <form name="form" className="form-horizontal" role="form" onSubmit={this.handleSubmit}>
               <center><h2>Add New Product</h2></center><br/>
+              <div className="form-group">
+                <label htmlFor="image" className="col-sm-2 control-label">Product Image Upload </label>
+                <input className="image-box" type="file" onChange={ (e) => this.handleChanges(e.target.files) } />
+              </div>
               <div className="form-group">
                 <label htmlFor="productname" className="col-sm-2 control-label">Product Name</label>
                 <div className="col-sm-9">
@@ -81,6 +104,7 @@ class NewProduct extends React.Component {
                     <div className="help-block required-msg"> Product Name is required</div>
                   }
                   <input type="text" id="productname" className="form-control" placeholder="Product Name" name="name" value={products.name} onChange={this.handleChange}  autoFocus />
+                  <input type="hidden" name="image" value={this.state.imageUrl} onChange={this.handleChange} />
                 </div>
               </div>
 
@@ -113,8 +137,8 @@ class NewProduct extends React.Component {
                    { allcategories.items && allcategories.items.length > 0 &&
                     <select value={products.category} onChange={this.handleChange} name="category" className="form-control select-field" >
                       {allcategories.items.map((category, index) =>
-                        <option key={category.id} >
-                          {category.id}
+                        <option key={index} value={category.id} >
+                          {category.name}
                         </option>
                       )}
                     </select>
@@ -131,6 +155,7 @@ class NewProduct extends React.Component {
                     <div className="help-block required-msg"> Product cgst is required</div>
                   }
                   <input type="text" id="productcgst" className="form-control" placeholder="Product cgst" value={products.cgst}  name="cgst"  onChange={this.handleChange}  autoFocus />
+                  
                 </div>
               </div>
 
@@ -144,15 +169,6 @@ class NewProduct extends React.Component {
                 </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="productimageUrl" className="col-sm-2 control-label">Product image</label>
-                <div className="col-sm-9">
-                  {submitted && !products.imageUrl && 
-                    <div className="help-block required-msg"> Product imageUrl is required</div>
-                  }
-                  <input type="text" id="productimageUrl" className="form-control" placeholder="Product imageUrl" value={products.imageUrl}  name="imageUrl"  onChange={this.handleChange}  autoFocus />
-                </div>
-              </div>
               <input type="hidden" id="productisActive" className="form-control" placeholder="Product isActive" value={products.isActive}  name="isActive"  onChange={this.handleChange}  autoFocus />
 
               <div className="form-group">
@@ -208,12 +224,13 @@ class NewProduct extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { products,allcategories, users, authentication } = state;
+  const { products,imageUrl,allcategories, users, authentication } = state;
   const { user } = authentication;
   return {
     user,
     allcategories,
     products,
+    imageUrl,
     users,
   };
 }
