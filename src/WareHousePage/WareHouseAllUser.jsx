@@ -6,16 +6,38 @@ import { userActions } from '../_actions';
 import { Footer } from '../Footer';
 import axios from 'axios';
 import config from 'config';
+import { RSAA } from 'redux-api-middleware'
 
 
 class WareHouseAllUser extends React.Component {
     componentDidMount(warehouse) {
-      this.props.dispatch(userActions.warehouseuser(this.props.match.params.id));
+      this.props.dispatch(userActions.getwarehouseuser(this.props.match.params.id));
     }
+
+  //   componentDidMount() {
+  //   // const apiUrl = 'http://18.217.112.188:8084/api/v1/inventory/warehouses/1201/users';
+
+  //   const options = {
+  //     method: 'GET'
+  //   }
+  //   fetch("http://18.217.112.188:8084/api/v1/inventory/warehouses/1201/users", options)
+  //     .then(res => res.json())
+  //     .then(
+  //       (result) => {
+  //         this.setState({
+  //           response: result,
+  //         });
+  //       },
+  //       (error) => {
+  //         this.setState({ error });
+  //       }
+  //     )
+  // }
     
     render() {
-      const { user, warehouse, warehouseuser } = this.props
+      const { user, warehouse, warehousealluser } = this.props
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
+      console.log("warehousealluser", warehousealluser)
       return (
         <div>
           <Header />
@@ -23,24 +45,21 @@ class WareHouseAllUser extends React.Component {
             <div className="">
               <div className="panel panel-primary filterable">
                 <div className="panel-heading">
-                  { warehouseuser.items && 
+                  { warehousealluser.items && 
                     <h3 className="panel-title"> 
-                     {warehouseuser.items.name}
+                     {warehousealluser.items.name}
                     </h3>
                   }
                   
                 </div>
-                { warehouseuser.items && 
+                { warehousealluser.items && 
                   <table className="table table-bordered table table-border">
-                    
                     <tbody>
                       <tr>
-                        <td>warehouseuser ID</td>
-                        <td>{warehouseuser.items.id}</td>
+                        <td>warehousealluser ID</td>
+                        <td>{warehousealluser.items.id}</td>
                       </tr>
-                     
                     </tbody>
-
                   </table>
                 }
               </div>
@@ -52,11 +71,11 @@ class WareHouseAllUser extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { warehouseid,warehouseuser, warehouse, authentication } = state;
+  const { warehouseid,warehousealluser, warehouse, authentication } = state;
   const { user } = authentication;
   return {
     user,
-    warehouseuser,
+    warehousealluser,
     warehouse
   };
 }

@@ -23,35 +23,20 @@ class Header extends React.Component {
             <nav>
               <div className="nav-xbootstrap">
                 <ul>
-                  <li><a href="/home">Dashboard</a></li>
+                  <li><a href="#">Dashboard</a></li>
                   <li><a href="javascript:void(0)">Master<span className="glyphicon glyphicon-chevron-down iconsize"></span></a>
                     <ul className="dropdown">
-                    <li><a href="/categories">Categories</a></li>
-                      <li><a href="/inventories">Inventory</a></li>
-                      <li><a href="/products">Set Up</a></li>
+                      <li><a href="/warehouses">Warehouse</a></li>
+                      <li><a href="/categories">Category</a></li>
+                      <li><a href="/products">Product</a></li>
                       <li><a href="/vendors">Vendor</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="javascript:void(0)">Transaction<span className="glyphicon glyphicon-chevron-down iconsize"></span></a>
-                    <ul className="dropdown">
-                    <li><a href="/purchase-orders">Purchase Order</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="javascript:void(0)" >Report<span className=""></span></a>
-                  </li>
-                  <li><a href="javascript:void(0)" >Warehouse<span className="glyphicon glyphicon-chevron-down iconsize"></span></a>
-                    <ul className="dropdown">
-                      <li><a href="https://xbootstrap.com">Tools</a></li>
-                      <li><a href="https://xbootstrap.com">Backlink</a></li>
-                    </ul>
-                  </li>
-                 <li><a href="javascript:void(0)" >Clinic<span className="glyphicon glyphicon-chevron-down iconsize"></span></a>
-                    <ul className="dropdown">
-                      <li><a href="https://xbootstrap.com">Tools</a></li>
-                      <li><a href="https://xbootstrap.com">Backlink</a></li>
-                    </ul>
-                  </li>
+                      <li><a href="/inventories">Inventory</a></li>
 
+                    </ul>
+                  </li>
+                  <li><a href="/purchase-orders">Purchase Order</a></li>
+                    <li><a href="/transfer-orders">Transfer Order</a></li>
+                  
                   <li className="nav-item dropdown pull-right">
                     <a className="nav-link " id="navbarDropdownMenuLink-333" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false">
@@ -59,7 +44,7 @@ class Header extends React.Component {
                     </a>
                     <div className="dropdown-menu dropdown-menu-right dropdown-default dropdown-d-color"
                       aria-labelledby="navbarDropdownMenuLink-333">
-                      <a className="dropdown-item" href="/login">Logout</a>
+                      <a className="dropdown-item" href="/login">Login</a>
                      
                     </div>
                   </li>

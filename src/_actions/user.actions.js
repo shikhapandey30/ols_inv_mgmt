@@ -6,8 +6,7 @@ import { history } from '../_helpers';
 export const userActions = {
     login,
     logout,
-    register,
-    warehouseuser,
+    getwarehouseuser,
     getAllwarehouse,
     getwarehousedetail,
     getAllproduct,
@@ -20,6 +19,8 @@ export const userActions = {
     getvendordetail,
     getAllpuchaseorderslist,
     getpurchaseorderdetail,
+    getAlltranferorderslist,
+    gettransferorderdetail,
     delete: _delete
 };
 
@@ -51,41 +52,19 @@ function logout() {
     return { type: userConstants.LOGOUT };
 }
 
-function register(user) {
-    return dispatch => {
-        dispatch(request(user));
 
-        userService.register(user)
-          .then(
-            user => { 
-                dispatch(success());
-                history.push('/login');
-                dispatch(alertActions.success('Registration successful'));
-            },
-            error => {
-                dispatch(failure(error.toString()));
-                dispatch(alertActions.error(error.toString()));
-            }
-          );
-    };
-
-    function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
-    function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
-}
-
-function warehouseuser(warehouseID) {
+function getwarehouseuser(warehouseID) {
   return dispatch => {
       dispatch(request());
-      userService.warehouseuser(warehouseID)
+      userService.getwarehouseuser(warehouseID)
         .then(
-          warehouseuser => dispatch(success(warehouseuser)),
+          warehousealluser => dispatch(success(warehousealluser)),
           error => dispatch(failure(error.toString()))
         );
   };
 
   function request() { return { type: userConstants.GETWAREHOUSET_REQUEST } }
-  function success(warehouseuser) { return { type: userConstants.GETWAREHOUSET_SUCCESS, warehouseuser } }
+  function success(warehousealluser) { return { type: userConstants.GETWAREHOUSET_SUCCESS, warehousealluser } }
   function failure(error) { return { type: userConstants.GETWAREHOUSET, error } }
 }
 
@@ -268,6 +247,36 @@ function getpurchaseorderdetail(purchaseorderID) {
   function request() { return { type: userConstants.GETPURCHASEORDERDETAILDETAIL_REQUEST } }
   function success(purchaseorder) { return { type: userConstants.GETPURCHASEORDERDETAILDETAIL_SUCCESS, purchaseorder } }
   function failure(error) { return { type: userConstants.GETPURCHASEORDERDETAILDETAIL, error } }
+}
+
+function gettransferorderdetail(transferorderID) {
+  return dispatch => {
+      dispatch(request());
+      userService.gettransferorderdetail(transferorderID)
+          .then(
+              transferorder => dispatch(success(transferorder)),
+              error => dispatch(failure(error.toString()))
+          );
+  };
+
+  function request() { return { type: userConstants.GETTRANSFERORDERDETAILDETAIL_REQUEST } }
+  function success(transferorder) { return { type: userConstants.GETTRANSFERORDERDETAILDETAIL_SUCCESS, transferorder } }
+  function failure(error) { return { type: userConstants.GETTRANSFERORDERDETAILDETAIL, error } }
+}
+
+function getAlltranferorderslist() {
+    return dispatch => {
+        dispatch(request());
+        userService.getAlltranferorderslist()
+            .then(
+                alltransferorders => dispatch(success(alltransferorders)),
+                error => dispatch(failure(error.toString()))
+            );
+    };
+
+    function request() { return { type: userConstants.GETALLTRANSFERORDER_REQUEST } }
+    function success(alltransferorders) { return { type: userConstants.GETALLTRANSFERORDER_SUCCESS, alltransferorders } }
+    function failure(error) { return { type: userConstants.GETALLTRANSFERORDER, error } }
 }
 
 

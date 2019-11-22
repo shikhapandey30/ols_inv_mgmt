@@ -22,10 +22,10 @@ class Inventory extends React.Component {
               <div className="panel panel-primary filterable">
                 <div className="panel-heading">
                   <h3 className="panel-title"> 
-                   Inventory
+                   Inventories
                     </h3>
                   <div className="pull-right">
-                    <a href="/new-inventory" className="btn btn-primary btn-xs pull-right"><b>+</b> Add new Inventroy
+                    <a href="/new-inventory" className="btn btn-primary btn-xs pull-right"><b>+</b> Add New Inventroy
                     </a>
                   </div>
                 </div>

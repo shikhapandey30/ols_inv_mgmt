@@ -22,11 +22,11 @@ class Product extends React.Component {
               <div className="panel panel-primary filterable">
                 <div className="panel-heading">
                   <h3 className="panel-title"> 
-                   <a href="/products"><button type="button" className="btn btn-default active">Product</button></a>
-                    <a href="/warehouses"><button type="button" className="btn btn-default">Warehouse</button></a></h3>
+                    Products
+                  </h3>
 
                   <div className="pull-right">
-                    <a href="/new-product" className="btn btn-primary btn-xs pull-right"><b>+</b> Add new Product
+                    <a href="/new-product" className="btn btn-primary btn-xs pull-right"><b>+</b> Add New Product
                     </a>
                   </div>
                 </div>

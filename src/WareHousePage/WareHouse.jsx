@@ -22,12 +22,11 @@ class WareHouse extends React.Component {
               <div className="panel panel-primary filterable">
                 <div className="panel-heading">
                   <h3 className="panel-title"> 
-                   
-                   <a href="/products"><button type="button" className="btn btn-default">Product</button></a>
-                    <a href="/warehouses"><button type="button" className="btn btn-default active">Warehouse</button></a></h3>
+                    Warehouses 
+                  </h3>
 
                   <div className="pull-right">
-                    <a href="/new-warehouse" className="btn btn-primary btn-xs pull-right"><b>+</b> Add new Warehouse
+                    <a href="/new-warehouse" className="btn btn-primary btn-xs pull-right add-record"><b>+</b> Add New Warehouse
                     </a>
                   </div>
                 </div>

@@ -38,7 +38,7 @@ class InventoryDetail extends React.Component {
                     </h3>
                   }
                   { inventory.items && 
-                    <div className="pull-right">
+                    <div className="pull-right btn-style">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.inventoryDelete(inventory.items.id)};}}>Delete</button>
                     </div>
                   }

@@ -127,7 +127,6 @@ class WareHouseEdit extends React.Component {
                       <input className="form-control" type="text" name="state" ref="state" value={this.state.state} onChange={this.handleInputChange} />
                     </div>
                   </div>
-
                   
                   <div className="form-group">
                     <label htmlFor="warehouseaddress" className="col-sm-2 control-label">Address</label>

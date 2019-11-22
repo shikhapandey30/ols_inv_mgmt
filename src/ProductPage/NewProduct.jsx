@@ -124,16 +124,13 @@ class NewProduct extends React.Component {
                   {submitted && !products.brandName && 
                     <div className="help-block required-msg"> Product Brand Name is required</div>
                   }
-                  <input type="text" id="productbrandName" className="form-control" placeholder="Product brand name" name="brandName" value={products.brandName} onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="productbrandName" className="form-control" placeholder="Product Brand Name" name="brandName" value={products.brandName} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 
               <div className="form-group">
                 <label htmlFor="productcategoryid" className="col-sm-2 control-label">Category </label>
                 <div className="col-sm-9">
-                  {submitted && !products.category && 
-                    <div className="help-block required-msg"> Product category is required</div>
-                  }
                    { allcategories.items && allcategories.items.length > 0 &&
                     <select value={products.category} onChange={this.handleChange} name="category" className="form-control select-field" >
                       {allcategories.items.map((category, index) =>
@@ -145,8 +142,6 @@ class NewProduct extends React.Component {
                    }
                 </div>   
               </div>
-
-              
 
               <div className="form-group">
                 <label htmlFor="productcgst" className="col-sm-2 control-label">Product cgst</label>
@@ -188,16 +183,13 @@ class NewProduct extends React.Component {
                     <div className="help-block required-msg"> Product description is required</div>
                   }
 
-                   <textarea id="productdescription" className="form-control" placeholder="Product description" value={products.description}  name="description"  onChange={this.handleChange}  autoFocus />
+                   <textarea id="productdescription" className="form-control" placeholder="Product Description" value={products.description}  name="description"  onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 
               <div className="form-group">
                 <label htmlFor="productisActive" className="col-sm-2 control-label">isActive </label>
                 <div className="col-sm-9">
-                  {submitted && !products.isActive && 
-                    <div className="help-block required-msg"> Product isActive is required</div>
-                  }
                   <select value={products.isActive} onChange={this.handleChange} name="isActive" className="form-control select-field" >
                       <option >
                         {"True"}

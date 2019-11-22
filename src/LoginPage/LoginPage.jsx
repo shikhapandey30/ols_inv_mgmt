@@ -40,47 +40,39 @@ class LoginPage extends React.Component {
         const { loggingIn } = this.props;
         const { username, password, submitted } = this.state;
         return (
-            <div id="login">
-              <h3 className="text-center text-white pt-5">Welcome Back</h3>
-              <div className="container">
-                <div id="login-row" className="row justify-content-center align-items-center">
-                  <div id="login-column" className="col-md-6">
-                    <div id="login-box" className="col-md-12">
-                      <form name="form" onSubmit={this.handleSubmit} id="loginform" className="auth-form" role="form">
-                        <input id="ReturnUrl" name="ReturnUrl" type="hidden" />
-                          <h3 className="text-center text-info">Login</h3>
-                          <div className={'row-input-field'+ 'form-group' + (submitted && !username ? ' has-error' : '')}>
-                            <label htmlFor="username" className="text-info">username:</label><br />
+              <div className="container ">
+              <h3 className="text-center">Login</h3>
+                <div className="row  align-items-center justify-content-center login-form ">
+                  <div className="col-md-6  p-3 mb-5 bg-white rounded ">
+
+                      <form onSubmit={this.handleSubmit} id="loginform">
+                        <div className="form-group className={'row-input-field'+ 'form-group' + (submitted && !username ? ' has-error' : '')}">
+                          <label htmlFor="exampleInputEmail1">Email Address</label>
                             {submitted && !username &&
                              <div className="help-block">username is required</div>
                             }
-                            
-                            <input type="text" name="username" id="username" className="form-control" name="username" value={username} onChange={this.handleChange} placeholder="username" />
-                          </div>
-                          <div className={'text-box single-line password'+ 'form-group' + (submitted && !password ? ' has-error' : '')}>
-                            <label htmlFor="password" className="text-info">Password:</label><br />
-                            {submitted && !password &&
+                          <input type="email" name="username" className="form-control" value={username} onChange={this.handleChange} id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                          <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div className="form-group {'text-box single-line password'+ 'form-group' + (submitted && !password ? ' has-error' : '')}">
+                          <label htmlFor="exampleInputPassword1">Password</label>
+                          {submitted && !password &&
                               <div className="help-block">Password is required</div>
                             }
-                            
-                            <input type="Password" name="password" id="password" className="form-control" name="password" value={password} onChange={this.handleChange} placeholder="Password" />
-                          </div>
-                          <div className="form-group">
-                            <br />
-                            <button className="btn btn-info btn-md">submit</button>
-                            {loggingIn &&
+                          <input type="password" name="password" value={password} onChange={this.handleChange} className="form-control" id="exampleInputPassword1" placeholder="Password" />
+                        </div>
+                        <div className="form-group form-check check-box">
+                          <input type="checkbox" className="form-check-input" id="exampleCheck1" />&nbsp;&nbsp;&nbsp;&nbsp;
+                          <label className="form-check-label" htmlFor="exampleCheck1">Remeber me</label>
+                        </div>
+                        <button type="submit" className="btn btn-primary">Submit</button>
+                          {loggingIn &&
                               <img />
-                            }<hr/>
-                          </div>
-                          <div id="register-link" className="text-right">
-                              <a href="/register" className="text-info">Register here</a>
-                          </div>
+                            }
                       </form>
-                    </div>
                   </div>
                 </div>
               </div>
-            </div> 
         );
     }
 }

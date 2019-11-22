@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 
 import { authentication } from './authentication.reducer';
-import { registration } from './registration.reducer';
 import { users } from './users.reducer';
 import { warehouse } from './warehouse.reducer';
 import { allwarehouses } from './allwarehouses.reducer';
@@ -10,20 +9,21 @@ import { category } from './category.reducer';
 import { allproducts } from './allproducts.reducer';
 import { allcategories } from './allcategories.reducer';
 import { allinventories } from './allinventories.reducer';
-import { warehouseuser } from './warehouseuser.reducer';
+import { warehousealluser } from './warehousealluser.reducer';
 import { inventory } from './inventory.reducer';
 import { allvendors } from './allvendors.reducer';
 import { vendor } from './vendor.reducer';
 import { allpuchaseorders } from './allpuchaseorders.reducer';
+import { alltransferorders } from './alltransferorders.reducer';
 import { purchaseorder } from './purchaseorder.reducer';
+import { transferorder } from './transferorder.reducer';
 import { alert } from './alert.reducer';
 
 const rootReducer = combineReducers({
   authentication,
-  registration,
   users,
   allwarehouses,
-  warehouseuser,
+  warehousealluser,
   warehouse,
   product,
   category,
@@ -35,6 +35,8 @@ const rootReducer = combineReducers({
   vendor,
   allpuchaseorders,
   purchaseorder,
+  alltransferorders,
+  transferorder,
   alert
 });
 

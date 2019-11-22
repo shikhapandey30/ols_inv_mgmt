@@ -38,7 +38,7 @@ class CategoryDetail extends React.Component {
                     </h3>
                   }
                   { category.items && 
-                    <div className="pull-right">
+                    <div className="pull-right btn-style">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.categoryDelete(category.items.id)};}}>Delete</button>
                     </div>
                   }

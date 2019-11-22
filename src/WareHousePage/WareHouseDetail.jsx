@@ -42,7 +42,7 @@ class WareHouseDetail extends React.Component {
                     <div className="pull-right btn-style">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.warehouseDelete(warehouse.items.id)};}}>Delete</button>
                       <button className="btn btn-default">
-                      <Link to={"/warehouse/" + warehouse.items.id + "/edit"}>Edit</Link></button>
+                      <Link to={"/warehouse/" + warehouse.items.id + "/edit"} onClick={this.forceUpdate}>Edit</Link></button>
                     </div>
                   }
                 </div>

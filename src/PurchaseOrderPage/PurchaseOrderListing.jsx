@@ -27,7 +27,7 @@ class PurchaseOrderListing extends React.Component {
                    Purchase Order Listing</h3>
 
                   <div className="pull-right">
-                    <a href="/new-purchase-order" className="btn btn-primary btn-xs pull-right"><b>+</b> Add new PO
+                    <a href="/new-purchase-order" className="btn btn-primary btn-xs pull-right"><b>+</b> Add New Purchase Order
                     </a>
                   </div>
                 </div>
@@ -37,13 +37,7 @@ class PurchaseOrderListing extends React.Component {
                     <tr className="filters">
                       <th>S.No</th>
                       <th>PO ID</th>
-                      <th>PO Number</th>
-                      <th>PO Amt</th>
-                      <th>Supplier Name</th>
-                      <th>Create Date</th>
-                      <th>Delivery Date</th>
                       <th>Status</th>
-                      <th>Info</th>
                       <th>View</th>
                       
                     </tr>  
@@ -55,13 +49,7 @@ class PurchaseOrderListing extends React.Component {
                       <tr key={po.id} >
                         <td>{index + 1}</td>
                         <td>{po.id}</td>
-                        <td>{po.number}</td>
-                        <td>{po.amt}</td>
-                        <td>{po.supplier_name}</td>
-                        <td>{po.created_date}</td>
-                        <td>{po.delivery_date}</td>
                         <td>{po.status}</td>
-                        <td>{po.info}</td>
                         <td><Link to={"/purchase-order/" + po.id}>View</Link></td>
                       </tr>
                     )}  

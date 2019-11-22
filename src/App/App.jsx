@@ -29,8 +29,10 @@ import { NewVendor } from '../VendorPage';
 import { PurchaseOrderListing } from '../PurchaseOrderPage';
 import { PurchaseOrderDetail } from '../PurchaseOrderPage';
 import { NewPurchaseOrder } from '../PurchaseOrderPage';
+import { TransferOrderListing } from '../TransferOrderPage';
+import { TransferOrderDetail } from '../TransferOrderPage';
 import { LoginPage } from '../LoginPage';
-import { RegisterPage } from '../RegisterPage';
+// import { RegisterPage } from '../RegisterPage';
 
 class App extends React.Component {
   constructor(props) {
@@ -55,6 +57,7 @@ class App extends React.Component {
                 <Route path="/Header" component={Header} />
                 <Route path="/Footer" component={Footer} />
                 <Route path="/products" component={Product} />
+                <Route path="/warehouse/:id/user" component={WareHouseAllUser} />
                 <Route path="/new-product" component={NewProduct} />
                 <Route path="/new-category" component={NewCategory} />   
                 <Route path="/categories" component={Category} />
@@ -63,14 +66,15 @@ class App extends React.Component {
                 <Route path="/inventory/:id" component={InventoryDetail} />
                 <Route path="/new-inventory" component={NewInventory} />
                 <Route path="/login" component={LoginPage} />
-                <Route path="/register" component={RegisterPage} />
+                
                 <Route exact path="/warehouses" component={WareHouse} />
                 <Route path="/product/:id" component={ProductDetail} />
-                <Route path="/warehouse/:id/user" component={WareHouseAllUser} />
+                
                 <Route path="/warehouse/:id/edit" component={WareHouseEdit} />
                 <Route path="/warehouse/:id" component={WareHouseDetail} />
 
                 <Route path="/new-warehouse" component={NewWareHouse} />
+
 
                 <Route path="/vendors" component={Vendor} />
                 <Route path="/vendor/:id" component={VendorDetail} />
@@ -78,6 +82,8 @@ class App extends React.Component {
                 <Route path="/purchase-orders" component={PurchaseOrderListing} />
                 <Route path="/purchase-order/:id" component={PurchaseOrderDetail} />
                 <Route path="/new-purchase-order" component={NewPurchaseOrder} />
+                <Route path="/transfer-orders" component={TransferOrderListing} />
+                <Route path="/transfer-order/:id" component={TransferOrderDetail} />
 
                 <Redirect from="*" to="/" />
               </Switch>

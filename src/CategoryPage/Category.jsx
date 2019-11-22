@@ -21,12 +21,12 @@ class Category extends React.Component {
             <div className="">
               <div className="panel panel-primary filterable">
                 <div className="panel-heading">
-                  <h3 className="panel-title"> 
-                   <a href="/products"><button type="button" className="btn btn-default active">Product</button></a>
-                    <a href="/warehouses"><button type="button" className="btn btn-default">Warehouse</button></a></h3>
+                  <h3 className="panel-title">
+                    Categories 
+                  </h3>
 
                   <div className="pull-right">
-                    <a href="/new-category" className="btn btn-primary btn-xs pull-right"><b>+</b> Add new Category
+                    <a href="/new-category" className="btn btn-primary btn-xs pull-right"><b>+</b> Add New Category
                     </a>
                   </div>
                 </div>

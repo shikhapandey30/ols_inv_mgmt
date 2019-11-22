@@ -10,10 +10,6 @@ import { Route, Redirect } from 'react-router-dom';
 
 
 class NewCategory extends React.Component {
-    // componentDidMount() {
-    //   console.log("mount")
-    //     this.props.dispatch(userActions.getAll());
-    // }
 
     constructor(props) {
         super(props);
@@ -48,8 +44,6 @@ class NewCategory extends React.Component {
         window.location = "/categories"
       })
     }
-
-
 
     handleDeleteUser(id) {
       return (e) => this.props.dispatch(userActions.delete(id));

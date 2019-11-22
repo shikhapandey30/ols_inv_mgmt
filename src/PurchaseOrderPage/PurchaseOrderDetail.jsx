@@ -15,10 +15,10 @@ class PurchaseOrderDetail extends React.Component {
 
     purchaseorderDelete = (id) => {
         console.log("******************************************", id)
-        axios.delete(`${config.apiUrl}/products/${id}`)
+        axios.delete(`${config.apiUrl}/purchase_orders/${id}`)
         .then(response => {
           this.setState({ locations: response.data });
-          window.location = "/products"
+          window.location = "/purchase-orders"
         })
     }
 
@@ -45,11 +45,11 @@ class PurchaseOrderDetail extends React.Component {
                 <div className="panel-heading">
                   { purchaseorder.items && 
                     <h3 className="panel-title"> 
-                     {purchaseorder.items.name}
+                     {purchaseorder.items.id}
                     </h3>
                   }
                   { purchaseorder.items && 
-                    <div className="pull-right">
+                    <div className="pull-right btn-style">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.purchaseorderDelete(purchaseorder.items.id)};}}>Delete</button>
                     </div>
                   }
@@ -58,36 +58,72 @@ class PurchaseOrderDetail extends React.Component {
                   <table className="table table-bordered table table-border">
                     <tbody>
                       <tr>
-                        <td>purchaseorder ID</td>
+                        <td>Purchase Order ID</td>
                         <td>{purchaseorder.items.id}</td>
                       </tr>
                       <tr>
-                        <td>purchaseorder Number</td>
-                        <td>{purchaseorder.items.number}</td>
+                        <td>Purchase Order Warehouse ID </td>
+                        <td>{purchaseorder.items.warehouse.id}</td>
                       </tr>
                       <tr>
-                        <td>purchaseorder Amt</td>
-                        <td>{purchaseorder.items.amt}</td>
+                        <td>Purchase Order Warehouse Name</td>
+                        <td>{purchaseorder.items.warehouse.name}</td>
                       </tr>
                       <tr>
-                        <td>purchaseorder Supplier Name</td>
-                        <td>{purchaseorder.items.supplier_name}</td>
+                        <td>Purchase Order Warehouse Address</td>
+                        <td>{purchaseorder.items.warehouse.address}</td>
                       </tr>
                       <tr>
-                        <td>purchaseorder Create Date</td>
-                        <td>{purchaseorder.items.create_date}</td>
+                        <td>Purchase Order Warehouse Landmark</td>
+                        <td>{purchaseorder.items.warehouse.landmark}</td>
                       </tr>
                       <tr>
-                        <td>purchaseorder DeliveryDate</td>
-                        <td>{purchaseorder.items.delivery_date}</td>
+                        <td>Purchase Order Warehouse Zipcode</td>
+                        <td>{purchaseorder.items.warehouse.zipcode}</td>
                       </tr>
                       <tr>
-                        <td>purchaseorder Status</td>
-                        <td>{purchaseorder.items.status}</td>
+                        <td>Purchase Order Warehouse City</td>
+                        <td>{purchaseorder.items.warehouse.city}</td>
                       </tr>
                       <tr>
-                        <td>purchaseorder info</td>
-                        <td>{purchaseorder.items.info}</td>
+                        <td>Purchase Order Warehouse State</td>
+                        <td>{purchaseorder.items.warehouse.state}</td>
+                      </tr>
+                      <tr>
+                        <td>Purchase Order Warehouse Country</td>
+                        <td>{purchaseorder.items.warehouse.country}</td>
+                      </tr>
+                      <tr>
+                        <td>Purchase Order Vendor ID</td>
+                        <td>{purchaseorder.items.vendor.id}</td>
+                      </tr>
+                      <tr>
+                        <td>Purchase Order Vendor Name</td>
+                        <td>{purchaseorder.items.vendor.name}</td>
+                      </tr>
+                      <tr>
+                        <td>Purchase Order Vendor Address</td>
+                        <td>{purchaseorder.items.vendor.address}</td>
+                      </tr>
+                      <tr>
+                        <td>Purchase Order Vendor Landmark</td>
+                        <td>{purchaseorder.items.vendor.landmark}</td>
+                      </tr>
+                      <tr>
+                        <td>Purchase Order Vendor Zipcode</td>
+                        <td>{purchaseorder.items.vendor.zipcode}</td>
+                      </tr>
+                      <tr>
+                        <td>Purchase Order Vendor City</td>
+                        <td>{purchaseorder.items.vendor.city}</td>
+                      </tr>
+                      <tr>
+                        <td>Purchase Order Vendor State</td>
+                        <td>{purchaseorder.items.vendor.state}</td>
+                      </tr>
+                      <tr>
+                        <td>Purchase Order Vendor Country</td>
+                        <td>{purchaseorder.items.vendor.country}</td>
                       </tr>
                     </tbody>
                   </table>

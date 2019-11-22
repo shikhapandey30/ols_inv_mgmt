@@ -87,7 +87,7 @@ class NewWareHouse extends React.Component {
                   {submitted && !warehouse.city && 
                     <div className="help-block required-msg"> Warehouse City is required</div>
                   }
-                  <input type="text" id="warehousecity" className="form-control" placeholder="WareHouse City" name="city" value={warehouse.city} onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="warehousecity" className="form-control" placeholder="City" name="city" value={warehouse.city} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 
@@ -97,7 +97,7 @@ class NewWareHouse extends React.Component {
                   {submitted && !warehouse.state && 
                     <div className="help-block required-msg"> Warehouse State is required</div>
                   }
-                  <input type="text" id="warehousestate" className="form-control" placeholder="WareHouse State" name="state" value={warehouse.state} onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="warehousestate" className="form-control" placeholder="State" name="state" value={warehouse.state} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 
@@ -108,7 +108,7 @@ class NewWareHouse extends React.Component {
                   {submitted && !warehouse.address && 
                     <div className="help-block required-msg"> Warehouse Address is required</div>
                   }
-                  <input type="text" id="warehouseaddress" className="form-control" placeholder="WareHouse Address" name="address" value={warehouse.address} onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="warehouseaddress" className="form-control" placeholder="Address" name="address" value={warehouse.address} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 
@@ -118,7 +118,7 @@ class NewWareHouse extends React.Component {
                   {submitted && !warehouse.country && 
                     <div className="help-block required-msg"> Warehouse Country is required</div>
                   }
-                  <input type="text" id="warehousecountry" className="form-control" placeholder="WareHouse Country" name="country" value={warehouse.country} onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="warehousecountry" className="form-control" placeholder="Country" name="country" value={warehouse.country} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 
@@ -128,7 +128,7 @@ class NewWareHouse extends React.Component {
                   {submitted && !warehouse.zipcode && 
                     <div className="help-block required-msg"> Warehouse Zipcode is required</div>
                   }
-                  <input type="text" id="warehousezipcode" className="form-control" placeholder="WareHouse Zipcode" name="zipcode" value={warehouse.zipcode} onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="warehousezipcode" className="form-control" placeholder="Zipcode" name="zipcode" value={warehouse.zipcode} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
               <div className="form-group">

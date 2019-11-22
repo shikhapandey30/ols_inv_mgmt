@@ -25,7 +25,7 @@ class Vendor extends React.Component {
                     Vendors 
                   </h3>
                   <div className="pull-right">
-                    <a href="/new-vendor" className="btn btn-primary btn-xs pull-right"><b>+</b> Add new Vendor
+                    <a href="/new-vendor" className="btn btn-primary btn-xs pull-right"><b>+</b> Add New Vendor
                     </a>
                   </div>
                 </div>

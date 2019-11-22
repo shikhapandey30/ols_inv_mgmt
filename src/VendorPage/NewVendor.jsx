@@ -73,7 +73,7 @@ class NewVendor extends React.Component {
           <form name="form" className="form-horizontal" role="form" onSubmit={this.handleSubmit}>
               <center><h2>Add New Vendor</h2></center><br/>
               <div className="form-group">
-                <label htmlFor="vendorname" className="col-sm-2 control-label">Vendor Name</label>
+                <label htmlFor="vendorname" className="col-sm-2 control-label">Name</label>
                 <div className="col-sm-9">
                   {submitted && !vendors.name && 
                     <div className="help-block required-msg"> Vendor Name is required</div>
@@ -83,7 +83,7 @@ class NewVendor extends React.Component {
               </div>
 
               <div className="form-group">
-                <label htmlFor="vendoraddress" className="col-sm-2 control-label">Vendor Address</label>
+                <label htmlFor="vendoraddress" className="col-sm-2 control-label">Address</label>
                 <div className="col-sm-9">
                   {submitted && !vendors.address && 
                     <div className="help-block required-msg"> Vendor Address is required</div>
@@ -93,52 +93,52 @@ class NewVendor extends React.Component {
               </div>
 
               <div className="form-group">
-                <label htmlFor="vendorcity" className="col-sm-2 control-label">Vendor City</label>
+                <label htmlFor="vendorcity" className="col-sm-2 control-label">City</label>
                 <div className="col-sm-9">
                   {submitted && !vendors.city && 
                     <div className="help-block required-msg"> Product Brand Name is required</div>
                   }
-                  <input type="text" id="vendorcity" className="form-control" placeholder="Product brand name" name="city" value={vendors.city} onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="vendorcity" className="form-control" placeholder="City" name="city" value={vendors.city} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 
               <div className="form-group">
-                <label htmlFor="vendorstate" className="col-sm-2 control-label">Vendor state</label>
+                <label htmlFor="vendorstate" className="col-sm-2 control-label">State</label>
                 <div className="col-sm-9">
                   {submitted && !vendors.state && 
                     <div className="help-block required-msg"> Product Brand Name is required</div>
                   }
-                  <input type="text" id="vendorstate" className="form-control" placeholder="Product brand name" name="state" value={vendors.state} onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="vendorstate" className="form-control" placeholder="State" name="state" value={vendors.state} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 
               <div className="form-group">
-                <label htmlFor="vendorcountry" className="col-sm-2 control-label">Vendor country</label>
+                <label htmlFor="vendorcountry" className="col-sm-2 control-label">Country</label>
                 <div className="col-sm-9">
                   {submitted && !vendors.country && 
                     <div className="help-block required-msg"> Product Brand Name is required</div>
                   }
-                  <input type="text" id="vendorcountry" className="form-control" placeholder="Product brand name" name="country" value={vendors.country} onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="vendorcountry" className="form-control" placeholder="Country" name="country" value={vendors.country} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 
               <div className="form-group">
-                <label htmlFor="vendorlandmark" className="col-sm-2 control-label">Vendor landmark</label>
+                <label htmlFor="vendorlandmark" className="col-sm-2 control-label">Landmark</label>
                 <div className="col-sm-9">
                   {submitted && !vendors.landmark && 
                     <div className="help-block required-msg"> Product Brand Name is required</div>
                   }
-                  <input type="text" id="vendorlandmark" className="form-control" placeholder="Product brand name" name="landmark" value={vendors.landmark} onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="vendorlandmark" className="form-control" placeholder="Landmark" name="landmark" value={vendors.landmark} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 
               <div className="form-group">
-                <label htmlFor="vendorzipcode" className="col-sm-2 control-label">Vendor zipcode</label>
+                <label htmlFor="vendorzipcode" className="col-sm-2 control-label">zipcode</label>
                 <div className="col-sm-9">
                   {submitted && !vendors.zipcode && 
                     <div className="help-block required-msg"> Product Brand Name is required</div>
                   }
-                  <input type="text" id="vendorzipcode" className="form-control" placeholder="Product brand name" name="zipcode" value={vendors.zipcode} onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="vendorzipcode" className="form-control" placeholder="Zipcode" name="zipcode" value={vendors.zipcode} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
               

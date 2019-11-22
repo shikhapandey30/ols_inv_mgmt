@@ -4,8 +4,7 @@ import { authHeader } from '../_helpers';
 export const userService = {
     login,
     logout,
-    register,
-    warehouseuser,
+    getwarehouseuser,
     getAllwarehouse,
     getwarehousedetail,
     getAllproduct,
@@ -18,6 +17,8 @@ export const userService = {
     getvendordetail,
     getAllpuchaseorderslist,
     getpurchaseorderdetail,
+    getAlltranferorderslist,
+    gettransferorderdetail,
     getById,
     update,
     delete: _delete
@@ -73,19 +74,19 @@ function getwarehousedetail(warehouseID) {
     });
 }
 
-function warehouseuser(warehouseID) {
+function getwarehouseuser(warehouseID) {
   const requestOptions = {
-    method: 'GET',
+    method: 'POST',
     headers: authHeader()
     // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
     // headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
   };
-    return fetch(`${config.apiUrl}/warehouses/1000/users`, requestOptions)
+    return fetch(`${config.apiUrl}/warehouses/${warehouseID}/users`, requestOptions)
     .then(handleResponse)
-    .then(warehouseuser => {
+    .then(warehousealluser => {
       debugger
-      console.log("Response@@@@@@@@@@@@",warehouseuser)
-      return warehouseuser.data;
+      console.log("Response@@@@@@@@@@@@",warehousealluser)
+      return warehousealluser.data;
     });
 }
 
@@ -230,7 +231,7 @@ function getAllpuchaseorderslist() {
     // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
     // headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
   };
-    return fetch(`${config.apiUrl}/products`, requestOptions)
+    return fetch(`${config.apiUrl}/purchase_orders`, requestOptions)
     .then(handleResponse)
     .then(allpuchaseorders => {
       console.log("Response",allpuchaseorders)
@@ -245,11 +246,41 @@ function getpurchaseorderdetail(purchaseorderID) {
     // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
     // headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
   };
-    return fetch(`${config.apiUrl}/products/${purchaseorderID}`, requestOptions)
+    return fetch(`${config.apiUrl}/purchase_orders/${purchaseorderID}`, requestOptions)
     .then(handleResponse)
     .then(purchaseorder => {
       console.log("Response",purchaseorder)
       return purchaseorder.data;
+    });
+}
+
+function getAlltranferorderslist() {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+    // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+    // headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
+  };
+    return fetch(`${config.apiUrl}/purchase_orders`, requestOptions)
+    .then(handleResponse)
+    .then(alltransferorders => {
+      console.log("Response",alltransferorders)
+      return alltransferorders.data;
+    });
+}
+
+function gettransferorderdetail(transferorderID) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+    // headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Token': JSON.parse(localStorage.getItem('user')).data.token }
+    // headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
+  };
+    return fetch(`${config.apiUrl}/purchase_orders/${transferorderID}`, requestOptions)
+    .then(handleResponse)
+    .then(transferorder => {
+      console.log("Response",transferorder)
+      return transferorder.data;
     });
 }
 
@@ -261,16 +292,6 @@ function getById(id) {
     };
 
     return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
-}
-
-function register(user) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
-    };
-
-    return fetch(`${config.apiUrl}/users/register`, requestOptions).then(handleResponse);
 }
 
 function update(user) {

@@ -38,7 +38,7 @@ class ProductDetail extends React.Component {
                     </h3>
                   }
                   { product.items && 
-                    <div className="pull-right">
+                    <div className="pull-right product-delete-btn">
                       <button className="btn btn-danger btn-style-product" onClick={() => {if(window.confirm('Delete the item?')){this.productDelete(product.items.id)};}}>Delete</button>
                     </div>
                   }
@@ -69,7 +69,7 @@ class ProductDetail extends React.Component {
                       <tr>
                         <td>Product image</td>
                         <td>
-                        <a href={product.items.imageUrl}><img style={{width: 100, height: 100}} className='tc br3' alt='none' src={ product.items.imageUrl } /></a>
+                        <a target = "_blank" href={product.items.imageUrl}><img style={{width: 100, height: 100}} className='tc br3' alt='none' src={ product.items.imageUrl } /></a>
                         </td>
                       </tr>
                       <tr>

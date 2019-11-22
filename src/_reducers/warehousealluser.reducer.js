@@ -1,5 +1,5 @@
 import { userConstants } from '../_constants';
-export function warehouseuser(state = {}, action) {
+export function warehousealluser(state = {}, action) {
   switch (action.type) {
     case userConstants.GETWAREHOUSET_REQUEST:
 
@@ -9,7 +9,7 @@ export function warehouseuser(state = {}, action) {
     case userConstants.GETWAREHOUSET_SUCCESS:
       return {
 
-        items: action.warehouseuser
+        items: action.warehousealluser
       };
     case userConstants.GETWAREHOUSET_FAILURE:
       return { 

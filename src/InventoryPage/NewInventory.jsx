@@ -80,7 +80,7 @@ class NewInventory extends React.Component {
                   {submitted && !inventories.barcode && 
                     <div className="help-block required-msg"> Inventory barcode is required</div>
                   }
-                  <input type="text" id="inventorybarcode" className="form-control" placeholder="Inventory barcode" name="barcode" value={inventories.barcode} onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="inventorybarcode" className="form-control" placeholder="Barcode" name="barcode" value={inventories.barcode} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 
@@ -90,7 +90,7 @@ class NewInventory extends React.Component {
                   {submitted && !inventories.batch && 
                     <div className="help-block required-msg"> Inventory batch is required</div>
                   }
-                  <input type="text" id="inveventorybatch" className="form-control" placeholder="Inventory batch" name="batch" value={inventories.batch} onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="inveventorybatch" className="form-control" placeholder="Batch" name="batch" value={inventories.batch} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 
@@ -100,15 +100,12 @@ class NewInventory extends React.Component {
                   {submitted && !inventories.mrpCost && 
                     <div className="help-block required-msg"> Inventory mrpCost is required</div>
                   }
-                  <input type="text" id="inventorymrpCost" className="form-control" placeholder="Inventory mrpCost" name="mrpCost" value={inventories.mrpCost} onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="inventorymrpCost" className="form-control" placeholder="MRP Cost" name="mrpCost" value={inventories.mrpCost} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="inventoryproductid" className="col-sm-2 control-label">Product </label>
                 <div className="col-sm-9">
-                  {submitted && !inventories.product && 
-                    <div className="help-block required-msg"> Inventory product is required</div>
-                  }
                    { allproducts.items && allproducts.items.length > 0 &&
                     <select value={inventories.product} onChange={this.handleChange} name="product" className="form-control select-field" >
                       {allproducts.items.map((product, index) =>
@@ -125,9 +122,6 @@ class NewInventory extends React.Component {
               <div className="form-group">
                 <label htmlFor="inventorywarehouseid" className="col-sm-2 control-label">Warehouse </label>
                 <div className="col-sm-9">
-                  {submitted && !inventories.warehouse && 
-                    <div className="help-block required-msg"> Inventory Warehouse is required</div>
-                  }
                    { allwarehouses.items && allwarehouses.items.length > 0 &&
                     <select value={inventories.warehouse} onChange={this.handleChange} name="warehouse" className="form-control select-field" >
                       {allwarehouses.items.map((warehouse, index) =>
@@ -144,9 +138,9 @@ class NewInventory extends React.Component {
                 <label htmlFor="inventorypurchaseCost" className="col-sm-2 control-label">Purchase Cost</label>
                 <div className="col-sm-9">
                   {submitted && !inventories.purchaseCost && 
-                    <div className="help-block required-msg"> Inventory purchaseCost is required</div>
+                    <div className="help-block required-msg"> Inventory PurchaseCost is required</div>
                   }
-                  <input type="text" id="inventorypurchaseCost" className="form-control" placeholder="Inventory purchaseCost" value={inventories.purchaseCost}  name="purchaseCost"  onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="inventorypurchaseCost" className="form-control" placeholder="Purchase Cost" value={inventories.purchaseCost}  name="purchaseCost"  onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 
@@ -156,7 +150,7 @@ class NewInventory extends React.Component {
                   {submitted && !inventories.quantity && 
                     <div className="help-block required-msg"> Inventory Quantity is required</div>
                   }
-                  <input type="text" id="inventoryquantity" className="form-control" placeholder="Inventory Quantity" value={inventories.quantity}  name="quantity"  onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="inventoryquantity" className="form-control" placeholder="Quantity" value={inventories.quantity}  name="quantity"  onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 
@@ -167,7 +161,7 @@ class NewInventory extends React.Component {
                     <div className="help-block required-msg"> Inventory Reference Number is required</div>
                   }
 
-                   <input type="text" id="inventoryreferenceNumber" className="form-control" placeholder="Inventory Reference Number" value={inventories.referenceNumber}  name="referenceNumber"  onChange={this.handleChange}  autoFocus />
+                   <input type="text" id="inventoryreferenceNumber" className="form-control" placeholder="Reference Number" value={inventories.referenceNumber}  name="referenceNumber"  onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 
@@ -177,29 +171,29 @@ class NewInventory extends React.Component {
                   {submitted && !inventories.remark && 
                     <div className="help-block required-msg"> Inventory remark is required</div>
                   }
-                  <input type="text" id="inventoryremark" className="form-control" placeholder="Inventory Remark" value={inventories.remark}  name="remark"  onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="inventoryremark" className="form-control" placeholder="Remark" value={inventories.remark}  name="remark"  onChange={this.handleChange}  autoFocus />
                   
                 </div>   
               </div>
 
               <div className="form-group">
-                <label htmlFor="inventorysalesCost" className="col-sm-2 control-label">salesCost </label>
+                <label htmlFor="inventorysalesCost" className="col-sm-2 control-label">Sales Cost </label>
                 <div className="col-sm-9">
                   {submitted && !inventories.salesCost && 
                     <div className="help-block required-msg"> Inventory Sales Cost is required</div>
                   }
-                  <input type="text" id="inventorysalesCost" className="form-control" placeholder="Inventory Sales Cost" value={inventories.salesCost}  name="salesCost"  onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="inventorysalesCost" className="form-control" placeholder="Sales Cost" value={inventories.salesCost}  name="salesCost"  onChange={this.handleChange}  autoFocus />
                   
                 </div>   
               </div>
 
               <div className="form-group">
-                <label htmlFor="inventoryspecialCost" className="col-sm-2 control-label">specialCost </label>
+                <label htmlFor="inventoryspecialCost" className="col-sm-2 control-label">Special Cost </label>
                 <div className="col-sm-9">
                   {submitted && !inventories.specialCost && 
                     <div className="help-block required-msg"> Inventory Special Cost is required</div>
                   }
-                  <input type="text" id="inventoryspecialCost" className="form-control" placeholder="Inventory Special Cost" value={inventories.specialCost}  name="specialCost"  onChange={this.handleChange}  autoFocus />
+                  <input type="text" id="inventoryspecialCost" className="form-control" placeholder="Special Cost" value={inventories.specialCost}  name="specialCost"  onChange={this.handleChange}  autoFocus />
                   
                 </div>   
               </div>

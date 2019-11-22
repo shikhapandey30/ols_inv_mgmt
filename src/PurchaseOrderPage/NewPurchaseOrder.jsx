@@ -15,12 +15,10 @@ class NewPurchaseOrder extends React.Component {
         super(props);
         this.state = {
           purchaseorders: {
-              product: '',
-              suppliername: '',
-              qty: '',
-              sku: '',
-              totalqty: '',
-              deliverydate: '',
+              itemid: '',
+              status: '',
+              vendorid: '',
+              warehouseid: '',
               loaded: 0
           },
           submitted: false
@@ -37,14 +35,13 @@ class NewPurchaseOrder extends React.Component {
       });
     }
 
-
     handleSubmit(event) {
       event.preventDefault();
       this.setState({ submitted: true });
       const { purchaseorders } = this.state;
       const { dispatch } = this.props;
-      var purchaseorder = { product: purchaseorders.product, suppliername: purchaseorders.suppliername, qty: purchaseorders.qty, sku: purchaseorders.sku, totalqty: purchaseorders.totalqty, deliverydate: purchaseorders.deliverydate}
-      axios.post(`${config.apiUrl}/purchaseorders`, purchaseorder)
+      var purchaseorder = { items: [{id: purchaseorders.itemid }],status: purchaseorders.status, vendor: {id: purchaseorders.vendorid}, warehouse: {id: purchaseorders.warehouseid}}
+      axios.post(`${config.apiUrl}/purchase_orders`, purchaseorder)
       .then(response => {
         this.setState({ locations: response.data });
         window.location = "/purchase-orders"
@@ -57,13 +54,16 @@ class NewPurchaseOrder extends React.Component {
 
     componentDidMount() {
       this.props.dispatch(userActions.getAllproduct());
+      this.props.dispatch(userActions.getAllwarehouse());
+      this.props.dispatch(userActions.getAllvendor());
     }
 
     render() {
-      const { loggingIn, user, allproducts, allcategories } = this.props;
+      const { loggingIn, user, allproducts,allvendors, allwarehouses,allcategories } = this.props;
       const { purchaseorders, category, submitted } = this.state;
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
       console.log("allproducts*******************************", allproducts)
+      console.log("allwarehouses*******************************", allwarehouses)
       return (
         <div>
           <Header />
@@ -71,73 +71,56 @@ class NewPurchaseOrder extends React.Component {
           <form name="form" className="form-horizontal" role="form" onSubmit={this.handleSubmit}>
               <center><h2>Add New Purchase Order</h2></center><br/>
               <div className="form-group">
-                <label htmlFor="productname" className="col-sm-2 control-label">Product Name </label>
+                <label htmlFor="productitemid" className="col-sm-2 control-label">Item</label>
                 <div className="col-sm-9">
-                  {submitted && !purchaseorders.product && 
-                    <div className="help-block required-msg"> Product Name is required</div>
+                  {submitted && !purchaseorders.itemid && 
+                    <div className="help-block required-msg"> Item is required</div>
                   }
-                   { allproducts.items && allproducts.items.length > 0 &&
-                    <select value={purchaseorders.product} onChange={this.handleChange} name="product" className="form-control select-field" >
-                      {allproducts.items.map((product, index) =>
-                        <option key={index} value={product.id} >
-                          {product.name}
+                  <input type="text" id="purchaseorderitemid" className="form-control" placeholder="Item" name="itemid" value={purchaseorders.itemid} onChange={this.handleChange}  autoFocus />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="productstatus" className="col-sm-2 control-label">Status</label>
+                <div className="col-sm-9">
+                  {submitted && !purchaseorders.status && 
+                    <div className="help-block required-msg"> status is required</div>
+                  }
+                  <input type="text" id="purchaseorderstatus" className="form-control" placeholder="Status" name="status" value={purchaseorders.status} onChange={this.handleChange}  autoFocus />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="productvendorid" className="col-sm-2 control-label">Vendor</label>
+                <div className="col-sm-9">
+                  { allvendors.items && allvendors.items.length > 0 &&
+                    <select value={purchaseorders.vendorid} onChange={this.handleChange} name="vendorid" className="form-control select-field" >
+                      {allvendors.items.map((vendor, index) =>
+                        <option key={index} value={vendor.id} >
+                          {vendor.name}
                         </option>
-                       
                       )}
                     </select>
                    }
-                </div>   
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="productsuppliername" className="col-sm-2 control-label">Supplier Name</label>
-                <div className="col-sm-9">
-                  {submitted && !purchaseorders.suppliername && 
-                    <div className="help-block required-msg"> Purchase Order Supplier Name is required</div>
-                  }
-                  <input type="text" id="purchaseordersuppliername" className="form-control" placeholder="Purchase Order Supplier Name" name="suppliername" value={purchaseorders.suppliername} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 
               <div className="form-group">
-                <label htmlFor="productqty" className="col-sm-2 control-label">QTY</label>
+                <label htmlFor="producttotalwarehouseid" className="col-sm-2 control-label">Warehouse</label>
                 <div className="col-sm-9">
-                  {submitted && !purchaseorders.qty && 
-                    <div className="help-block required-msg"> Purchase Order QTY is required</div>
-                  }
-                  <input type="text" id="purchaseorderqty" className="form-control" placeholder="Purchase Order QTY" name="qty" value={purchaseorders.qty} onChange={this.handleChange}  autoFocus />
+                  { allwarehouses.items && allwarehouses.items.length > 0 &&
+                    <select value={purchaseorders.warehouseid} onChange={this.handleChange} name="warehouseid" className="form-control select-field" >
+                      {allwarehouses.items.map((warehouse, index) =>
+                        <option key={index} value={warehouse.id} >
+                          {warehouse.name}
+                        </option>
+                      )}
+                    </select>
+                   }
                 </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="productsku" className="col-sm-2 control-label">SKU</label>
-                <div className="col-sm-9">
-                  {submitted && !purchaseorders.sku && 
-                    <div className="help-block required-msg"> Purchase Order sku is required</div>
-                  }
-                  <input type="text" id="purchaseordersku" className="form-control" placeholder="Purchase Order sku" name="sku" value={purchaseorders.sku} onChange={this.handleChange}  autoFocus />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="producttotalqty" className="col-sm-2 control-label">Total Qty</label>
-                <div className="col-sm-9">
-                  {submitted && !purchaseorders.totalqty && 
-                    <div className="help-block required-msg"> Purchase Order totalqty is required</div>
-                  }
-                  <input type="text" id="purchaseordertotalqty" className="form-control" placeholder="Purchase Order totalqty" name="totalqty" value={purchaseorders.totalqty} onChange={this.handleChange}  autoFocus />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="productdeliverydate" className="col-sm-2 control-label">Delivery Date</label>
-                <div className="col-sm-9">
-                  {submitted && !purchaseorders.deliverydate && 
-                    <div className="help-block required-msg"> Purchase Order deliverydate is required</div>
-                  }
-                  <input type="text" id="purchaseorderdeliverydate" className="form-control" placeholder="Purchase Order deliverydate" name="deliverydate" value={purchaseorders.deliverydate} onChange={this.handleChange}  autoFocus />
-                </div>
-              </div>
+              
               <div className="form-group">
                 <div className="col-sm-9 col-sm-offset-2">
                   <button className="btn btn-primary btn-block">Submit</button>
@@ -152,12 +135,14 @@ class NewPurchaseOrder extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { purchaseorders,allproducts, users, authentication } = state;
+  const { purchaseorders,allproducts,allwarehouses, allvendors, users, authentication } = state;
   const { user } = authentication;
   return {
     user,
     allproducts,
+    allwarehouses,
     purchaseorders,
+    allvendors,
     users,
   };
 }
