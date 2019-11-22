@@ -99,7 +99,7 @@ class NewProduct extends React.Component {
               </div>
               <div className="form-group">
                 <label htmlFor="productname" className="col-sm-2 control-label">Product Name</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !products.name && 
                     <div className="help-block required-msg"> Product Name is required</div>
                   }
@@ -110,7 +110,7 @@ class NewProduct extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="productcode" className="col-sm-2 control-label">Product Code</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !products.code && 
                     <div className="help-block required-msg"> Product Code is required</div>
                   }
@@ -120,7 +120,7 @@ class NewProduct extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="productbrandName" className="col-sm-2 control-label">Product Brand Name</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !products.brandName && 
                     <div className="help-block required-msg"> Product Brand Name is required</div>
                   }
@@ -130,7 +130,7 @@ class NewProduct extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="productcategoryid" className="col-sm-2 control-label">Category </label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                    { allcategories.items && allcategories.items.length > 0 &&
                     <select value={products.category} onChange={this.handleChange} name="category" className="form-control select-field" >
                       {allcategories.items.map((category, index) =>
@@ -145,7 +145,7 @@ class NewProduct extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="productcgst" className="col-sm-2 control-label">Product cgst</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !products.cgst && 
                     <div className="help-block required-msg"> Product cgst is required</div>
                   }
@@ -156,7 +156,7 @@ class NewProduct extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="producthsnCode" className="col-sm-2 control-label">Product hsnCode</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !products.hsnCode && 
                     <div className="help-block required-msg"> Product hsnCode is required</div>
                   }
@@ -168,7 +168,7 @@ class NewProduct extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="productsgst" className="col-sm-2 control-label">Product sgst</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !products.sgst && 
                     <div className="help-block required-msg"> Product sgst is required</div>
                   }
@@ -178,7 +178,7 @@ class NewProduct extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="productdescription" className="col-sm-2 control-label">Product Description</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !products.description && 
                     <div className="help-block required-msg"> Product description is required</div>
                   }
@@ -189,7 +189,7 @@ class NewProduct extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="productisActive" className="col-sm-2 control-label">isActive </label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   <select value={products.isActive} onChange={this.handleChange} name="isActive" className="form-control select-field" >
                       <option >
                         {"True"}
@@ -203,7 +203,7 @@ class NewProduct extends React.Component {
               </div>
               
               <div className="form-group">
-                <div className="col-sm-9 col-sm-offset-2">
+                <div className="col-sm-1 col-sm-offset-2">
                   <button className="btn btn-primary btn-block">Submit</button>
                   
                 </div>

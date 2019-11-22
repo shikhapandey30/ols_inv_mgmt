@@ -76,7 +76,7 @@ class NewInventory extends React.Component {
               <center><h2>Add New Inventory</h2></center><br/>
               <div className="form-group">
                 <label htmlFor="inventorybarcode" className="col-sm-2 control-label">Barcode</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !inventories.barcode && 
                     <div className="help-block required-msg"> Inventory barcode is required</div>
                   }
@@ -86,7 +86,7 @@ class NewInventory extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="inventorybatch" className="col-sm-2 control-label">Batch</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !inventories.batch && 
                     <div className="help-block required-msg"> Inventory batch is required</div>
                   }
@@ -96,7 +96,7 @@ class NewInventory extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="inventorymrpCost" className="col-sm-2 control-label">MRP Cost</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !inventories.mrpCost && 
                     <div className="help-block required-msg"> Inventory mrpCost is required</div>
                   }
@@ -105,7 +105,7 @@ class NewInventory extends React.Component {
               </div>
               <div className="form-group">
                 <label htmlFor="inventoryproductid" className="col-sm-2 control-label">Product </label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                    { allproducts.items && allproducts.items.length > 0 &&
                     <select value={inventories.product} onChange={this.handleChange} name="product" className="form-control select-field" >
                       {allproducts.items.map((product, index) =>
@@ -121,7 +121,7 @@ class NewInventory extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="inventorywarehouseid" className="col-sm-2 control-label">Warehouse </label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                    { allwarehouses.items && allwarehouses.items.length > 0 &&
                     <select value={inventories.warehouse} onChange={this.handleChange} name="warehouse" className="form-control select-field" >
                       {allwarehouses.items.map((warehouse, index) =>
@@ -136,7 +136,7 @@ class NewInventory extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="inventorypurchaseCost" className="col-sm-2 control-label">Purchase Cost</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !inventories.purchaseCost && 
                     <div className="help-block required-msg"> Inventory PurchaseCost is required</div>
                   }
@@ -146,7 +146,7 @@ class NewInventory extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="inventoryquantity" className="col-sm-2 control-label">Quantity</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !inventories.quantity && 
                     <div className="help-block required-msg"> Inventory Quantity is required</div>
                   }
@@ -156,7 +156,7 @@ class NewInventory extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="inventoryreferenceNumber" className="col-sm-2 control-label">Reference Number</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !inventories.referenceNumber && 
                     <div className="help-block required-msg"> Inventory Reference Number is required</div>
                   }
@@ -167,7 +167,7 @@ class NewInventory extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="inventoryremark" className="col-sm-2 control-label">Remark </label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !inventories.remark && 
                     <div className="help-block required-msg"> Inventory remark is required</div>
                   }
@@ -178,7 +178,7 @@ class NewInventory extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="inventorysalesCost" className="col-sm-2 control-label">Sales Cost </label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !inventories.salesCost && 
                     <div className="help-block required-msg"> Inventory Sales Cost is required</div>
                   }
@@ -189,7 +189,7 @@ class NewInventory extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="inventoryspecialCost" className="col-sm-2 control-label">Special Cost </label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !inventories.specialCost && 
                     <div className="help-block required-msg"> Inventory Special Cost is required</div>
                   }
@@ -199,7 +199,7 @@ class NewInventory extends React.Component {
               </div>
 
               <div className="form-group">
-                <div className="col-sm-9 col-sm-offset-2">
+                <div className="col-sm-1 col-sm-offset-2">
                   <button className="btn btn-primary btn-block">Submit</button>
                   
                 </div>

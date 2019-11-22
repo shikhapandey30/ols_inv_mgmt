@@ -74,7 +74,7 @@ class NewVendor extends React.Component {
               <center><h2>Add New Vendor</h2></center><br/>
               <div className="form-group">
                 <label htmlFor="vendorname" className="col-sm-2 control-label">Name</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !vendors.name && 
                     <div className="help-block required-msg"> Vendor Name is required</div>
                   }
@@ -84,7 +84,7 @@ class NewVendor extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="vendoraddress" className="col-sm-2 control-label">Address</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !vendors.address && 
                     <div className="help-block required-msg"> Vendor Address is required</div>
                   }
@@ -94,7 +94,7 @@ class NewVendor extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="vendorcity" className="col-sm-2 control-label">City</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !vendors.city && 
                     <div className="help-block required-msg"> Product Brand Name is required</div>
                   }
@@ -104,7 +104,7 @@ class NewVendor extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="vendorstate" className="col-sm-2 control-label">State</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !vendors.state && 
                     <div className="help-block required-msg"> Product Brand Name is required</div>
                   }
@@ -114,7 +114,7 @@ class NewVendor extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="vendorcountry" className="col-sm-2 control-label">Country</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !vendors.country && 
                     <div className="help-block required-msg"> Product Brand Name is required</div>
                   }
@@ -124,7 +124,7 @@ class NewVendor extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="vendorlandmark" className="col-sm-2 control-label">Landmark</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !vendors.landmark && 
                     <div className="help-block required-msg"> Product Brand Name is required</div>
                   }
@@ -134,7 +134,7 @@ class NewVendor extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="vendorzipcode" className="col-sm-2 control-label">zipcode</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !vendors.zipcode && 
                     <div className="help-block required-msg"> Product Brand Name is required</div>
                   }
@@ -144,7 +144,7 @@ class NewVendor extends React.Component {
               
               <div className="form-group">
                 <label htmlFor="vendorproductid" className="col-sm-2 control-label">Product </label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !vendors.product && 
                     <div className="help-block required-msg"> Inventory product is required</div>
                   }
@@ -162,7 +162,7 @@ class NewVendor extends React.Component {
               </div>
 
               <div className="form-group">
-                <div className="col-sm-9 col-sm-offset-2">
+                <div className="col-sm-1 col-sm-offset-2">
                   <button className="btn btn-primary btn-block">Submit</button>
                   
                 </div>

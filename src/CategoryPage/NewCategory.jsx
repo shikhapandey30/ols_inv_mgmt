@@ -62,7 +62,7 @@ class NewCategory extends React.Component {
               <center><h2>Add New Category</h2></center><br/>
               <div className="form-group">
                 <label htmlFor="categoryname" className="col-sm-2 control-label">Category Name</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !category.name && 
                     <div className="help-block required-msg"> Category Name is required</div>
                   }
@@ -71,7 +71,7 @@ class NewCategory extends React.Component {
               </div>
 
               <div className="form-group">
-                <div className="col-sm-9 col-sm-offset-2">
+                <div className="col-sm-1 col-sm-offset-2">
                   <button className="btn btn-primary btn-block">Submit</button>
                   
                 </div>
