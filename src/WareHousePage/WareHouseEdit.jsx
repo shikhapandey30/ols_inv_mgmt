@@ -118,7 +118,7 @@ class WareHouseEdit extends React.Component {
             <Header />
             <div className="container">
               <form className="form-horizontal" onSubmit={this.onSubmit.bind(this)}>
-                  <center><h2>Edit WareHouse</h2></center><br/>
+                  <center><h2>Edit And Update WareHouse</h2></center><br/>
                   <div className="form-group">
                     <label htmlFor="warehousename" className="col-sm-2 control-label">WareHouse Name</label>
                     <div className="col-sm-3">
