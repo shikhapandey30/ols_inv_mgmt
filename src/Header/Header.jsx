@@ -44,7 +44,7 @@ class Header extends React.Component {
                     </a>
                     <div className="dropdown-menu dropdown-menu-right dropdown-default dropdown-d-color"
                       aria-labelledby="navbarDropdownMenuLink-333">
-                      <a className="dropdown-item" href="/login">Login</a>
+                      <a className="dropdown-item" href="/login">Logout</a>
                      
                     </div>
                   </li>

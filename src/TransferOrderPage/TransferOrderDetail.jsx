@@ -14,8 +14,14 @@ class TransferOrderDetail extends React.Component {
     }
 
     transferorderDelete = (id) => {
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+        }
         console.log("******************************************", id)
-        axios.delete(`${config.apiUrl}/transfer_orders/${id}`)
+        axios.delete(`${config.apiUrl}/transfer_orders/${id}`, {
+      headers: headers
+      })
         .then(response => {
           this.setState({ locations: response.data });
           window.location = "/transfer-orders"
@@ -39,7 +45,7 @@ class TransferOrderDetail extends React.Component {
                     </h3>
                   }
                   { transferorder.items && 
-                    <div className="pull-right">
+                    <div className="pull-right btn-style">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.transferorderDelete(transferorder.items.id)};}}>Delete</button>
                     </div>
                   }
@@ -51,73 +57,84 @@ class TransferOrderDetail extends React.Component {
                         <td>transferorder ID</td>
                         <td>{transferorder.items.id}</td>
                       </tr>
-                      <tr>
-                        <td>transferorder Warehouse ID </td>
-                        <td>{transferorder.items.warehouse.id}</td>
+                       <tr>
+                        <td>From Warehouse ID</td>
+                        <td>{transferorder.items.sourceWarehouse.id}</td>
                       </tr>
                       <tr>
-                        <td>transferorder Warehouse Name</td>
-                        <td>{transferorder.items.warehouse.name}</td>
+                        <td>From Warehouse Name</td>
+                        <td>{transferorder.items.sourceWarehouse.name}</td>
                       </tr>
                       <tr>
-                        <td>transferorder Warehouse Address</td>
-                        <td>{transferorder.items.warehouse.address}</td>
+                        <td>From Warehouse Address</td>
+                        <td>{transferorder.items.sourceWarehouse.address}</td>
                       </tr>
                       <tr>
-                        <td>transferorder Warehouse Landmark</td>
-                        <td>{transferorder.items.warehouse.landmark}</td>
+                        <td>From Warehouse City</td>
+                        <td>{transferorder.items.sourceWarehouse.city}</td>
                       </tr>
                       <tr>
-                        <td>transferorder Warehouse Zipcode</td>
-                        <td>{transferorder.items.warehouse.zipcode}</td>
+                        <td>To Warehouse ID</td>
+                        <td>{transferorder.items.destinationWarehouse.id}</td>
                       </tr>
                       <tr>
-                        <td>transferorder Warehouse City</td>
-                        <td>{transferorder.items.warehouse.city}</td>
+                        <td>To Warehouse Name</td>
+                        <td>{transferorder.items.destinationWarehouse.name}</td>
                       </tr>
                       <tr>
-                        <td>transferorder Warehouse State</td>
-                        <td>{transferorder.items.warehouse.state}</td>
+                        <td>To Warehouse Address</td>
+                        <td>{transferorder.items.destinationWarehouse.address}</td>
                       </tr>
                       <tr>
-                        <td>transferorder Warehouse Country</td>
-                        <td>{transferorder.items.warehouse.country}</td>
+                        <td>To Warehouse City</td>
+                        <td>{transferorder.items.destinationWarehouse.city}</td>
                       </tr>
                       <tr>
-                        <td>transferorder Vendor ID</td>
-                        <td>{transferorder.items.vendor.id}</td>
+                        <td>To Warehouse State</td>
+                        <td>{transferorder.items.destinationWarehouse.state}</td>
                       </tr>
                       <tr>
-                        <td>transferorder Vendor Name</td>
-                        <td>{transferorder.items.vendor.name}</td>
+                        <td>To Warehouse Country</td>
+                        <td>{transferorder.items.destinationWarehouse.country}</td>
                       </tr>
                       <tr>
-                        <td>transferorder Vendor Address</td>
-                        <td>{transferorder.items.vendor.address}</td>
+                        <td>To Warehouse Landmark</td>
+                        <td>{transferorder.items.destinationWarehouse.landmark}</td>
                       </tr>
                       <tr>
-                        <td>transferorder Vendor Landmark</td>
-                        <td>{transferorder.items.vendor.landmark}</td>
+                        <td>To Warehouse Zipcode</td>
+                        <td>{transferorder.items.destinationWarehouse.zipcode}</td>
                       </tr>
-                      <tr>
-                        <td>transferorder Vendor Zipcode</td>
-                        <td>{transferorder.items.vendor.zipcode}</td>
-                      </tr>
-                      <tr>
-                        <td>transferorder Vendor City</td>
-                        <td>{transferorder.items.vendor.city}</td>
-                      </tr>
-                      <tr>
-                        <td>transferorder Vendor State</td>
-                        <td>{transferorder.items.vendor.state}</td>
-                      </tr>
-                      <tr>
-                        <td>transferorder Vendor Country</td>
-                        <td>{transferorder.items.vendor.country}</td>
-                      </tr>
+
                     </tbody>
                   </table>
+
                 }
+                <center><h3>Items</h3></center>
+                { transferorder.items && 
+                  <table className="table table-bordered table table-border">
+                    <thead>
+                      <tr className="filters">
+                        <th>S.No</th>
+                        <th>ID</th>
+                        <th>Product ID</th>
+                        <th>Quantity</th>
+                      </tr>  
+                    </thead>
+                    { transferorder.items.items && transferorder.items.items.length > 0 &&
+                      <tbody>
+                        {transferorder.items.items.map((transfer_order, index) =>
+                          <tr key={transfer_order.id} >
+                            <td>{index + 1}</td>
+                            <td>{transfer_order.id}</td>
+                            <td>{transfer_order.product.id}</td>
+                            <td>{transfer_order.quantity}</td>
+                          </tr>
+                        )}  
+                      </tbody>
+                    }
+                  </table>
+                }  
               </div>
             </div>
           </div>

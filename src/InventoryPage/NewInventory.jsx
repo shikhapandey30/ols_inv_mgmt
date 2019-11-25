@@ -41,12 +41,18 @@ class NewInventory extends React.Component {
     }
 
     handleSubmit(event) {
+      const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+      }
       event.preventDefault();
       this.setState({ submitted: true });
       const { inventories } = this.state;
       const { dispatch } = this.props;
       var inventory = { barcode: inventories.barcode, batch: inventories.batch, mrpCost: inventories.mrpCost, purchaseCost: inventories.purchaseCost, quantity: inventories.quantity, referenceNumber: inventories.referenceNumber, remark: inventories.remark, salesCost: inventories.salesCost, specialCost: inventories.specialCost, product: { id: inventories.product}, warehouse: { id: inventories.warehouse} }
-      axios.post(`${config.apiUrl}/inventories`, inventory)
+      axios.post(`${config.apiUrl}/inventories`, inventory, {
+      headers: headers
+      })
       .then(response => {
         this.setState({ locations: response.data });
         window.location = "/inventories"

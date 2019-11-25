@@ -41,7 +41,7 @@ class LoginPage extends React.Component {
         const { username, password, submitted } = this.state;
         return (
               <div className="container ">
-              <h3 className="text-center">Login</h3>
+              <h3 className="text-center login-heading">Login</h3>
                 <div className="row  align-items-center justify-content-center login-form ">
                   <div className="col-md-6  p-3 mb-5 bg-white rounded ">
 

@@ -31,8 +31,14 @@ class WareHouseEdit extends React.Component {
     this.getWarehouseDetails();
   }
   getWarehouseDetails(){
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+    }
     let warehouseId = this.props.match.params.id;
-    axios.get(`${config.apiUrl}/warehouses/${warehouseId}`)
+    axios.get(`${config.apiUrl}/warehouses/${warehouseId}`, {
+    headers: headers
+  })
     .then(response => {
       this.setState({
         id: response.data.data.id,
@@ -52,7 +58,13 @@ class WareHouseEdit extends React.Component {
     }
 
   editWarehouse(warehouse){
-    axios.put(`${config.apiUrl}/warehouses`, warehouse)
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+    }
+    axios.put(`${config.apiUrl}/warehouses`, warehouse, {
+    headers: headers
+  })
       .then(response => {
         this.setState({ locations: response.data });
         window.location = "/warehouses"

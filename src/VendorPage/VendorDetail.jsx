@@ -13,8 +13,14 @@ class VendorDetail extends React.Component {
     }
 
     vendorDelete = (id) => {
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+        }
         console.log("******************************************", id)
-        axios.delete(`${config.apiUrl}/vendors/${id}`)
+        axios.delete(`${config.apiUrl}/vendors/${id}`, {
+      headers: headers
+      })
         .then(response => {
           this.setState({ locations: response.data });
           window.location = "/vendors"

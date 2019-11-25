@@ -33,12 +33,18 @@ class NewCategory extends React.Component {
     }
 
     handleSubmit(event) {
+      const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+      }
       event.preventDefault();
       this.setState({ submitted: true });
       const { category } = this.state;
       const { dispatch } = this.props;
 
-      axios.post(`${config.apiUrl}/categories`, category)
+      axios.post(`${config.apiUrl}/categories`, category, {
+      headers: headers
+      })
       .then(response => {
         this.setState({ locations: response.data });
         window.location = "/categories"

@@ -39,14 +39,19 @@ class NewVendor extends React.Component {
       });
     }
 
-
     handleSubmit(event) {
+      const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+      }
       event.preventDefault();
       this.setState({ submitted: true });
       const { vendors } = this.state;
       const { dispatch } = this.props;
       var vendor = { name: vendors.name, address: vendors.address, city: vendors.city, state: vendors.state, country: vendors.country,landmark: vendors.landmark, zipcode: vendors.zipcode,products: [{ id: vendors.product}] }
-      axios.post(`${config.apiUrl}/vendors`, vendor)
+      axios.post(`${config.apiUrl}/vendors`, vendor, {
+      headers: headers
+      })
       .then(response => {
         this.setState({ locations: response.data });
         window.location = "/vendors"

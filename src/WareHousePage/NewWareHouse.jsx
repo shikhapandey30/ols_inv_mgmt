@@ -10,11 +10,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 
 class NewWareHouse extends React.Component {
-    // componentDidMount() {
-    //   console.log("mount")
-    //     this.props.dispatch(userActions.getAll());
-    // }
-
+   
     constructor(props) {
         super(props);
         this.state = {
@@ -42,19 +38,23 @@ class NewWareHouse extends React.Component {
     }
 
     handleSubmit(event) {
+      const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+      }
       event.preventDefault();
       this.setState({ submitted: true });
       const { warehouse } = this.state;
       const { dispatch } = this.props;
 
-      axios.post(`${config.apiUrl}/warehouses`, warehouse)
+      axios.post(`${config.apiUrl}/warehouses`, warehouse, {
+      headers: headers
+      })
       .then(response => {
         this.setState({ locations: response.data });
         window.location = "/warehouses"
       })
     }
-
-
 
     handleDeleteUser(id) {
       return (e) => this.props.dispatch(userActions.delete(id));

@@ -14,8 +14,14 @@ class ProductDetail extends React.Component {
     }
 
     productDelete = (id) => {
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+        }
         console.log("******************************************", id)
-        axios.delete(`${config.apiUrl}/products/${id}`)
+        axios.delete(`${config.apiUrl}/products/${id}`,  {
+      headers: headers
+      })
         .then(response => {
           this.setState({ locations: response.data });
           window.location = "/products"

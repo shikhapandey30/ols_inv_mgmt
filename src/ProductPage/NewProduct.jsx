@@ -43,10 +43,16 @@ class NewProduct extends React.Component {
     }
 
     handleChanges(FileList) {
+      const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+      }
       console.log(FileList[0].name);
       const data = new FormData()
       data.append('file', FileList[0], FileList[0].name)
-      axios.post(`${config.apiUrl}/images`, data)
+      axios.post(`${config.apiUrl}/images`, data, {
+      headers: headers
+      })
       .then(res => {
         console.log(res.data)
         alert('Image Successfully Uploaded, Please continue');
@@ -58,12 +64,18 @@ class NewProduct extends React.Component {
     }
 
     handleSubmit(event) {
+      const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+      }
       event.preventDefault();
       this.setState({ submitted: true });
       const { products } = this.state;
       const { dispatch } = this.props;
       var product = { name: products.name, code: products.code, brandName: products.brandName, description: products.description, cgst: products.cgst, hsnCode: products.hsnCode, imageUrl: this.state.imageUrl, isActive: products.isActive, sgst: products.sgst,   category: { id: products.category} }
-      axios.post(`${config.apiUrl}/products`, product)
+      axios.post(`${config.apiUrl}/products`, product, {
+      headers: headers
+      })
       .then(response => {
         this.setState({ locations: response.data });
         window.location = "/products"

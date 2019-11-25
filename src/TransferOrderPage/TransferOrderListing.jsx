@@ -27,7 +27,7 @@ class TransferOrderListing extends React.Component {
                    Transfer Order Listing</h3>
 
                   <div className="pull-right">
-                    <a href="#" className="btn btn-primary btn-xs pull-right"><b>+</b> Add New Transfer Order
+                    <a href="/new-transfer-order" className="btn btn-primary btn-xs pull-right"><b>+</b> Add New Transfer Order
                     </a>
                   </div>
                 </div>
@@ -36,11 +36,9 @@ class TransferOrderListing extends React.Component {
                   <thead>
                     <tr className="filters">
                       <th>S.No</th>
-                      <th>TO ID</th>
+                      <th>Transfer Order ID</th>
                       <th>From Warehouse</th>
                       <th>To Warehouse</th>
-                      <th>Creation Date</th>
-                      <th>Delivery Date</th>
                       <th>Status</th>
                       <th>View</th>
                     </tr>  
@@ -52,11 +50,9 @@ class TransferOrderListing extends React.Component {
                       <tr key={transfer_order.id} >
                         <td>{index + 1}</td>
                         <td>{transfer_order.id}</td>
+                        <td>{transfer_order.sourceWarehouse.name}</td>
+                        <td>{transfer_order.destinationWarehouse.name}</td>
                         <td>{transfer_order.status}</td>
-                        <td>{transfer_order.id}</td>
-                        <td>{transfer_order.id}</td>
-                        <td>{transfer_order.id}</td>
-                        <td>{transfer_order.id}</td>
                         <td><Link to={"/transfer-order/" + transfer_order.id}>View</Link></td>
                       </tr>
                     )}  

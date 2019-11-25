@@ -14,8 +14,14 @@ class CategoryDetail extends React.Component {
     }
 
     categoryDelete = (id) => {
+       const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+        }
         console.log("******************************************", id)
-        axios.delete(`${config.apiUrl}/categories/${id}`)
+        axios.delete(`${config.apiUrl}/categories/${id}`, {
+      headers: headers
+      })
         .then(response => {
           this.setState({ locations: response.data });
           window.location = "/categories"

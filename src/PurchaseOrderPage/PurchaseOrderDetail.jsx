@@ -14,8 +14,14 @@ class PurchaseOrderDetail extends React.Component {
     }
 
     purchaseorderDelete = (id) => {
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+        }
         console.log("******************************************", id)
-        axios.delete(`${config.apiUrl}/purchase_orders/${id}`)
+        axios.delete(`${config.apiUrl}/purchase_orders/${id}`, {
+      headers: headers
+      })
         .then(response => {
           this.setState({ locations: response.data });
           window.location = "/purchase-orders"

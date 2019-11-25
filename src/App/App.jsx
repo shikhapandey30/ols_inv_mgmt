@@ -31,6 +31,7 @@ import { PurchaseOrderDetail } from '../PurchaseOrderPage';
 import { NewPurchaseOrder } from '../PurchaseOrderPage';
 import { TransferOrderListing } from '../TransferOrderPage';
 import { TransferOrderDetail } from '../TransferOrderPage';
+import { NewTransferOrder } from '../TransferOrderPage';
 import { LoginPage } from '../LoginPage';
 // import { RegisterPage } from '../RegisterPage';
 
@@ -54,37 +55,35 @@ class App extends React.Component {
             <Router history={history}>
               <Switch>
                 <PrivateRoute exact path="/" component={HomePage} />
-                <Route path="/Header" component={Header} />
-                <Route path="/Footer" component={Footer} />
-                <Route path="/products" component={Product} />
-                <Route path="/warehouse/:id/user" component={WareHouseAllUser} />
-                <Route path="/new-product" component={NewProduct} />
-                <Route path="/new-category" component={NewCategory} />   
-                <Route path="/categories" component={Category} />
-                <Route path="/category/:id" component={CategoryDetail} />
-                <Route path="/inventories" component={Inventory} />
-                <Route path="/inventory/:id" component={InventoryDetail} />
-                <Route path="/new-inventory" component={NewInventory} />
+                <PrivateRoute path="/Header" component={Header} />
+                <PrivateRoute path="/Footer" component={Footer} />
+                <PrivateRoute path="/products" component={Product} />
+                <PrivateRoute path="/warehouse/:id/user" component={WareHouseAllUser} />
+                <PrivateRoute path="/new-product" component={NewProduct} />
+                <PrivateRoute path="/new-category" component={NewCategory} />   
+                <PrivateRoute path="/categories" component={Category} />
+                <PrivateRoute path="/category/:id" component={CategoryDetail} />
+                <PrivateRoute path="/inventories" component={Inventory} />
+                <PrivateRoute path="/inventory/:id" component={InventoryDetail} />
+                <PrivateRoute path="/new-inventory" component={NewInventory} />
+                
+                
+                <PrivateRoute path="/product/:id" component={ProductDetail} />
+                <PrivateRoute path="/warehouses" component={WareHouse} />
+                
+                <PrivateRoute path="/warehouse/:id/edit" component={WareHouseEdit} />
+                <PrivateRoute path="/warehouse/:id" component={WareHouseDetail} />
+                <PrivateRoute path="/new-warehouse" component={NewWareHouse} />
+                <PrivateRoute path="/vendors" component={Vendor} />
+                <PrivateRoute path="/vendor/:id" component={VendorDetail} />
+                <PrivateRoute path="/new-vendor" component={NewVendor} />
+                <PrivateRoute path="/purchase-orders" component={PurchaseOrderListing} />
+                <PrivateRoute path="/purchase-order/:id" component={PurchaseOrderDetail} />
+                <PrivateRoute path="/new-purchase-order" component={NewPurchaseOrder} />
+                <PrivateRoute path="/transfer-orders" component={TransferOrderListing} />
+                <PrivateRoute path="/transfer-order/:id" component={TransferOrderDetail} />
+                <PrivateRoute path="/new-transfer-order" component={NewTransferOrder} />
                 <Route path="/login" component={LoginPage} />
-                
-                <Route exact path="/warehouses" component={WareHouse} />
-                <Route path="/product/:id" component={ProductDetail} />
-                
-                <Route path="/warehouse/:id/edit" component={WareHouseEdit} />
-                <Route path="/warehouse/:id" component={WareHouseDetail} />
-
-                <Route path="/new-warehouse" component={NewWareHouse} />
-
-
-                <Route path="/vendors" component={Vendor} />
-                <Route path="/vendor/:id" component={VendorDetail} />
-                <Route path="/new-vendor" component={NewVendor} />
-                <Route path="/purchase-orders" component={PurchaseOrderListing} />
-                <Route path="/purchase-order/:id" component={PurchaseOrderDetail} />
-                <Route path="/new-purchase-order" component={NewPurchaseOrder} />
-                <Route path="/transfer-orders" component={TransferOrderListing} />
-                <Route path="/transfer-order/:id" component={TransferOrderDetail} />
-
                 <Redirect from="*" to="/" />
               </Switch>
             </Router>
