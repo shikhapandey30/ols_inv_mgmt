@@ -69,7 +69,7 @@ class NewWareHouse extends React.Component {
         <div>
           <Header />
           <div className="container">
-          <form name="form" className="form-horizontal" role="form" onSubmit={this.handleSubmit}>
+              <form name="form" className="form-horizontal" role="form" onSubmit={this.handleSubmit}>
               <center><h2>Add New WareHouse</h2></center><br/>
               <div className="form-group">
                 <label htmlFor="warehousename" className="col-sm-2 control-label">WareHouse Name</label>
@@ -137,7 +137,7 @@ class NewWareHouse extends React.Component {
                   
                 </div>
               </div>
-            </form>
+              </form>
           </div>
         </div>  
       );

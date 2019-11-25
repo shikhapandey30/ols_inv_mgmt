@@ -48,10 +48,11 @@ class NewPurchaseOrder extends React.Component {
       axios.post(`${config.apiUrl}/purchase_orders`, purchaseorder, {
       headers: headers
       })
-      .then(response => {
-        this.setState({ locations: response.data });
-        window.location = "/purchase-orders"
-      })
+      window.location = "/purchase-orders"
+      // .then(response => {
+      //   this.setState({ locations: response.data });
+      //   window.location = "/purchase-orders"
+      // })
     }
 
     handleDeleteUser(id) {

@@ -48,10 +48,11 @@ class NewTransferOrder extends React.Component {
       axios.post(`${config.apiUrl}/transfer_orders`, transferorder, {
       headers: headers
       })
-      .then(response => {
-        this.setState({ locations: response.data });
-        window.location = "/transfer-orders"
-      })
+      window.location = "/transfer-orders"
+      // .then(response => {
+      //   this.setState({ locations: response.data });
+      //   window.location = "/transfer-orders"
+      // })
     }
 
     handleDeleteUser(id) {
