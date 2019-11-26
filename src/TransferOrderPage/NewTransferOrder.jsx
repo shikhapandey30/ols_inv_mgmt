@@ -80,7 +80,7 @@ class NewTransferOrder extends React.Component {
 
                <div className="form-group">
                 <label htmlFor="destinationWarehouse" className="col-sm-2 control-label">Destination Warehouse</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   { allwarehouses.items && allwarehouses.items.length > 0 &&
                     <select value={transferorders.destinationWarehouse} onChange={this.handleChange} name="destinationWarehouse" className="form-control select-field" >
                       {allwarehouses.items.map((warehouse, index) =>
@@ -95,7 +95,7 @@ class NewTransferOrder extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="productitemid" className="col-sm-2 control-label">Item</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !transferorders.itemid && 
                     <div className="help-block required-msg"> Item is required</div>
                   }
@@ -105,7 +105,7 @@ class NewTransferOrder extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="productstatus" className="col-sm-2 control-label">Status</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   {submitted && !transferorders.status && 
                     <div className="help-block required-msg"> status is required</div>
                   }
@@ -115,7 +115,7 @@ class NewTransferOrder extends React.Component {
 
               <div className="form-group">
                 <label htmlFor="sourceWarehouse" className="col-sm-2 control-label">Source Warehouse</label>
-                <div className="col-sm-9">
+                <div className="col-sm-3">
                   { allwarehouses.items && allwarehouses.items.length > 0 &&
                     <select value={transferorders.sourceWarehouse} onChange={this.handleChange} name="sourceWarehouse" className="form-control select-field" >
                       {allwarehouses.items.map((warehouse, index) =>
@@ -128,9 +128,8 @@ class NewTransferOrder extends React.Component {
                 </div>
               </div>
               <div className="form-group">
-                <div className="col-sm-9 col-sm-offset-2">
+                <div className="col-sm-3 col-sm-offset-2">
                   <button className="btn btn-primary btn-block">Submit</button>
-                  
                 </div>
               </div>
             </form>

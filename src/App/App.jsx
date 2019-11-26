@@ -10,6 +10,7 @@ import { Header } from '../Header';
 import { Footer } from '../Footer';
 import { Product } from '../ProductPage';
 import { NewProduct } from '../ProductPage';
+import { ProductEdit } from '../ProductPage';
 import { WareHouse } from '../WareHousePage';
 import { NewWareHouse } from '../WareHousePage';
 import { WareHouseAllUser } from '../WareHousePage';
@@ -20,12 +21,15 @@ import { WareHouseEdit } from '../WareHousePage';
 import { Category } from '../CategoryPage';
 import { NewCategory } from '../CategoryPage';
 import { CategoryDetail } from '../CategoryPage';
+import { CategoryEdit } from '../CategoryPage';
 import { Inventory } from '../InventoryPage';
 import { InventoryDetail } from '../InventoryPage';
+import { InventoryEdit } from '../InventoryPage';
 import { NewInventory } from '../InventoryPage';
 import { Vendor } from '../VendorPage';
 import { VendorDetail } from '../VendorPage';
 import { NewVendor } from '../VendorPage';
+import { VendorEdit } from '../VendorPage';
 import { PurchaseOrderListing } from '../PurchaseOrderPage';
 import { PurchaseOrderDetail } from '../PurchaseOrderPage';
 import { NewPurchaseOrder } from '../PurchaseOrderPage';
@@ -60,10 +64,13 @@ class App extends React.Component {
                 <PrivateRoute path="/products" component={Product} />
                 <PrivateRoute path="/warehouse/:id/user" component={WareHouseAllUser} />
                 <PrivateRoute path="/new-product" component={NewProduct} />
+                <PrivateRoute path="/product/:id/edit" component={ProductEdit} />
                 <PrivateRoute path="/new-category" component={NewCategory} />   
                 <PrivateRoute path="/categories" component={Category} />
+                <PrivateRoute path="/category/:id/edit" component={CategoryEdit} />
                 <PrivateRoute path="/category/:id" component={CategoryDetail} />
                 <PrivateRoute path="/inventories" component={Inventory} />
+                <PrivateRoute path="/inventory/:id/edit" component={InventoryEdit} />
                 <PrivateRoute path="/inventory/:id" component={InventoryDetail} />
                 <PrivateRoute path="/new-inventory" component={NewInventory} />
                 
@@ -75,6 +82,7 @@ class App extends React.Component {
                 <PrivateRoute path="/warehouse/:id" component={WareHouseDetail} />
                 <PrivateRoute path="/new-warehouse" component={NewWareHouse} />
                 <PrivateRoute path="/vendors" component={Vendor} />
+                <PrivateRoute path="/vendor/:id/edit" component={VendorEdit} />
                 <PrivateRoute path="/vendor/:id" component={VendorDetail} />
                 <PrivateRoute path="/new-vendor" component={NewVendor} />
                 <PrivateRoute path="/purchase-orders" component={PurchaseOrderListing} />

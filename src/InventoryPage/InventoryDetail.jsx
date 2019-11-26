@@ -46,6 +46,8 @@ class InventoryDetail extends React.Component {
                   { inventory.items && 
                     <div className="pull-right btn-style">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.inventoryDelete(inventory.items.id)};}}>Delete</button>
+                      <button className="btn btn-default">
+                      <Link to={"/inventory/" + inventory.items.id + "/edit"} onClick={this.forceUpdate}>Edit</Link></button>
                     </div>
                   }
                 </div>

@@ -7,6 +7,8 @@ import { Footer } from '../Footer';
 import axios from 'axios';
 import config from 'config';
 import { Route, Redirect } from 'react-router-dom';
+import DatePicker from "react-datepicker";
+import ModernDatepicker from 'react-modern-datepicker';
 
 class NewInventory extends React.Component {
     constructor(props) {
@@ -17,6 +19,7 @@ class NewInventory extends React.Component {
               batch: '',
               mrpCost: '',
               product: '',
+              expiryDate: '',
               purchaseCost: '',
               quantity: '',
               referenceNumber: '',
@@ -49,7 +52,7 @@ class NewInventory extends React.Component {
       this.setState({ submitted: true });
       const { inventories } = this.state;
       const { dispatch } = this.props;
-      var inventory = { barcode: inventories.barcode, batch: inventories.batch, mrpCost: inventories.mrpCost, purchaseCost: inventories.purchaseCost, quantity: inventories.quantity, referenceNumber: inventories.referenceNumber, remark: inventories.remark, salesCost: inventories.salesCost, specialCost: inventories.specialCost, product: { id: inventories.product}, warehouse: { id: inventories.warehouse} }
+      var inventory = { barcode: inventories.barcode, expiryDate: inventories.expiryDate, batch: inventories.batch, mrpCost: inventories.mrpCost, purchaseCost: inventories.purchaseCost, quantity: inventories.quantity, referenceNumber: inventories.referenceNumber, remark: inventories.remark, salesCost: inventories.salesCost, specialCost: inventories.specialCost, product: { id: inventories.product}, warehouse: { id: inventories.warehouse} }
       axios.post(`${config.apiUrl}/inventories`, inventory, {
       headers: headers
       })
@@ -87,6 +90,17 @@ class NewInventory extends React.Component {
                     <div className="help-block required-msg"> Inventory barcode is required</div>
                   }
                   <input type="text" id="inventorybarcode" className="form-control" placeholder="Barcode" name="barcode" value={inventories.barcode} onChange={this.handleChange}  autoFocus />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="inventoryexpiryDate" className="col-sm-2 control-label">Expiry Date</label>
+                <div className="col-sm-3">
+                  {submitted && !inventories.expiryDate && 
+                    <div className="help-block required-msg"> Inventory expiryDate is required</div>
+                  }
+                  
+                  <input type="date" id="inventoryexpiryDate" className="form-control" placeholder="expiryDate" name="expiryDate" value={inventories.expiryDate} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 

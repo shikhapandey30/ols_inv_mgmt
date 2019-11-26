@@ -46,6 +46,8 @@ class CategoryDetail extends React.Component {
                   { category.items && 
                     <div className="pull-right btn-style">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.categoryDelete(category.items.id)};}}>Delete</button>
+                      <button className="btn btn-default">
+                      <Link to={"/category/" + category.items.id + "/edit"} onClick={this.forceUpdate}>Edit</Link></button>
                     </div>
                   }
                 </div>

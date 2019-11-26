@@ -46,6 +46,8 @@ class ProductDetail extends React.Component {
                   { product.items && 
                     <div className="pull-right product-delete-btn">
                       <button className="btn btn-danger btn-style-product" onClick={() => {if(window.confirm('Delete the item?')){this.productDelete(product.items.id)};}}>Delete</button>
+                      <button className="btn btn-default product-edit-btn">
+                      <Link to={"/product/" + product.items.id + "/edit"} onClick={this.forceUpdate}>Edit</Link></button>
                     </div>
                   }
                 </div>

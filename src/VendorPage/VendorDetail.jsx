@@ -45,6 +45,8 @@ class VendorDetail extends React.Component {
                   { vendor.items && 
                     <div className="pull-right btn-style">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.vendorDelete(vendor.items.id)};}}>Delete</button>
+                      <button className="btn btn-default">
+                      <Link to={"/vendor/" + vendor.items.id + "/edit"} onClick={this.forceUpdate}>Edit</Link></button>
                     </div>
                   }
                 </div>
