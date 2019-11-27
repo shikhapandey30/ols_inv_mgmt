@@ -17,6 +17,8 @@ class NewPurchaseOrder extends React.Component {
           purchaseorders: {
               itemid: '',
               status: '',
+              product: '',
+              quantity: '',
               vendorid: '',
               warehouseid: '',
               loaded: 0
@@ -44,15 +46,14 @@ class NewPurchaseOrder extends React.Component {
       this.setState({ submitted: true });
       const { purchaseorders } = this.state;
       const { dispatch } = this.props;
-      var purchaseorder = { items: [{id: purchaseorders.itemid }],status: purchaseorders.status, vendor: {id: purchaseorders.vendorid}, warehouse: {id: purchaseorders.warehouseid}}
+      var purchaseorder = { items: [{id: purchaseorders.itemid, product: {id: purchaseorders.product}, quantity: purchaseorders.quantity }],status: purchaseorders.status, vendor: {id: purchaseorders.vendorid}, warehouse: {id: purchaseorders.warehouseid}}
       axios.post(`${config.apiUrl}/purchase_orders`, purchaseorder, {
       headers: headers
       })
-      window.location = "/purchase-orders"
-      // .then(response => {
-      //   this.setState({ locations: response.data });
-      //   window.location = "/purchase-orders"
-      // })
+      .then(response => {
+        this.setState({ locations: response.data });
+        window.location = "/purchase-orders"
+      })
     }
 
     handleDeleteUser(id) {
@@ -96,6 +97,31 @@ class NewPurchaseOrder extends React.Component {
                     <input type="text" id="purchaseorderstatus" className="form-control" placeholder="Status" name="status" value={purchaseorders.status} onChange={this.handleChange}  autoFocus />
                   </div>
                 </div>
+
+                <div className="form-group">
+                <label htmlFor="product" className="col-sm-2 control-label">Product</label>
+                <div className="col-sm-3">
+                  { allproducts.items && allproducts.items.length > 0 &&
+                    <select value={purchaseorders.product} onChange={this.handleChange} name="product" className="form-control select-field" >
+                      {allproducts.items.map((product, index) =>
+                        <option key={index} value={product.id} >
+                          {product.name}
+                        </option>
+                      )}
+                    </select>
+                   }
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="productquantity" className="col-sm-2 control-label">quantity</label>
+                <div className="col-sm-3">
+                  {submitted && !purchaseorders.quantity && 
+                    <div className="help-block required-msg"> quantity is required</div>
+                  }
+                  <input type="text" id="transferorderquantity" className="form-control" placeholder="quantity" name="quantity" value={purchaseorders.quantity} onChange={this.handleChange}  autoFocus />
+                </div>
+              </div>
 
                 <div className="form-group">
                   <label htmlFor="productvendorid" className="col-sm-2 control-label">Vendor</label>

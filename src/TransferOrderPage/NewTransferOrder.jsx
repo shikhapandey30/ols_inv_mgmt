@@ -18,6 +18,8 @@ class NewTransferOrder extends React.Component {
               destinationWarehouse: '',
               itemid: '',
               sourceWarehouse: '',
+              product: '',
+              quantity: '',
               status: '',
               loaded: 0
           },
@@ -44,15 +46,14 @@ class NewTransferOrder extends React.Component {
       this.setState({ submitted: true });
       const { transferorders } = this.state;
       const { dispatch } = this.props;
-      var transferorder = { items: [{id: transferorders.itemid }],status: transferorders.status, destinationWarehouse: {id: transferorders.destinationWarehouse}, sourceWarehouse: {id: transferorders.sourceWarehouse}}
+      var transferorder = { items: [{id: transferorders.itemid, product: {id: transferorders.product}, quantity: transferorders.quantity }],status: transferorders.status, destinationWarehouse: {id: transferorders.destinationWarehouse}, sourceWarehouse: {id: transferorders.sourceWarehouse}}
       axios.post(`${config.apiUrl}/transfer_orders`, transferorder, {
       headers: headers
       })
-      window.location = "/transfer-orders"
-      // .then(response => {
-      //   this.setState({ locations: response.data });
-      //   window.location = "/transfer-orders"
-      // })
+      .then(response => {
+        this.setState({ locations: response.data });
+        window.location = "/transfer-orders"
+      })
     }
 
     handleDeleteUser(id) {
@@ -94,6 +95,21 @@ class NewTransferOrder extends React.Component {
               </div>
 
               <div className="form-group">
+                <label htmlFor="product" className="col-sm-2 control-label">Product</label>
+                <div className="col-sm-3">
+                  { allproducts.items && allproducts.items.length > 0 &&
+                    <select value={transferorders.product} onChange={this.handleChange} name="product" className="form-control select-field" >
+                      {allproducts.items.map((product, index) =>
+                        <option key={index} value={product.id} >
+                          {product.name}
+                        </option>
+                      )}
+                    </select>
+                   }
+                </div>
+              </div>
+
+              <div className="form-group">
                 <label htmlFor="productitemid" className="col-sm-2 control-label">Item</label>
                 <div className="col-sm-3">
                   {submitted && !transferorders.itemid && 
@@ -110,6 +126,16 @@ class NewTransferOrder extends React.Component {
                     <div className="help-block required-msg"> status is required</div>
                   }
                   <input type="text" id="transferorderstatus" className="form-control" placeholder="Status" name="status" value={transferorders.status} onChange={this.handleChange}  autoFocus />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="productquantity" className="col-sm-2 control-label">quantity</label>
+                <div className="col-sm-3">
+                  {submitted && !transferorders.quantity && 
+                    <div className="help-block required-msg"> quantity is required</div>
+                  }
+                  <input type="text" id="transferorderquantity" className="form-control" placeholder="quantity" name="quantity" value={transferorders.quantity} onChange={this.handleChange}  autoFocus />
                 </div>
               </div>
 

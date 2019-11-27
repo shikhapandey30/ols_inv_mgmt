@@ -33,6 +33,8 @@ class InventoryEdit extends React.Component {
 
   componentWillMount(){
     this.getInventoryDetails();
+    this.props.dispatch(userActions.getAllwarehouse());
+    this.props.dispatch(userActions.getAllproduct());
   }
   getInventoryDetails(){
     const headers = {
@@ -122,7 +124,7 @@ class InventoryEdit extends React.Component {
     }
 
     render() {
-      const { loggingIn} = this.props;
+      const { loggingIn, allwarehouses, allproducts} = this.props;
       const { submitted } = this.state;
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
 
@@ -164,7 +166,16 @@ class InventoryEdit extends React.Component {
                   <div className="form-group">
                     <label htmlFor="inventoryproduct" className="col-sm-2 control-label">Inventory Product</label>
                     <div className="col-sm-3">
-                      <input className="form-control" type="text" name="product" ref="product" value={this.state.product.id} onChange={this.handleInputChange} />
+                      { allproducts.items && allproducts.items.length > 0 &&
+                        <select name="product" ref="product" value={this.state.product.id} onChange={this.handleInputChange} className="form-control select-field" >
+                          {allproducts.items.map((product, index) =>
+                            <option key={index} value={this.state.product.id} >
+                              {product.name}
+                            </option>
+                           
+                          )}
+                        </select>
+                      }
                     </div>
                   </div>
 
@@ -213,7 +224,16 @@ class InventoryEdit extends React.Component {
                   <div className="form-group">
                     <label htmlFor="inventorywarehouse" className="col-sm-2 control-label">Inventory Warehouse</label>
                     <div className="col-sm-3">
-                      <input className="form-control" type="text" name="warehouse" ref="warehouse" value={this.state.warehouse.id} onChange={this.handleInputChange} />
+                      { allwarehouses.items && allwarehouses.items.length > 0 &&
+                        <select name="warehouse" ref="warehouse" value={this.state.warehouse.id} onChange={this.handleInputChange} className="form-control select-field" >
+                          {allwarehouses.items.map((warehouse, index) =>
+                            <option key={index} value={this.state.warehouse.id} >
+                              {warehouse.name}
+                            </option>
+                          )}
+                        </select>
+                      }
+
                     </div>
                   </div>
 
@@ -239,10 +259,12 @@ class InventoryEdit extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const {inventoryid, authentication } = state;
+  const {inventoryid,allwarehouses, allproducts, authentication } = state;
   const { user } = authentication;
   return {
-    user
+    user,
+    allwarehouses,
+    allproducts
   };
 }
 

@@ -57,6 +57,8 @@ class PurchaseOrderDetail extends React.Component {
                   { purchaseorder.items && 
                     <div className="pull-right btn-style">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.purchaseorderDelete(purchaseorder.items.id)};}}>Delete</button>
+                      <button className="btn btn-default">
+                      <Link to={"/purchase-order/" + purchaseorder.items.id + "/edit"} onClick={this.forceUpdate}>Edit</Link></button>
                     </div>
                   }
                 </div>
@@ -134,6 +136,31 @@ class PurchaseOrderDetail extends React.Component {
                     </tbody>
                   </table>
                 }
+                <center><h3>Items</h3></center>
+                { purchaseorder.items && 
+                  <table className="table table-bordered table table-border">
+                    <thead>
+                      <tr className="filters">
+                        <th>S.No</th>
+                        <th>ID</th>
+                        <th>Product ID</th>
+                        <th>Quantity</th>
+                      </tr>  
+                    </thead>
+                    { purchaseorder.items.items && purchaseorder.items.items.length > 0 &&
+                      <tbody>
+                        {purchaseorder.items.items.map((purchase_order, index) =>
+                          <tr key={purchase_order.id} >
+                            <td>{index + 1}</td>
+                            <td>{purchase_order.id}</td>
+                            <td>{purchase_order.product.id}</td>
+                            <td>{purchase_order.quantity}</td>
+                          </tr>
+                        )}  
+                      </tbody>
+                    }
+                  </table>
+                }  
               </div>
             </div>
           </div>

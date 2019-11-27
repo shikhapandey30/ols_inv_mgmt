@@ -33,6 +33,7 @@ import { VendorEdit } from '../VendorPage';
 import { PurchaseOrderListing } from '../PurchaseOrderPage';
 import { PurchaseOrderDetail } from '../PurchaseOrderPage';
 import { NewPurchaseOrder } from '../PurchaseOrderPage';
+import { PurchaseOrderEdit } from '../PurchaseOrderPage';
 import { TransferOrderListing } from '../TransferOrderPage';
 import { TransferOrderDetail } from '../TransferOrderPage';
 import { NewTransferOrder } from '../TransferOrderPage';
@@ -86,6 +87,7 @@ class App extends React.Component {
                 <PrivateRoute path="/vendor/:id" component={VendorDetail} />
                 <PrivateRoute path="/new-vendor" component={NewVendor} />
                 <PrivateRoute path="/purchase-orders" component={PurchaseOrderListing} />
+                <PrivateRoute path="/purchase-order/:id/edit" component={PurchaseOrderEdit} />
                 <PrivateRoute path="/purchase-order/:id" component={PurchaseOrderDetail} />
                 <PrivateRoute path="/new-purchase-order" component={NewPurchaseOrder} />
                 <PrivateRoute path="/transfer-orders" component={TransferOrderListing} />
