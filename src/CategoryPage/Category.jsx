@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Header } from '../Header';
 import { userActions } from '../_actions';
 import { Footer } from '../Footer';
-import Popup from "reactjs-popup";
 import { NewCategory } from '../CategoryPage';
 
 class Category extends React.Component {
