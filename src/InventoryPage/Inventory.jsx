@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { Header } from '../Header';
 import { userActions } from '../_actions';
 import { Footer } from '../Footer';
+import { NewInventory } from '../InventoryPage';
+
 
 class Inventory extends React.Component {
     componentDidMount() {
@@ -23,10 +25,26 @@ class Inventory extends React.Component {
                 <div className="panel-heading">
                   <h3 className="panel-title"> 
                    Inventories
-                    </h3>
-                  <div className="pull-right">
-                    <a href="/new-inventory" className="btn btn-primary btn-xs pull-right"><b>+</b> Add New Inventroy
-                    </a>
+                  </h3>
+                  <div className="pull-right category-position">
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <b>+</b>Add New Inventory
+                    </button>
+                    <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-box" role="document">
+                          <div className="modal-content">
+                            <div className="modal-header textdesign">
+                              <p style={{ fontWeight: 'bold' }}>Add New Inventory</p>
+                              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div className="modal-body">
+                              <NewInventory/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                   </div>
                 </div>
                 <h5 className="loading-msg">{allinventories.loading && <em>Loading All Inventory .....</em>}</h5>

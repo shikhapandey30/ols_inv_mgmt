@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { Header } from '../Header';
 import { userActions } from '../_actions';
 import { Footer } from '../Footer';
+import { NewVendor } from '../VendorPage';
+
 
 class Vendor extends React.Component {
     componentDidMount() {
@@ -24,9 +26,25 @@ class Vendor extends React.Component {
                   <h3 className="panel-title">
                     Vendors 
                   </h3>
-                  <div className="pull-right">
-                    <a href="/new-vendor" className="btn btn-primary btn-xs pull-right"><b>+</b> Add New Vendor
-                    </a>
+                  <div className="pull-right category-position">
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <b>+</b>Add New Vendor
+                    </button>
+                    <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-box" role="document">
+                          <div className="modal-content">
+                            <div className="modal-header textdesign">
+                              <p style={{ fontWeight: 'bold' }}>Add New Vendor</p>
+                              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div className="modal-body">
+                              <NewVendor/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                   </div>
                 </div>
                 <h5 className="loading-msg">{allvendors.loading && <em>Loading All Vendors .....</em>}</h5>

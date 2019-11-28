@@ -62,24 +62,21 @@ class NewCategory extends React.Component {
       console.log("users", users)
       return (
         <div>
-          <Header />
           <div className="container">
           <form name="form" className="form-horizontal" role="form" onSubmit={this.handleSubmit}>
-              <center><h2>Add New Category</h2></center><br/>
-              <div className="form-group">
-                <label htmlFor="categoryname" className="col-sm-2 control-label">Category Name</label>
-                <div className="col-sm-3">
+              <div className="form-group model-warehouse">
+                <label htmlFor="categoryname" className="label">Category Name</label>
+                <div>
+                  <input type="text" id="categoryname" className="form-control" placeholder="Category Name" name="name" value={category.name} onChange={this.handleChange}  autoFocus />
                   {submitted && !category.name && 
                     <div className="help-block required-msg"> Category Name is required</div>
                   }
-                  <input type="text" id="categoryname" className="form-control" placeholder="Category Name" name="name" value={category.name} onChange={this.handleChange}  autoFocus />
-                </div>
+                </div><br/>
               </div>
-
               <div className="form-group">
-                <div className="col-sm-1 col-sm-offset-2">
-                  <button className="btn btn-primary btn-block">Submit</button>
-                  
+                <div className="pull-right">
+                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
+                  <button className="btn btn-primary">Submit</button>
                 </div>
               </div>
             </form>

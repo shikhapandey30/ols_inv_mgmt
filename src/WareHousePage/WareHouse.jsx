@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Header } from '../Header';
 import { userActions } from '../_actions';
 import { Footer } from '../Footer';
+import { NewWareHouse } from '../WareHousePage';
 
 class WareHouse extends React.Component {
     componentDidMount() {
@@ -24,14 +25,29 @@ class WareHouse extends React.Component {
                   <h3 className="panel-title"> 
                     Warehouses 
                   </h3>
-
-                  <div className="pull-right">
-                    <a href="/new-warehouse" className="btn btn-primary btn-xs pull-right add-record"><b>+</b> Add New Warehouse
-                    </a>
+                  <div className="pull-right category-position">
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <b>+</b>Add New Warehouse
+                    </button>
+                    <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-box" role="document">
+                          <div className="modal-content">
+                            <div className="modal-header textdesign">
+                              <p style={{ fontWeight: 'bold' }}>Add New WareHouse</p>
+                              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div className="modal-body">
+                              <NewWareHouse/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                   </div>
                 </div>
                 <h5 className="loading-msg">{allwarehouses.loading && <em>Loading All Warehouses .....</em>}</h5>
-                <table className="table table-bordered table table-border">
+                <table className="table table-bordered table table-border responsive">
                   <thead>
                     <tr className="filters">
                       <th>S.No</th>

@@ -6,6 +6,8 @@ import { userActions } from '../_actions';
 import { Footer } from '../Footer';
 import MUIDataTable from "mui-datatables";
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { NewTransferOrder } from '../TransferOrderPage';
+
 
 class TransferOrderListing extends React.Component {
     componentDidMount() {
@@ -26,9 +28,25 @@ class TransferOrderListing extends React.Component {
                   <h3 className="panel-title"> 
                    Transfer Order Listing</h3>
 
-                  <div className="pull-right">
-                    <a href="/new-transfer-order" className="btn btn-primary btn-xs pull-right"><b>+</b> Add New Transfer Order
-                    </a>
+                  <div className="pull-right category-position">
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <b>+</b>Add New Transfer Order
+                    </button>
+                    <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-box" role="document">
+                          <div className="modal-content">
+                            <div className="modal-header textdesign">
+                              <p style={{ fontWeight: 'bold' }}>Add New Transfer Order</p>
+                              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div className="modal-body">
+                              <NewTransferOrder/>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
                   </div>
                 </div>
                 <h5 className="loading-msg">{alltransferorders.loading && <em>Loading All Transfer Order .....</em>}</h5>

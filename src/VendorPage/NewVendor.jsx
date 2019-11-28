@@ -73,103 +73,101 @@ class NewVendor extends React.Component {
       console.log("allproducts*******************************", allproducts)
       return (
         <div>
-          <Header />
           <div className="container">
           <form name="form" className="form-horizontal" role="form" onSubmit={this.handleSubmit}>
-              <center><h2>Add New Vendor</h2></center><br/>
-              <div className="form-group">
-                <label htmlFor="vendorname" className="col-sm-2 control-label">Name</label>
-                <div className="col-sm-3">
-                  {submitted && !vendors.name && 
-                    <div className="help-block required-msg"> Vendor Name is required</div>
-                  }
-                  <input type="text" id="vendorname" className="form-control" placeholder="Vendor Name" name="name" value={vendors.name} onChange={this.handleChange}  autoFocus />
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="vendorname" className="label">Name</label>
+                  <div>
+                    {submitted && !vendors.name && 
+                      <div className="help-block required-msg"> Vendor Name is required</div>
+                    }
+                    <input type="text" id="vendorname" className="form-control" placeholder="Vendor Name" name="name" value={vendors.name} onChange={this.handleChange}  autoFocus />
+                  </div>
                 </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="vendoraddress" className="col-sm-2 control-label">Address</label>
-                <div className="col-sm-3">
-                  {submitted && !vendors.address && 
-                    <div className="help-block required-msg"> Vendor Address is required</div>
-                  }
-                  <input type="text" id="vendoraddress" className="form-control" placeholder="Vendor Address" name="address" value={vendors.address} onChange={this.handleChange}  autoFocus />
+                <div className="col-md-6">
+                  <label htmlFor="vendoraddress" className="label">Address</label>
+                  <div>
+                    {submitted && !vendors.address && 
+                      <div className="help-block required-msg"> Vendor Address is required</div>
+                    }
+                    <input type="text" id="vendoraddress" className="form-control" placeholder="Vendor Address" name="address" value={vendors.address} onChange={this.handleChange}  autoFocus />
+                  </div>
+                </div>  
+              </div><br/>
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="vendorcity" className="label">City</label>
+                  <div>
+                    {submitted && !vendors.city && 
+                      <div className="help-block required-msg"> Product Brand Name is required</div>
+                    }
+                    <input type="text" id="vendorcity" className="form-control" placeholder="City" name="city" value={vendors.city} onChange={this.handleChange}  autoFocus />
+                  </div>
                 </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="vendorcity" className="col-sm-2 control-label">City</label>
-                <div className="col-sm-3">
-                  {submitted && !vendors.city && 
-                    <div className="help-block required-msg"> Product Brand Name is required</div>
-                  }
-                  <input type="text" id="vendorcity" className="form-control" placeholder="City" name="city" value={vendors.city} onChange={this.handleChange}  autoFocus />
+                <div className="col-md-6">
+                  <label htmlFor="vendorstate" className="label">State</label>
+                  <div>
+                    {submitted && !vendors.state && 
+                      <div className="help-block required-msg"> Product Brand Name is required</div>
+                    }
+                    <input type="text" id="vendorstate" className="form-control" placeholder="State" name="state" value={vendors.state} onChange={this.handleChange}  autoFocus />
+                  </div>
+                </div>  
+              </div><br/>
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="vendorcountry" className="label">Country</label>
+                  <div>
+                    {submitted && !vendors.country && 
+                      <div className="help-block required-msg"> Product Brand Name is required</div>
+                    }
+                    <input type="text" id="vendorcountry" className="form-control" placeholder="Country" name="country" value={vendors.country} onChange={this.handleChange}  autoFocus />
+                  </div>
                 </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="vendorstate" className="col-sm-2 control-label">State</label>
-                <div className="col-sm-3">
-                  {submitted && !vendors.state && 
-                    <div className="help-block required-msg"> Product Brand Name is required</div>
-                  }
-                  <input type="text" id="vendorstate" className="form-control" placeholder="State" name="state" value={vendors.state} onChange={this.handleChange}  autoFocus />
+                <div className="col-md-6">
+                  <label htmlFor="vendorlandmark" className="label">Landmark</label>
+                  <div>
+                    {submitted && !vendors.landmark && 
+                      <div className="help-block required-msg"> Product Brand Name is required</div>
+                    }
+                    <input type="text" id="vendorlandmark" className="form-control" placeholder="Landmark" name="landmark" value={vendors.landmark} onChange={this.handleChange}  autoFocus />
+                  </div>
+                </div>  
+              </div><br/>
+              <div className="row model-warehouse">
+                <div className="col-md-6">
+                  <label htmlFor="vendorzipcode" className="label">Zipcode</label>
+                  <div>
+                    {submitted && !vendors.zipcode && 
+                      <div className="help-block required-msg"> Product Brand Name is required</div>
+                    }
+                    <input type="text" id="vendorzipcode" className="form-control" placeholder="Zipcode" name="zipcode" value={vendors.zipcode} onChange={this.handleChange}  autoFocus />
+                  </div>
                 </div>
-              </div>
-
+                <div className="col-md-6">
+                  <label htmlFor="vendorproductid" className="label">Product </label>
+                  <div>
+                    {submitted && !vendors.product && 
+                      <div className="help-block required-msg"> Inventory product is required</div>
+                    }
+                     { allproducts.items && allproducts.items.length > 0 &&
+                      <select value={vendors.product} onChange={this.handleChange} name="product" className="form-control select-field" >
+                        {allproducts.items.map((product, index) =>
+                          <option key={index} value={product.id} >
+                            {product.name}
+                          </option>
+                         
+                        )}
+                      </select>
+                     }
+                  </div><br/>
+                </div>     
+              </div><br/>
               <div className="form-group">
-                <label htmlFor="vendorcountry" className="col-sm-2 control-label">Country</label>
-                <div className="col-sm-3">
-                  {submitted && !vendors.country && 
-                    <div className="help-block required-msg"> Product Brand Name is required</div>
-                  }
-                  <input type="text" id="vendorcountry" className="form-control" placeholder="Country" name="country" value={vendors.country} onChange={this.handleChange}  autoFocus />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="vendorlandmark" className="col-sm-2 control-label">Landmark</label>
-                <div className="col-sm-3">
-                  {submitted && !vendors.landmark && 
-                    <div className="help-block required-msg"> Product Brand Name is required</div>
-                  }
-                  <input type="text" id="vendorlandmark" className="form-control" placeholder="Landmark" name="landmark" value={vendors.landmark} onChange={this.handleChange}  autoFocus />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="vendorzipcode" className="col-sm-2 control-label">zipcode</label>
-                <div className="col-sm-3">
-                  {submitted && !vendors.zipcode && 
-                    <div className="help-block required-msg"> Product Brand Name is required</div>
-                  }
-                  <input type="text" id="vendorzipcode" className="form-control" placeholder="Zipcode" name="zipcode" value={vendors.zipcode} onChange={this.handleChange}  autoFocus />
-                </div>
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="vendorproductid" className="col-sm-2 control-label">Product </label>
-                <div className="col-sm-3">
-                  {submitted && !vendors.product && 
-                    <div className="help-block required-msg"> Inventory product is required</div>
-                  }
-                   { allproducts.items && allproducts.items.length > 0 &&
-                    <select value={vendors.product} onChange={this.handleChange} name="product" className="form-control select-field" >
-                      {allproducts.items.map((product, index) =>
-                        <option key={index} value={product.id} >
-                          {product.name}
-                        </option>
-                       
-                      )}
-                    </select>
-                   }
-                </div>   
-              </div>
-
-              <div className="form-group">
-                <div className="col-sm-1 col-sm-offset-2">
-                  <button className="btn btn-primary btn-block">Submit</button>
-                  
+                <div className="pull-right">
+                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
+                  <button className="btn btn-primary">Submit</button>
                 </div>
               </div>
             </form>

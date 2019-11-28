@@ -79,149 +79,147 @@ class NewInventory extends React.Component {
       console.log("allwarehouses*******************************", allwarehouses)
       return (
         <div>
-          <Header />
           <div className="container">
           <form name="form" className="form-horizontal" role="form" onSubmit={this.handleSubmit}>
-              <center><h2>Add New Inventory</h2></center><br/>
-              <div className="form-group">
-                <label htmlFor="inventorybarcode" className="col-sm-2 control-label">Barcode</label>
-                <div className="col-sm-3">
-                  {submitted && !inventories.barcode && 
-                    <div className="help-block required-msg"> Inventory barcode is required</div>
-                  }
-                  <input type="text" id="inventorybarcode" className="form-control" placeholder="Barcode" name="barcode" value={inventories.barcode} onChange={this.handleChange}  autoFocus />
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="inventorybarcode" className="label">Barcode</label>
+                  <div>
+                    {submitted && !inventories.barcode && 
+                      <div className="help-block required-msg"> Inventory barcode is required</div>
+                    }
+                    <input type="text" id="inventorybarcode" className="form-control" placeholder="Barcode" name="barcode" value={inventories.barcode} onChange={this.handleChange}  autoFocus />
+                  </div>
+                </div>  
+
+                <div className="col-md-6">
+                  <label htmlFor="inventoryexpiryDate" className="label">Expiry Date</label>
+                  <div>
+                    {submitted && !inventories.expiryDate && 
+                      <div className="help-block required-msg"> Inventory expiryDate is required</div>
+                    }
+                    
+                    <input type="date" id="inventoryexpiryDate" className="form-control" placeholder="expiryDate" name="expiryDate" value={inventories.expiryDate} onChange={this.handleChange}  autoFocus />
+                  </div>
                 </div>
-              </div>
+              </div><br/>  
 
-              <div className="form-group">
-                <label htmlFor="inventoryexpiryDate" className="col-sm-2 control-label">Expiry Date</label>
-                <div className="col-sm-3">
-                  {submitted && !inventories.expiryDate && 
-                    <div className="help-block required-msg"> Inventory expiryDate is required</div>
-                  }
-                  
-                  <input type="date" id="inventoryexpiryDate" className="form-control" placeholder="expiryDate" name="expiryDate" value={inventories.expiryDate} onChange={this.handleChange}  autoFocus />
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="inventorybatch" className="label">Batch</label>
+                  <div>
+                    {submitted && !inventories.batch && 
+                      <div className="help-block required-msg"> Inventory batch is required</div>
+                    }
+                    <input type="text" id="inveventorybatch" className="form-control" placeholder="Batch" name="batch" value={inventories.batch} onChange={this.handleChange}  autoFocus />
+                  </div>
                 </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="inventorybatch" className="col-sm-2 control-label">Batch</label>
-                <div className="col-sm-3">
-                  {submitted && !inventories.batch && 
-                    <div className="help-block required-msg"> Inventory batch is required</div>
-                  }
-                  <input type="text" id="inveventorybatch" className="form-control" placeholder="Batch" name="batch" value={inventories.batch} onChange={this.handleChange}  autoFocus />
+                <div className="col-md-6">
+                  <label htmlFor="inventorymrpCost" className="label">MRP Cost</label>
+                  <div>
+                    {submitted && !inventories.mrpCost && 
+                      <div className="help-block required-msg"> Inventory mrpCost is required</div>
+                    }
+                    <input type="text" id="inventorymrpCost" className="form-control" placeholder="MRP Cost" name="mrpCost" value={inventories.mrpCost} onChange={this.handleChange}  autoFocus />
+                  </div>
                 </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="inventorymrpCost" className="col-sm-2 control-label">MRP Cost</label>
-                <div className="col-sm-3">
-                  {submitted && !inventories.mrpCost && 
-                    <div className="help-block required-msg"> Inventory mrpCost is required</div>
-                  }
-                  <input type="text" id="inventorymrpCost" className="form-control" placeholder="MRP Cost" name="mrpCost" value={inventories.mrpCost} onChange={this.handleChange}  autoFocus />
+              </div><br/> 
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="inventoryproductid" className="label">Product </label>
+                  <div>
+                     { allproducts.items && allproducts.items.length > 0 &&
+                      <select value={inventories.product} onChange={this.handleChange} name="product" className="form-control select-field" >
+                        {allproducts.items.map((product, index) =>
+                          <option key={index} value={product.id} >
+                            {product.name}
+                          </option>
+                         
+                        )}
+                      </select>
+                     }
+                  </div>   
                 </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="inventoryproductid" className="col-sm-2 control-label">Product </label>
-                <div className="col-sm-3">
-                   { allproducts.items && allproducts.items.length > 0 &&
-                    <select value={inventories.product} onChange={this.handleChange} name="product" className="form-control select-field" >
-                      {allproducts.items.map((product, index) =>
-                        <option key={index} value={product.id} >
-                          {product.name}
-                        </option>
-                       
-                      )}
-                    </select>
-                   }
-                </div>   
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="inventorywarehouseid" className="col-sm-2 control-label">Warehouse </label>
-                <div className="col-sm-3">
-                   { allwarehouses.items && allwarehouses.items.length > 0 &&
-                    <select value={inventories.warehouse} onChange={this.handleChange} name="warehouse" className="form-control select-field" >
-                      {allwarehouses.items.map((warehouse, index) =>
-                        <option key={index} value={warehouse.id} >
-                          {warehouse.name}
-                        </option>
-                      )}
-                    </select>
-                   }
-                </div>   
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="inventorypurchaseCost" className="col-sm-2 control-label">Purchase Cost</label>
-                <div className="col-sm-3">
-                  {submitted && !inventories.purchaseCost && 
-                    <div className="help-block required-msg"> Inventory PurchaseCost is required</div>
-                  }
-                  <input type="text" id="inventorypurchaseCost" className="form-control" placeholder="Purchase Cost" value={inventories.purchaseCost}  name="purchaseCost"  onChange={this.handleChange}  autoFocus />
+                <div className="col-md-6">
+                  <label htmlFor="inventorywarehouseid" className="label">Warehouse </label>
+                  <div>
+                     { allwarehouses.items && allwarehouses.items.length > 0 &&
+                      <select value={inventories.warehouse} onChange={this.handleChange} name="warehouse" className="form-control select-field" >
+                        {allwarehouses.items.map((warehouse, index) =>
+                          <option key={index} value={warehouse.id} >
+                            {warehouse.name}
+                          </option>
+                        )}
+                      </select>
+                     }
+                  </div>   
                 </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="inventoryquantity" className="col-sm-2 control-label">Quantity</label>
-                <div className="col-sm-3">
-                  {submitted && !inventories.quantity && 
-                    <div className="help-block required-msg"> Inventory Quantity is required</div>
-                  }
-                  <input type="text" id="inventoryquantity" className="form-control" placeholder="Quantity" value={inventories.quantity}  name="quantity"  onChange={this.handleChange}  autoFocus />
+              </div><br/>  
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="inventorypurchaseCost" className="label">Purchase Cost</label>
+                  <div>
+                    {submitted && !inventories.purchaseCost && 
+                      <div className="help-block required-msg"> Inventory PurchaseCost is required</div>
+                    }
+                    <input type="text" id="inventorypurchaseCost" className="form-control" placeholder="Purchase Cost" value={inventories.purchaseCost}  name="purchaseCost"  onChange={this.handleChange}  autoFocus />
+                  </div>
                 </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="inventoryreferenceNumber" className="col-sm-2 control-label">Reference Number</label>
-                <div className="col-sm-3">
-                  {submitted && !inventories.referenceNumber && 
-                    <div className="help-block required-msg"> Inventory Reference Number is required</div>
-                  }
-
-                   <input type="text" id="inventoryreferenceNumber" className="form-control" placeholder="Reference Number" value={inventories.referenceNumber}  name="referenceNumber"  onChange={this.handleChange}  autoFocus />
+                <div className="col-md-6">
+                  <label htmlFor="inventoryquantity" className="label">Quantity</label>
+                  <div>
+                    {submitted && !inventories.quantity && 
+                      <div className="help-block required-msg"> Inventory Quantity is required</div>
+                    }
+                    <input type="text" id="inventoryquantity" className="form-control" placeholder="Quantity" value={inventories.quantity}  name="quantity"  onChange={this.handleChange}  autoFocus />
+                  </div>
                 </div>
-              </div>
+              </div><br/>  
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="inventoryreferenceNumber" className="label">Reference Number</label>
+                  <div>
+                    {submitted && !inventories.referenceNumber && 
+                      <div className="help-block required-msg"> Inventory Reference Number is required</div>
+                    }
 
+                     <input type="text" id="inventoryreferenceNumber" className="form-control" placeholder="Reference Number" value={inventories.referenceNumber}  name="referenceNumber"  onChange={this.handleChange}  autoFocus />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="inventoryremark" className="label">Remark </label>
+                  <div>
+                    {submitted && !inventories.remark && 
+                      <div className="help-block required-msg"> Inventory remark is required</div>
+                    }
+                    <input type="text" id="inventoryremark" className="form-control" placeholder="Remark" value={inventories.remark}  name="remark"  onChange={this.handleChange}  autoFocus />
+                  </div>   
+                </div>
+              </div><br/>  
+              <div className="row model-warehouse">
+                <div className="col-md-6">
+                  <label htmlFor="inventorysalesCost" className="label">Sales Cost </label>
+                  <div>
+                    {submitted && !inventories.salesCost && 
+                      <div className="help-block required-msg"> Inventory Sales Cost is required</div>
+                    }
+                    <input type="text" id="inventorysalesCost" className="form-control" placeholder="Sales Cost" value={inventories.salesCost}  name="salesCost"  onChange={this.handleChange}  autoFocus />
+                  </div>   
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="inventoryspecialCost" className="label">Special Cost </label>
+                  <div>
+                    {submitted && !inventories.specialCost && 
+                      <div className="help-block required-msg"> Inventory Special Cost is required</div>
+                    }
+                    <input type="text" id="inventoryspecialCost" className="form-control" placeholder="Special Cost" value={inventories.specialCost}  name="specialCost"  onChange={this.handleChange}  autoFocus />
+                  </div><br/>   
+                </div>
+              </div><br/>  
               <div className="form-group">
-                <label htmlFor="inventoryremark" className="col-sm-2 control-label">Remark </label>
-                <div className="col-sm-3">
-                  {submitted && !inventories.remark && 
-                    <div className="help-block required-msg"> Inventory remark is required</div>
-                  }
-                  <input type="text" id="inventoryremark" className="form-control" placeholder="Remark" value={inventories.remark}  name="remark"  onChange={this.handleChange}  autoFocus />
-                  
-                </div>   
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="inventorysalesCost" className="col-sm-2 control-label">Sales Cost </label>
-                <div className="col-sm-3">
-                  {submitted && !inventories.salesCost && 
-                    <div className="help-block required-msg"> Inventory Sales Cost is required</div>
-                  }
-                  <input type="text" id="inventorysalesCost" className="form-control" placeholder="Sales Cost" value={inventories.salesCost}  name="salesCost"  onChange={this.handleChange}  autoFocus />
-                  
-                </div>   
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="inventoryspecialCost" className="col-sm-2 control-label">Special Cost </label>
-                <div className="col-sm-3">
-                  {submitted && !inventories.specialCost && 
-                    <div className="help-block required-msg"> Inventory Special Cost is required</div>
-                  }
-                  <input type="text" id="inventoryspecialCost" className="form-control" placeholder="Special Cost" value={inventories.specialCost}  name="specialCost"  onChange={this.handleChange}  autoFocus />
-                  
-                </div>   
-              </div>
-
-              <div className="form-group">
-                <div className="col-sm-1 col-sm-offset-2">
-                  <button className="btn btn-primary btn-block">Submit</button>
-                  
+                <div className="pull-right">
+                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
+                  <button className="btn btn-primary">Submit</button>
                 </div>
               </div>
             </form>

@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { Header } from '../Header';
 import { userActions } from '../_actions';
 import { Footer } from '../Footer';
+import { NewProduct } from '../ProductPage';
+
 
 class Product extends React.Component {
     componentDidMount() {
@@ -24,10 +26,25 @@ class Product extends React.Component {
                   <h3 className="panel-title"> 
                     Products
                   </h3>
-
-                  <div className="pull-right">
-                    <a href="/new-product" className="btn btn-primary btn-xs pull-right"><b>+</b> Add New Product
-                    </a>
+                  <div className="pull-right category-position">
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <b>+</b>Add New Product
+                    </button>
+                    <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-box" role="document">
+                          <div className="modal-content">
+                            <div className="modal-header textdesign">
+                              <p style={{ fontWeight: 'bold' }}>Add New Product</p>
+                              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div className="modal-body">
+                              <NewProduct/>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
                   </div>
                 </div>
                 <h5 className="loading-msg">{allproducts.loading && <em>Loading All Products .....</em>}</h5>
@@ -38,10 +55,8 @@ class Product extends React.Component {
                       <th>ID</th>
                       <th>Name</th>
                       <th>Code</th>
-                      
                     </tr>  
                   </thead>
-                  
                   { allproducts.items && allproducts.items.length > 0 &&
                     <tbody>
                     {allproducts.items.map((product, index) =>
@@ -50,9 +65,7 @@ class Product extends React.Component {
                         <td><Link to={"/product/" + product.id}>{product.id}</Link></td>
                         <td>{product.name}</td>
                         <td>{product.code}</td>
-                        
                       </tr>
-                      
                     )}  
                     </tbody>
                   }  
