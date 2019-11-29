@@ -7,7 +7,6 @@ import { Footer } from '../Footer';
 import axios from 'axios';
 import config from 'config';
 import { Route, Redirect } from 'react-router-dom';
-import { MDBSelect } from "mdbreact";
 import MultiSelect from "@khanacademy/react-multi-select";
 
 
