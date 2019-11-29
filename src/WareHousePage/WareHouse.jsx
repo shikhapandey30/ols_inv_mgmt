@@ -19,45 +19,31 @@ class WareHouse extends React.Component {
         <div>
           <Header />
           <div className="container">
-            <div className="">
-              <div className="panel panel-primary filterable">
-                <div className="panel-heading">
-                  <h3 className="panel-title"> 
-                    Warehouses 
-                  </h3>
-                  <div className="pull-right category-position">
+            <div>
+              <div className="page-header">
+                <h1 className="page-title">
+                  Warehouses
+                  <div className="pull-right">
                     <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        <b>+</b>Add New Warehouse
+                      <i className="fa fa-plus" aria-hidden="true"></i> Add New Warehouse
                     </button>
-                    <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div className="modal-box" role="document">
-                          <div className="modal-content">
-                            <div className="modal-header textdesign">
-                              <p style={{ fontWeight: 'bold' }}>Add New WareHouse</p>
-                              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div className="modal-body">
-                              <NewWareHouse/>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                   </div>
-                </div>
-                <h5 className="loading-msg">{allwarehouses.loading && <em>Loading All Warehouses .....</em>}</h5>
-                <table className="table table-bordered table table-border responsive">
+                </h1>
+              </div>
+              <div className="panel filterable">
+                {allwarehouses.loading && <h5 className="loading-msg"><em>Loading All Warehouses .....</em></h5>}
+                <table className="table table-hover table-responsive">
                   <thead>
                     <tr className="filters">
                       <th>S.No</th>
-                      <th>Warehouse Name</th>
-                      <th>Warehouse ID</th>
-                      <th>Warehouse Address</th>
-                      <th>Warehouse City</th>
-                      <th>Warehouse State</th>
-                      <th>Warehouse Country</th>
-                      <th>Warehouse Landmark</th>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Address</th>
+                      <th>Landmark</th>
+                      <th>Zipcode</th>
+                      <th>City</th>
+                      <th>State</th>
+                      <th>Created At</th>
                     </tr>  
                   </thead>
                   
@@ -66,13 +52,22 @@ class WareHouse extends React.Component {
                     {allwarehouses.items.map((warehouse, index) =>
                       <tr key={warehouse.id} >
                         <td>{index + 1}</td>
-                        <td><Link to={"/warehouse/" + warehouse.id} onClick={this.forceUpdate}>{warehouse.name}</Link></td>
                         <td>{warehouse.id}</td>
+                        <td><Link to={"/warehouse/" + warehouse.id} onClick={this.forceUpdate}>{warehouse.name}</Link></td>
                         <td>{warehouse.address}</td>
+                        <td>{warehouse.landmark}</td>
+                        <td>{warehouse.zipcode}</td>
                         <td>{warehouse.city}</td>
                         <td>{warehouse.state}</td>
-                        <td>{warehouse.country}</td>
-                        <td>{warehouse.landmark}</td>
+                        <td>
+                          {new Intl.DateTimeFormat('en-GB', { 
+                            year: 'numeric', 
+                            month: 'short', 
+                            day: '2-digit',
+                            hour: 'numeric',
+                            minute: 'numeric'
+                          }).format(new Date(warehouse.createdAt))}
+                        </td>
                       </tr>
                       
                     )}  
@@ -82,7 +77,23 @@ class WareHouse extends React.Component {
               </div>
             </div>
           </div>
-        </div>  
+          <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-box" role="document">
+              <div className="modal-content">
+                <div className="modal-header textdesign">
+                  <p style={{ fontWeight: 'bold' }}>Add New WareHouse</p>
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <NewWareHouse/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       );
     }
 }
