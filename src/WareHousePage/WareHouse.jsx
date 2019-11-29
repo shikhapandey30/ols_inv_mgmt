@@ -66,7 +66,7 @@ class WareHouse extends React.Component {
                     {allwarehouses.items.map((warehouse, index) =>
                       <tr key={warehouse.id} >
                         <td>{index + 1}</td>
-                        <td><Link to={"/warehouse/" + warehouse.id}>{warehouse.name}</Link></td>
+                        <td><Link to={"/warehouse/" + warehouse.id} onClick={this.forceUpdate}>{warehouse.name}</Link></td>
                         <td>{warehouse.id}</td>
                         <td>{warehouse.address}</td>
                         <td>{warehouse.city}</td>

@@ -67,7 +67,7 @@ class Inventory extends React.Component {
                     {allinventories.items.map((inventory, index) =>
                       <tr key={inventory.id} >
                         <td>{index + 1}</td>
-                        <td><Link to={"/inventory/" + inventory.id}>{inventory.id}</Link></td>
+                        <td><Link to={"/inventory/" + inventory.id} onClick={this.forceUpdate}>{inventory.id}</Link></td>
                         <td>{inventory.product.id}</td>
                         <td>{inventory.product.name}</td>
                         <td>{inventory.warehouse.name}</td>

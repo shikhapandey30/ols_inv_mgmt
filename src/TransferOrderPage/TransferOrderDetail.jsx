@@ -47,6 +47,24 @@ class TransferOrderDetail extends React.Component {
                   { transferorder.items && 
                     <div className="pull-right btn-style">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.transferorderDelete(transferorder.items.id)};}}>Delete</button>
+                      <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                          Edit
+                        </button>
+                        <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div className="modal-box" role="document">
+                              <div className="modal-content">
+                                <div className="modal-header textdesign">
+                                  <p style={{ fontWeight: 'bold' }}>Transfer Order: {transferorder.items.id}</p>
+                                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div className="modal-body">
+                                  
+                                </div>
+                              </div>
+                            </div>
+                        </div>
                     </div>
                   }
                 </div>

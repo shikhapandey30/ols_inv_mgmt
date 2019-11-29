@@ -56,7 +56,6 @@ class PurchaseOrderEdit extends React.Component {
       'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
     }
     var purchaseorders = {id: purchaseorder.id, status: purchaseorder.status, items: [{id: purchaseorder.items}], vendor: {id: purchaseorder.vendor}, warehouse: {id: purchaseorder.warehouse}}
-    debugger
     axios.put(`${config.apiUrl}/purchase_orders`, purchaseorders, {
     headers: headers
   })

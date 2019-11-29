@@ -56,13 +56,12 @@ class Category extends React.Component {
                       
                     </tr>  
                   </thead>
-                  
                   { allcategories.items && allcategories.items.length > 0 &&
                     <tbody>
                     {allcategories.items.map((category, index) =>
                       <tr key={category.id} >
                         <td>{index + 1}</td>
-                        <td><Link to={"/category/" + category.id}>{category.id}</Link></td>
+                        <td><Link to={"/category/" + category.id} onClick={this.forceUpdate}>{category.id}</Link></td>
                         <td>{category.name}</td>
                       </tr>
                     )}  

@@ -7,6 +7,8 @@ import { Footer } from '../Footer';
 import axios from 'axios';
 import config from 'config';
 import { Route, Redirect } from 'react-router-dom';
+import { MDBSelect } from "mdbreact";
+import MultiSelect from "@khanacademy/react-multi-select";
 
 
 class NewVendor extends React.Component {
@@ -25,6 +27,7 @@ class NewVendor extends React.Component {
               product: '',
               loaded: 0
           },
+          selected: [],
           submitted: false
         };
         this.handleChange = this.handleChange.bind(this);
@@ -46,9 +49,15 @@ class NewVendor extends React.Component {
       }
       event.preventDefault();
       this.setState({ submitted: true });
-      const { vendors } = this.state;
       const { dispatch } = this.props;
-      var vendor = { name: vendors.name, address: vendors.address, city: vendors.city, state: vendors.state, country: vendors.country,landmark: vendors.landmark, zipcode: vendors.zipcode,products: [{ id: vendors.product}] }
+      const { selected } = this.state;
+      const { vendors } = this.state;
+
+      const product_ids = [];
+      {selected.map((product_id) =>
+        product_ids.push({id: product_id})
+      )}
+      var vendor = { name: vendors.name, address: vendors.address, city: vendors.city, state: vendors.state, country: vendors.country,landmark: vendors.landmark, zipcode: vendors.zipcode,products: product_ids }
       axios.post(`${config.apiUrl}/vendors`, vendor, {
       headers: headers
       })
@@ -68,9 +77,14 @@ class NewVendor extends React.Component {
 
     render() {
       const { loggingIn, user, allproducts } = this.props;
-      const { vendors, category, submitted } = this.state;
+      const { vendors, category, submitted, selected } = this.state;
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
       console.log("allproducts*******************************", allproducts)
+      const options = [];
+      {allproducts.items && allproducts.items.length > 0 && allproducts.items.map((product) =>
+        options.push({label: product.name, value: product.id})
+      )}
+
       return (
         <div>
           <div className="container">
@@ -148,19 +162,12 @@ class NewVendor extends React.Component {
                 <div className="col-md-6">
                   <label htmlFor="vendorproductid" className="label">Product </label>
                   <div>
-                    {submitted && !vendors.product && 
-                      <div className="help-block required-msg"> Inventory product is required</div>
-                    }
-                     { allproducts.items && allproducts.items.length > 0 &&
-                      <select value={vendors.product} onChange={this.handleChange} name="product" className="form-control select-field" >
-                        {allproducts.items.map((product, index) =>
-                          <option key={index} value={product.id} >
-                            {product.name}
-                          </option>
-                         
-                        )}
-                      </select>
-                     }
+                      <MultiSelect value={vendors.product}
+                        options={options}
+                        selected={selected}
+                        onSelectedChanged={selected => this.setState({selected})}
+                      />
+
                   </div><br/>
                 </div>     
               </div><br/>

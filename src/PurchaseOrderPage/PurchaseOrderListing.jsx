@@ -67,7 +67,7 @@ class PurchaseOrderListing extends React.Component {
                         <td>{index + 1}</td>
                         <td>{po.id}</td>
                         <td>{po.status}</td>
-                        <td><Link to={"/purchase-order/" + po.id}>View</Link></td>
+                        <td><Link to={"/purchase-order/" + po.id} onClick={this.forceUpdate}>View</Link></td>
                       </tr>
                     )}  
                     </tbody>

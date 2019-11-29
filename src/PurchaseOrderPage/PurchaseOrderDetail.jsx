@@ -9,6 +9,94 @@ import config from 'config';
 
 
 class PurchaseOrderDetail extends React.Component {
+
+     constructor(props){
+    super(props);
+    this.state = {
+      id:'',
+      warehouse:'',
+      status:'',
+      items:'',
+      vendor:'',
+    }
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  componentWillMount(){
+    this.getPurchaseOrderDetails();
+  }
+  getPurchaseOrderDetails(){
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+    }
+    let purchaseorderId = this.props.match.params.id;
+    axios.get(`${config.apiUrl}/purchase_orders/${purchaseorderId}`, {
+    headers: headers
+  })
+    .then(response => {
+      this.setState({
+        id: response.data.data.id,
+        warehouse: response.data.data.warehouse,
+        status: response.data.data.status,
+        items: response.data.data.items,
+        vendor: response.data.data.vendor
+      }, () => {
+        console.log(this.state);
+      });
+    })
+    .catch(err => console.log(err));
+    }
+
+  editPurchaseOrder(purchaseorder){
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+    }
+    var purchaseorders = {id: purchaseorder.id, status: purchaseorder.status, items: [{id: purchaseorder.items}], vendor: {id: purchaseorder.vendor}, warehouse: {id: purchaseorder.warehouse}}
+    axios.put(`${config.apiUrl}/purchase_orders`, purchaseorders, {
+    headers: headers
+  })
+      .then(response => {
+        this.setState({ locations: response.data });
+        window.location = "/purchase_orders"
+      })
+  }
+
+  onSubmit(e){
+
+    const purchaseorder = {
+      id: this.refs.id.value,
+      warehouse: this.refs.warehouse.value,
+      status: this.refs.status.value,
+      items: this.refs.items.value,
+      vendor: this.refs.vendor.value
+    }
+    this.editPurchaseOrder(purchaseorder);
+    e.preventDefault();
+
+  }
+
+  handleInputChange(e){
+    const target = e.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+    handleChange(event) {
+      const { name, value } = event.target;
+      const { purchaseorder } = this.state;
+      this.setState({purchaseorder: event.target.value});
+      this.setState({
+          purchaseorder: { ...purchaseorder, [name]: value }
+      });
+    }
+
     componentDidMount(purchaseorder) {
       this.props.dispatch(userActions.getpurchaseorderdetail(this.props.match.params.id));
     }
@@ -29,7 +117,8 @@ class PurchaseOrderDetail extends React.Component {
     }
 
     render() {
-      const { user, purchaseorder } = this.props
+      const { user, purchaseorder, loggingIn } = this.props;
+      const { submitted } = this.state;
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
       return (
         <div>
@@ -57,8 +146,60 @@ class PurchaseOrderDetail extends React.Component {
                   { purchaseorder.items && 
                     <div className="pull-right btn-style">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.purchaseorderDelete(purchaseorder.items.id)};}}>Delete</button>
-                      <button className="btn btn-default">
-                      <Link to={"/purchase-order/" + purchaseorder.items.id + "/edit"} onClick={this.forceUpdate}>Edit</Link></button>
+                      <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Edit
+                      </button>
+                      <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div className="modal-box" role="document">
+                            <div className="modal-content">
+                              <div className="modal-header textdesign">
+                                <p style={{ fontWeight: 'bold' }}>Purchase Order: {purchaseorder.items.id}</p>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div className="modal-body">
+                               <form className="form-horizontal" onSubmit={this.onSubmit.bind(this)}>
+                                  <div className="row">
+                                    <div className="col-md-6">
+                                      <label htmlFor="warehouse" className="label">Warehouse</label>
+                                      <div>
+                                        <input className="form-control" type="text" name="warehouse" ref="warehouse" value={this.state.warehouse.id} onChange={this.handleInputChange} />
+                                      </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                      <label htmlFor="status" className="label">Status</label>
+                                      <div>
+                                        <input className="form-control" type="text" name="status" ref="status" value={this.state.status} onChange={this.handleInputChange} />
+                                      </div>
+                                    </div>
+                                  </div><br/>  
+                                  <div className="row model-warehouse">
+                                    <div className="col-md-6">
+                                      <label htmlFor="items" className="label">Items</label>
+                                      <div>
+                                        <input className="form-control" type="text" name="items" ref="items" value={this.state.items.id} onChange={this.handleInputChange} />
+                                      </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                      <label htmlFor="vendor" className="label">Vendor</label>
+                                      <div>
+                                        <input className="form-control" type="text" name="vendor" ref="vendor" value={this.state.vendor.id} onChange={this.handleInputChange} />
+                                      </div><br/>
+                                    </div>
+                                  </div><br/>  
+                                  <input className="form-control" type="hidden" name="id" ref="id" value={this.state.id} onChange={this.handleInputChange} />
+                                  <div className="form-group">
+                                    <div className="pull-right">
+                                      <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
+                                      <button className="btn btn-primary">Submit</button>
+                                    </div>
+                                  </div>
+                                </form> 
+                              </div>
+                            </div>
+                          </div>
+                      </div>
                     </div>
                   }
                 </div>

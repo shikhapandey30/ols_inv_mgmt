@@ -64,7 +64,7 @@ class Vendor extends React.Component {
                     {allvendors.items.map((vendor, index) =>
                       <tr key={vendor.id} >
                         <td>{index + 1}</td>
-                        <td><Link to={"/vendor/" + vendor.id}>{vendor.id}</Link></td>
+                        <td><Link to={"/vendor/" + vendor.id} onClick={this.forceUpdate}>{vendor.id}</Link></td>
                         <td>{vendor.name}</td>
                         <td>{vendor.address}</td>
                         

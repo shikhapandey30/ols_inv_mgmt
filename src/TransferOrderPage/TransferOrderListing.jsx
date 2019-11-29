@@ -71,7 +71,7 @@ class TransferOrderListing extends React.Component {
                         <td>{transfer_order.sourceWarehouse.name}</td>
                         <td>{transfer_order.destinationWarehouse.name}</td>
                         <td>{transfer_order.status}</td>
-                        <td><Link to={"/transfer-order/" + transfer_order.id}>View</Link></td>
+                        <td><Link to={"/transfer-order/" + transfer_order.id} onClick={this.forceUpdate}>View</Link></td>
                       </tr>
                     )}  
                     </tbody>

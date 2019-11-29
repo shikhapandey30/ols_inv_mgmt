@@ -62,7 +62,7 @@ class Product extends React.Component {
                     {allproducts.items.map((product, index) =>
                       <tr key={product.id} >
                         <td>{index + 1}</td>
-                        <td><Link to={"/product/" + product.id}>{product.id}</Link></td>
+                        <td><Link to={"/product/" + product.id} onClick={this.forceUpdate}>{product.id}</Link></td>
                         <td>{product.name}</td>
                         <td>{product.code}</td>
                       </tr>
