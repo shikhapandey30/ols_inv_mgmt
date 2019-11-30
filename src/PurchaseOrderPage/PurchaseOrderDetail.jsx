@@ -99,6 +99,8 @@ class PurchaseOrderDetail extends React.Component {
 
     componentDidMount(purchaseorder) {
       this.props.dispatch(userActions.getpurchaseorderdetail(this.props.match.params.id));
+      this.props.dispatch(userActions.getAllwarehouse());
+      this.props.dispatch(userActions.getAllvendor());
     }
 
     purchaseorderDelete = (id) => {
@@ -117,7 +119,7 @@ class PurchaseOrderDetail extends React.Component {
     }
 
     render() {
-      const { user, purchaseorder, loggingIn } = this.props;
+      const { user, purchaseorder,allwarehouses,allvendors, loggingIn } = this.props;
       const { submitted } = this.state;
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
       return (
@@ -243,55 +245,75 @@ class PurchaseOrderDetail extends React.Component {
           </div>
           { purchaseorder.items &&
             <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div className="modal-box" role="document">
-                            <div className="modal-content">
-                              <div className="modal-header textdesign">
-                                <p style={{ fontWeight: 'bold' }}>Purchase Order: {purchaseorder.items.id}</p>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div className="modal-body">
-                               <form className="form-horizontal" onSubmit={this.onSubmit.bind(this)}>
-                                  <div className="row">
-                                    <div className="col-md-6">
-                                      <label htmlFor="warehouse" className="label">Warehouse</label>
-                                      <div>
-                                        <input className="form-control" type="text" name="warehouse" ref="warehouse" value={this.state.warehouse.id} onChange={this.handleInputChange} />
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                      <label htmlFor="status" className="label">Status</label>
-                                      <div>
-                                        <input className="form-control" type="text" name="status" ref="status" value={this.state.status} onChange={this.handleInputChange} />
-                                      </div>
-                                    </div>
-                                  </div><br/>  
-                                  <div className="row model-warehouse">
-                                    <div className="col-md-6">
-                                      <label htmlFor="items" className="label">Items</label>
-                                      <div>
-                                        <input className="form-control" type="text" name="items" ref="items" value={this.state.items.id} onChange={this.handleInputChange} />
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                      <label htmlFor="vendor" className="label">Vendor</label>
-                                      <div>
-                                        <input className="form-control" type="text" name="vendor" ref="vendor" value={this.state.vendor.id} onChange={this.handleInputChange} />
-                                      </div><br/>
-                                    </div>
-                                  </div><br/>  
-                                  <input className="form-control" type="hidden" name="id" ref="id" value={this.state.id} onChange={this.handleInputChange} />
-                                  <div className="form-group">
-                                    <div className="pull-right">
-                                      <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
-                                      <button className="btn btn-primary">Submit</button>
-                                    </div>
-                                  </div>
-                                </form> 
-                              </div>
+                <div className="modal-box" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header textdesign">
+                      <p style={{ fontWeight: 'bold' }}>Purchase Order: {purchaseorder.items.id}</p>
+                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                     <form className="form-horizontal" onSubmit={this.onSubmit.bind(this)}>
+                        <div className="row">
+                          <div className="col-md-6">
+                            <label htmlFor="warehouse" className="label">Warehouse</label>
+                            <div>
+
+                              { allwarehouses.items && allwarehouses.items.length > 0 &&
+                              <select name="warehouse" ref="warehouse" value={this.state.warehouse.id} onChange={this.handleInputChange} className="form-control select-field" >
+                                {allwarehouses.items.map((warehouse, index) =>
+                                  <option key={index} value={warehouse.id} >
+                                    {warehouse.name}
+                                  </option>
+                                )}
+                              </select>
+                            }
+
                             </div>
                           </div>
+                          <div className="col-md-6">
+                            <label htmlFor="status" className="label">Status</label>
+                            <div>
+                              <input className="form-control" type="text" name="status" ref="status" value={this.state.status} onChange={this.handleInputChange} />
+                            </div>
+                          </div>
+                        </div><br/>  
+                        <div className="row model-warehouse">
+                          <div className="col-md-6">
+                            <label htmlFor="items" className="label">Items</label>
+                            <div>
+                              <input className="form-control" type="text" name="items" ref="items" value={this.state.items.id} onChange={this.handleInputChange} />
+                            </div>
+                          </div>
+                          <div className="col-md-6">
+                            <label htmlFor="vendor" className="label">Vendor</label>
+                            <div>
+
+                            { allvendors.items && allvendors.items.length > 0 &&
+                              <select name="vendor" ref="vendor" value={this.state.vendor.id}  onChange={this.handleChange}  className="form-control select-field" >
+                                {allvendors.items.map((vendor, index) =>
+                                  <option key={index} value={vendor.id} >
+                                    {vendor.name}
+                                  </option>
+                                )}
+                              </select>
+                            }
+
+                            </div><br/>
+                          </div>
+                        </div><br/>  
+                        <input className="form-control" type="hidden" name="id" ref="id" value={this.state.id} onChange={this.handleInputChange} />
+                        <div className="form-group">
+                          <div className="pull-right">
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
+                            <button className="btn btn-primary">Submit</button>
+                          </div>
+                        </div>
+                      </form> 
+                    </div>
+                  </div>
+                </div>
             </div>
           }
         </div>  
@@ -300,11 +322,13 @@ class PurchaseOrderDetail extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { purchaseorderid, purchaseorder, authentication } = state;
+  const { purchaseorderid,allwarehouses, allvendors, purchaseorder, authentication } = state;
   const { user } = authentication;
   return {
     user,
-    purchaseorder
+    purchaseorder,
+    allwarehouses,
+    allvendors
   };
 }
 
