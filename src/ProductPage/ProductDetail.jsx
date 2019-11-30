@@ -139,110 +139,21 @@ class ProductDetail extends React.Component {
         <div>
           <Header />
           <div className="container">
-            <div className="">
-              <div className="panel panel-primary filterable">
-                <div className="panel-heading">
-                  { product.items && 
-                    <h3 className="panel-title"> 
-                     {product.items.name}
-                    </h3>
-                  }
-                  { product.items && 
-                    <div className="pull-right product-delete-btn">
-                      <button className="btn btn-danger btn-style-product" onClick={() => {if(window.confirm('Delete the item?')){this.productDelete(product.items.id)};}}>Delete</button>
-                      <button type="button" className="btn btn-primary product-edit-btn" data-toggle="modal" data-target="#exampleModal">
-                          Edit 
-                        </button>
-                        <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div className="modal-box" role="document">
-                              <div className="modal-content">
-                                <div className="modal-header textdesign">
-                                  <p style={{ fontWeight: 'bold' }}>{product.items.name}</p>
-                                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div className="modal-body">
-                                  <form className="form-horizontal" onSubmit={this.onSubmit.bind(this)}>
-                                    <div className="row">
-                                      <div className="col-md-6">
-                                        <label htmlFor="productname" className="label">Product Name</label>
-                                        <div>
-                                          <input className="form-control" type="text" name="name" ref="name" value={this.state.name} onChange={this.handleInputChange} />
-                                        </div>
-                                      </div>
-                                      <div className="col-md-6">
-                                        <label htmlFor="productbrandName" className="label">Product Brand Name</label>
-                                        <div>
-                                          <input className="form-control" type="text" name="brandName" ref="brandName" value={this.state.brandName} onChange={this.handleInputChange} />
-                                        </div>
-                                      </div>
-                                    </div><br/>  
-                                    <div className="row">
-                                      <div className="col-md-6">
-                                        <label htmlFor="productcode" className="label">Product Code</label>
-                                        <div>
-                                          <input className="form-control" type="text" name="code" ref="code" value={this.state.code} onChange={this.handleInputChange} />
-                                        </div>
-                                      </div>
-                                      <div className="col-md-6">
-                                        <label htmlFor="productcgst" className="label">Product cgst</label>
-                                        <div>
-                                          <input className="form-control" type="text" name="cgst" ref="cgst" value={this.state.cgst} onChange={this.handleInputChange} />
-                                        </div>
-                                      </div>
-                                    </div><br/>  
-                                    <div className="row">
-                                      <div className="col-md-6">
-                                        <label htmlFor="productsgst" className="label">Product sgst</label>
-                                        <div>
-                                          <input className="form-control" type="text" name="sgst" ref="sgst" value={this.state.sgst} onChange={this.handleInputChange} />
-                                        </div>
-                                      </div>
-                                      <div className="col-md-6">
-                                        <label htmlFor="producthsnCode" className="label">Product hsnCode</label>
-                                        <div>
-                                          <input className="form-control" type="text" name="hsnCode" ref="hsnCode" value={this.state.hsnCode} onChange={this.handleInputChange} />
-                                        </div>
-                                      </div>
-                                    </div><br/>  
-                                    <div className="row model-warehouse">
-                                      <div className="col-md-6">
-                                        <label htmlFor="productcategory" className="label">Product Category</label>
-                                        <div>
-                                          { allcategories.items && allcategories.items.length > 0 &&
-                                            <select value={this.state.category.id} onChange={this.handleChange} name="category" ref="category" className="form-control select-field" >
-                                              {allcategories.items.map((category, index) =>
-                                                <option key={index} value={this.state.category.id} >
-                                                  {category.name}
-                                                </option>
-                                              )}
-                                            </select>
-                                           }
-                                        </div>
-                                      </div>
-                                      <div className="col-md-6">
-                                        <label htmlFor="productdescription" className="label">Product Description</label>
-                                        <div>
-                                          <textarea className="form-control" name="description" ref="description" value={this.state.description} onChange={this.handleInputChange}  autoFocus />
-                                        </div><br/>
-                                      </div>
-                                    </div><br/>  
-                                    <input className="form-control" type="hidden" name="id" ref="id" value={this.state.id} onChange={this.handleInputChange} />
-                                    <div className="form-group">
-                                      <div className="pull-right">
-                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
-                                        <button className="btn btn-primary">Submit</button>
-                                      </div>
-                                    </div>
-                                  </form>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
+            <div>
+              <div className="page-header">
+                { product.items && 
+                  <h1 className="page-title">
+                    {product.items.name}
+                    <div className="pull-right">
+                      <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.productDelete(product.items.id)};}}>Delete</button>
+                      &nbsp; <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Edit
+                      </button>
                     </div>
-                  }
-                </div>
+                  </h1>
+                }
+              </div>
+              <div className="panel filterable">
                 { product.items && 
                   <table className="table table-bordered table table-border">
                     <tbody>
@@ -255,17 +166,26 @@ class ProductDetail extends React.Component {
                         <td>{product.items.name}</td>
                       </tr>
                       <tr>
+                        <td>Category ID</td>
+                        <td>{product.items.category.id}</td>
+                      </tr>
+                      <tr>
+                        <td>Category  Name</td>
+                        <td>{product.items.category.name}</td>
+                      </tr>
+                      <tr>
                         <td>Product Code</td>
                         <td>{product.items.code}</td>
                       </tr>
                       <tr>
-                        <td>Product brandName</td>
+                        <td>Product BrandName</td>
                         <td>{product.items.brandName}</td>
                       </tr>
                       <tr>
-                        <td>Product description</td>
+                        <td>Product Description</td>
                         <td>{product.items.description}</td>
                       </tr>
+                      
                       <tr>
                         <td>Product image</td>
                         <td>
@@ -290,6 +210,95 @@ class ProductDetail extends React.Component {
               </div>
             </div>
           </div>
+          { product.items &&
+            <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-box" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header textdesign">
+                      <p style={{ fontWeight: 'bold' }}>{product.items.name}</p>
+                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                      <form className="form-horizontal" onSubmit={this.onSubmit.bind(this)}>
+                        <div className="row">
+                          <div className="col-md-6">
+                            <label htmlFor="productname" className="label">Product Name</label>
+                            <div>
+                              <input className="form-control" type="text" name="name" ref="name" value={this.state.name} onChange={this.handleInputChange} />
+                            </div>
+                          </div>
+                          <div className="col-md-6">
+                            <label htmlFor="productbrandName" className="label">Product Brand Name</label>
+                            <div>
+                              <input className="form-control" type="text" name="brandName" ref="brandName" value={this.state.brandName} onChange={this.handleInputChange} />
+                            </div>
+                          </div>
+                        </div><br/>  
+                        <div className="row">
+                          <div className="col-md-6">
+                            <label htmlFor="productcode" className="label">Product Code</label>
+                            <div>
+                              <input className="form-control" type="text" name="code" ref="code" value={this.state.code} onChange={this.handleInputChange} />
+                            </div>
+                          </div>
+                          <div className="col-md-6">
+                            <label htmlFor="productcgst" className="label">Product cgst</label>
+                            <div>
+                              <input className="form-control" type="text" name="cgst" ref="cgst" value={this.state.cgst} onChange={this.handleInputChange} />
+                            </div>
+                          </div>
+                        </div><br/>  
+                        <div className="row">
+                          <div className="col-md-6">
+                            <label htmlFor="productsgst" className="label">Product sgst</label>
+                            <div>
+                              <input className="form-control" type="text" name="sgst" ref="sgst" value={this.state.sgst} onChange={this.handleInputChange} />
+                            </div>
+                          </div>
+                          <div className="col-md-6">
+                            <label htmlFor="producthsnCode" className="label">Product hsnCode</label>
+                            <div>
+                              <input className="form-control" type="text" name="hsnCode" ref="hsnCode" value={this.state.hsnCode} onChange={this.handleInputChange} />
+                            </div>
+                          </div>
+                        </div><br/>  
+                        <div className="row model-warehouse">
+                          <div className="col-md-6">
+                            <label htmlFor="productcategory" className="label">Product Category</label>
+                            <div>
+                              { allcategories.items && allcategories.items.length > 0 &&
+                                <select value={this.state.category.id} onChange={this.handleChange} name="category" ref="category" className="form-control select-field" >
+                                  {allcategories.items.map((category, index) =>
+                                    <option key={index} value={this.state.category.id} >
+                                      {category.name}
+                                    </option>
+                                  )}
+                                </select>
+                               }
+                            </div>
+                          </div>
+                          <div className="col-md-6">
+                            <label htmlFor="productdescription" className="label">Product Description</label>
+                            <div>
+                              <textarea className="form-control" name="description" ref="description" value={this.state.description} onChange={this.handleInputChange}  autoFocus />
+                            </div><br/>
+                          </div>
+                        </div><br/>  
+                        <input className="form-control" type="hidden" name="id" ref="id" value={this.state.id} onChange={this.handleInputChange} />
+                        <div className="form-group">
+                          <div className="pull-right">
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
+                            <button className="btn btn-primary">Submit</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          }
         </div>  
       );
     }

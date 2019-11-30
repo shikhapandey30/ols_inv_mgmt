@@ -124,85 +124,21 @@ class PurchaseOrderDetail extends React.Component {
         <div>
           <Header />
           <div className="container">
-            <div className="">
-              { purchaseorder.items && 
-                <h3 className="panel-title"> 
-                  Purchase Order Number: {purchaseorder.items.number}<br/><br/>
-                  Purchase Order Date: {purchaseorder.items.create_date}<br/><br/>
-                  Payment Mode: COD<br/><br/>
-                  Tax Type: GST<br/><br/>
-                  Ammendment Number: 12345678<br/><br/>
-                  Company State CD: 27<br/><br/>
-                  Supplier Name: {purchaseorder.items.suppliername}<br/><br/>
-                </h3> 
-              }   
-              <div className="panel panel-primary filterable">
-                <div className="panel-heading">
-                  { purchaseorder.items && 
-                    <h3 className="panel-title"> 
-                     {purchaseorder.items.id}
-                    </h3>
-                  }
-                  { purchaseorder.items && 
-                    <div className="pull-right btn-style">
+            <div>
+              <div className="page-header">
+                { purchaseorder.items && 
+                  <h1 className="page-title">
+                    {purchaseorder.items.id}
+                    <div className="pull-right">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.purchaseorderDelete(purchaseorder.items.id)};}}>Delete</button>
-                      <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                      &nbsp; <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         Edit
                       </button>
-                      <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div className="modal-box" role="document">
-                            <div className="modal-content">
-                              <div className="modal-header textdesign">
-                                <p style={{ fontWeight: 'bold' }}>Purchase Order: {purchaseorder.items.id}</p>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div className="modal-body">
-                               <form className="form-horizontal" onSubmit={this.onSubmit.bind(this)}>
-                                  <div className="row">
-                                    <div className="col-md-6">
-                                      <label htmlFor="warehouse" className="label">Warehouse</label>
-                                      <div>
-                                        <input className="form-control" type="text" name="warehouse" ref="warehouse" value={this.state.warehouse.id} onChange={this.handleInputChange} />
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                      <label htmlFor="status" className="label">Status</label>
-                                      <div>
-                                        <input className="form-control" type="text" name="status" ref="status" value={this.state.status} onChange={this.handleInputChange} />
-                                      </div>
-                                    </div>
-                                  </div><br/>  
-                                  <div className="row model-warehouse">
-                                    <div className="col-md-6">
-                                      <label htmlFor="items" className="label">Items</label>
-                                      <div>
-                                        <input className="form-control" type="text" name="items" ref="items" value={this.state.items.id} onChange={this.handleInputChange} />
-                                      </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                      <label htmlFor="vendor" className="label">Vendor</label>
-                                      <div>
-                                        <input className="form-control" type="text" name="vendor" ref="vendor" value={this.state.vendor.id} onChange={this.handleInputChange} />
-                                      </div><br/>
-                                    </div>
-                                  </div><br/>  
-                                  <input className="form-control" type="hidden" name="id" ref="id" value={this.state.id} onChange={this.handleInputChange} />
-                                  <div className="form-group">
-                                    <div className="pull-right">
-                                      <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
-                                      <button className="btn btn-primary">Submit</button>
-                                    </div>
-                                  </div>
-                                </form> 
-                              </div>
-                            </div>
-                          </div>
-                      </div>
                     </div>
-                  }
-                </div>
+                  </h1>
+                }
+              </div>
+              <div className="panel filterable">
                 { purchaseorder.items && 
                   <table className="table table-bordered table table-border">
                     <tbody>
@@ -277,7 +213,7 @@ class PurchaseOrderDetail extends React.Component {
                     </tbody>
                   </table>
                 }
-                <center><h3>Items</h3></center>
+                <center><h3>Products</h3></center>
                 { purchaseorder.items && 
                   <table className="table table-bordered table table-border">
                     <thead>
@@ -305,6 +241,59 @@ class PurchaseOrderDetail extends React.Component {
               </div>
             </div>
           </div>
+          { purchaseorder.items &&
+            <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div className="modal-box" role="document">
+                            <div className="modal-content">
+                              <div className="modal-header textdesign">
+                                <p style={{ fontWeight: 'bold' }}>Purchase Order: {purchaseorder.items.id}</p>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div className="modal-body">
+                               <form className="form-horizontal" onSubmit={this.onSubmit.bind(this)}>
+                                  <div className="row">
+                                    <div className="col-md-6">
+                                      <label htmlFor="warehouse" className="label">Warehouse</label>
+                                      <div>
+                                        <input className="form-control" type="text" name="warehouse" ref="warehouse" value={this.state.warehouse.id} onChange={this.handleInputChange} />
+                                      </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                      <label htmlFor="status" className="label">Status</label>
+                                      <div>
+                                        <input className="form-control" type="text" name="status" ref="status" value={this.state.status} onChange={this.handleInputChange} />
+                                      </div>
+                                    </div>
+                                  </div><br/>  
+                                  <div className="row model-warehouse">
+                                    <div className="col-md-6">
+                                      <label htmlFor="items" className="label">Items</label>
+                                      <div>
+                                        <input className="form-control" type="text" name="items" ref="items" value={this.state.items.id} onChange={this.handleInputChange} />
+                                      </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                      <label htmlFor="vendor" className="label">Vendor</label>
+                                      <div>
+                                        <input className="form-control" type="text" name="vendor" ref="vendor" value={this.state.vendor.id} onChange={this.handleInputChange} />
+                                      </div><br/>
+                                    </div>
+                                  </div><br/>  
+                                  <input className="form-control" type="hidden" name="id" ref="id" value={this.state.id} onChange={this.handleInputChange} />
+                                  <div className="form-group">
+                                    <div className="pull-right">
+                                      <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
+                                      <button className="btn btn-primary">Submit</button>
+                                    </div>
+                                  </div>
+                                </form> 
+                              </div>
+                            </div>
+                          </div>
+            </div>
+          }
         </div>  
       );
     }

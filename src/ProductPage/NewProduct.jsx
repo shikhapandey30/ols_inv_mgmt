@@ -188,10 +188,10 @@ class NewProduct extends React.Component {
                   <label htmlFor="productisActive" className="label">isActive </label>
                   <select value={products.isActive} onChange={this.handleChange} name="isActive" className="form-control select-form" >
                       <option >
-                        {"True"}
+                        {"true"}
                       </option><br/>
                       <option >
-                        {"False"}
+                        {"false"}
                       </option>
                   </select>
                 </div> 

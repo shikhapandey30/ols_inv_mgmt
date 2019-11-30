@@ -63,7 +63,7 @@ class App extends React.Component {
                 <PrivateRoute path="/Header" component={Header} />
                 <PrivateRoute path="/Footer" component={Footer} />
                 <PrivateRoute path="/products" component={Product} />
-                <PrivateRoute path="/warehouse/:id/user" component={WareHouseAllUser} />
+                <PrivateRoute path="/warehouse/:id/users" component={WareHouseAllUser} />
                 <PrivateRoute path="/new-product" component={NewProduct} />
                 <PrivateRoute path="/product/:id/edit" component={ProductEdit} />
                 <PrivateRoute path="/new-category" component={NewCategory} />   

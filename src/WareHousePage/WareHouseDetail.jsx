@@ -133,23 +133,63 @@ class WareHouseDetail extends React.Component {
         <div>
           <Header />
           <div className="container">
-            <div className="">
-              <div className="panel panel-primary filterable">
-                <div className="panel-heading">
-                  { warehouse.items && 
-                    <h3 className="panel-title"> 
-                     {warehouse.items.name}
-                      
-                    </h3>
-
-                  }
-                  { warehouse.items && 
-                    <div className="pull-right btn-style">
+            <div>
+              <div className="page-header">
+                { warehouse.items && 
+                  <h1 className="page-title">
+                    {warehouse.items.name}
+                    <div className="pull-right">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.warehouseDelete(warehouse.items.id)};}}>Delete</button>
-                      <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                      &nbsp; <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         Edit
                       </button>
-                      <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    </div>
+                  </h1>
+                }
+              </div>
+              <div className="panel filterable">
+                { warehouse.items && 
+                  <table className="table table-bordered table table-border">
+                    
+                    <tbody>
+                      <tr>
+                        <td>Warehouse ID</td>
+                        <td>{warehouse.items.id}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Warehouse Name</td>
+                        <td>{warehouse.items.name}</td>
+                      </tr>
+                      <tr>
+                        <td>Warehouse Address</td>
+                        <td>{warehouse.items.address}</td>
+                      </tr>
+                      <tr>
+                        <td>Warehouse City</td>
+                        <td>{warehouse.items.city}</td>
+                      </tr>
+                      <tr>
+                        <td>Warehouse State</td>
+                        <td>{warehouse.items.state}</td>
+                      </tr>
+                      <tr>
+                        <td>Warehouse Country</td>
+                        <td>{warehouse.items.country}</td>
+                      </tr>
+                      <tr>
+                        <td>Warehouse Landmark</td>
+                        <td>{warehouse.items.landmark}</td>
+                      </tr>
+                    </tbody>
+
+                  </table>
+                }
+              </div>
+            </div>
+          </div>
+          { warehouse.items &&
+            <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div className="modal-box" role="document">
                             <div className="modal-content">
                               <div className="modal-header textdesign">
@@ -228,50 +268,8 @@ class WareHouseDetail extends React.Component {
                               </div>
                             </div>
                           </div>
-                      </div>
-                    </div>
-                  }
-                </div>
-                { warehouse.items && 
-                  <table className="table table-bordered table table-border">
-                    
-                    <tbody>
-                      <tr>
-                        <td>Warehouse ID</td>
-                        <td>{warehouse.items.id}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Warehouse Name</td>
-                        <td>{warehouse.items.name}</td>
-                      </tr>
-                      <tr>
-                        <td>Warehouse Address</td>
-                        <td>{warehouse.items.address}</td>
-                      </tr>
-                      <tr>
-                        <td>Warehouse City</td>
-                        <td>{warehouse.items.city}</td>
-                      </tr>
-                      <tr>
-                        <td>Warehouse State</td>
-                        <td>{warehouse.items.state}</td>
-                      </tr>
-                      <tr>
-                        <td>Warehouse Country</td>
-                        <td>{warehouse.items.country}</td>
-                      </tr>
-                      <tr>
-                        <td>Warehouse Landmark</td>
-                        <td>{warehouse.items.landmark}</td>
-                      </tr>
-                    </tbody>
-
-                  </table>
-                }
-              </div>
             </div>
-          </div>
+          }
         </div>  
       );
     }

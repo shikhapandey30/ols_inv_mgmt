@@ -22,41 +22,33 @@ class PurchaseOrderListing extends React.Component {
         <div>
           <Header />
           <div className="container">
-            <div className="">
-              <div className="panel panel-primary filterable">
-                <div className="panel-heading">
-                  <h3 className="panel-title"> 
-                   Purchase Order Listing</h3>
-                   <div className="pull-right category-position">
+            <div>
+              <div className="page-header">
+                <h1 className="page-title">
+                  Purchase Orders
+                  <div className="pull-right">
                     <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        <b>+</b>Add New Purchase Order
+                      <i className="fa fa-plus" aria-hidden="true"></i> Add New Purchase Order
                     </button>
-                    <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div className="modal-box" role="document">
-                          <div className="modal-content">
-                            <div className="modal-header textdesign">
-                              <p style={{ fontWeight: 'bold' }}>Add New Purchase Order</p>
-                              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div className="modal-body">
-                              <NewPurchaseOrder/>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
                   </div>
-                </div>
-                <h5 className="loading-msg">{allpuchaseorders.loading && <em>Loading All Puchase Order .....</em>}</h5>
-                <table className="table table-bordered table table-border">
+                </h1>
+              </div>
+              <div className="panel filterable">
+                {allpuchaseorders.loading && <h5 className="loading-msg"><em>Loading All Purchase Orders .....</em></h5>}
+                <table className="table table-hover table-responsive">
                   <thead>
                     <tr className="filters">
                       <th>S.No</th>
                       <th>PO ID</th>
                       <th>Status</th>
+                      <th>Warehouse ID</th>
+                      <th>Warehouse Name</th>
+                      <th>Warehouse Address</th>
+                      <th>Warehouse City</th>
+                      <th>Warehouse State</th>
+                      <th>Vendor ID</th>
+                      <th>Vendor Name</th>
                       <th>View</th>
-                      
                     </tr>  
                   </thead>
                   
@@ -67,6 +59,13 @@ class PurchaseOrderListing extends React.Component {
                         <td>{index + 1}</td>
                         <td>{po.id}</td>
                         <td>{po.status}</td>
+                        <td>{po.warehouse.id}</td>
+                        <td>{po.warehouse.name}</td>
+                        <td>{po.warehouse.address}</td>
+                        <td>{po.warehouse.city}</td>
+                        <td>{po.warehouse.state}</td>
+                        <td>{po.vendor.id}</td>
+                        <td>{po.vendor.name}</td>
                         <td><Link to={"/purchase-order/" + po.id} onClick={this.forceUpdate}>View</Link></td>
                       </tr>
                     )}  
@@ -76,7 +75,22 @@ class PurchaseOrderListing extends React.Component {
               </div>
             </div>
           </div>
-        </div>  
+          <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-box" role="document">
+              <div className="modal-content">
+                <div className="modal-header textdesign">
+                  <p style={{ fontWeight: 'bold' }}>Add New Purchase Order</p>
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <NewPurchaseOrder/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       );
     }
 }

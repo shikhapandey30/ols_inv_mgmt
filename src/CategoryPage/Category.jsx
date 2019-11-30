@@ -19,43 +19,28 @@ class Category extends React.Component {
         <div>
           <Header />
           <div className="container">
-            <div className="">
-              <div className="panel panel-primary filterable">
-                <div className="panel-heading">
-                  <h3 className="panel-title">
-                    Categories
-                  </h3>
-                  <div className="pull-right category-position">
+            <div>
+              <div className="page-header">
+                <h1 className="page-title">
+                  Categories
+                  <div className="pull-right">
                     <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        <b>+</b>Add New Category
+                      <i className="fa fa-plus" aria-hidden="true"></i> Add New Category
                     </button>
-                    <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div className="modal-box" role="document">
-                          <div className="modal-content">
-                            <div className="modal-header textdesign">
-                              <p style={{ fontWeight: 'bold' }}>Add New Category</p>
-                              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div className="modal-body">
-                              <NewCategory/>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                   </div>
-                </div>
-                <h5 className="loading-msg">{allcategories.loading && <em>Loading All Categories .....</em>}</h5>
-                <table className="table table-bordered table table-border">
+                </h1>
+              </div>
+              <div className="panel filterable">
+                {allcategories.loading && <h5 className="loading-msg"><em>Loading All Categories .....</em></h5>}
+                <table className="table table-hover">
                   <thead>
                     <tr className="filters">
                       <th>S.No</th>
                       <th>ID</th>
                       <th>Name</th>
-                      
                     </tr>  
                   </thead>
+                  
                   { allcategories.items && allcategories.items.length > 0 &&
                     <tbody>
                     {allcategories.items.map((category, index) =>
@@ -66,12 +51,27 @@ class Category extends React.Component {
                       </tr>
                     )}  
                     </tbody>
-                  }  
+                  }     
                 </table>
               </div>
             </div>
           </div>
-        </div>  
+          <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-box" role="document">
+              <div className="modal-content">
+                <div className="modal-header textdesign">
+                  <p style={{ fontWeight: 'bold' }}>Add New Purchase Order</p>
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <NewCategory/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       );
     }
 }

@@ -73,13 +73,12 @@ function getwarehousedetail(warehouseID) {
 
 function getwarehouseuser(warehouseID) {
   const requestOptions = {
-    method: 'POST',
+    method: 'GET',
     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token }
   };
     return fetch(`${config.apiUrl}/warehouses/${warehouseID}/users`, requestOptions)
     .then(handleResponse)
     .then(warehousealluser => {
-      debugger
       console.log("Response@@@@@@@@@@@@",warehousealluser)
       return warehousealluser.data;
     });

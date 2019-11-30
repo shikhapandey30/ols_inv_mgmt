@@ -113,21 +113,41 @@ class CategoryDetail extends React.Component {
         <div>
           <Header />
           <div className="container">
-            <div className="">
-              <div className="panel panel-primary filterable">
-                <div className="panel-heading">
-                  { category.items && 
-                    <h3 className="panel-title"> 
-                     {category.items.name}
-                    </h3>
-                  }
-                  { category.items && 
-                    <div className="pull-right btn-style">
+            <div>
+              <div className="page-header">
+                { category.items && 
+                  <h1 className="page-title">
+                    {category.items.name}
+                    <div className="pull-right">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.categoryDelete(category.items.id)};}}>Delete</button>
-                      <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                          Edit 
-                        </button>
-                        <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      &nbsp; <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Edit
+                      </button>
+                    </div>
+                  </h1>
+                }
+              </div>
+              <div className="panel filterable">
+                { category.items && 
+                  <table className="table table-bordered table table-border">
+                    <tbody>
+                      <tr>
+                        <td>Category ID</td>
+                        <td>{category.items.id}</td>
+                      </tr>
+                      <tr>
+                        <td>Category Name</td>
+                        <td>{category.items.name}</td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                }
+              </div>
+            </div>
+          </div>
+          { category.items &&
+            <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div className="modal-box" role="document">
                               <div className="modal-content">
                                 <div className="modal-header textdesign">
@@ -161,29 +181,8 @@ class CategoryDetail extends React.Component {
                                 </div>
                               </div>
                             </div>
-                        </div>
-                      
-                    </div>
-                  }
-                </div>
-                { category.items && 
-                  <table className="table table-bordered table table-border">
-                    <tbody>
-                      <tr>
-                        <td>Category ID</td>
-                        <td>{category.items.id}</td>
-                      </tr>
-                      <tr>
-                        <td>Category Name</td>
-                        <td>{category.items.name}</td>
-                      </tr>
-                      
-                    </tbody>
-                  </table>
-                }
-              </div>
             </div>
-          </div>
+          }
         </div>  
       );
     }

@@ -131,21 +131,64 @@ class VendorDetail extends React.Component {
         <div>
           <Header />
           <div className="container">
-            <div className="">
-              <div className="panel panel-primary filterable">
-                <div className="panel-heading">
-                  { vendor.items && 
-                    <h3 className="panel-title"> 
-                     {vendor.items.name}
-                    </h3>
-                  }
-                  { vendor.items && 
-                    <div className="pull-right btn-style">
+            <div>
+              <div className="page-header">
+                { vendor.items && 
+                  <h1 className="page-title">
+                    {vendor.items.name}
+                    <div className="pull-right">
                       <button className="btn btn-danger" onClick={() => {if(window.confirm('Delete the item?')){this.vendorDelete(vendor.items.id)};}}>Delete</button>
-                      <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                      &nbsp; <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         Edit
                       </button>
-                      <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    </div>
+                  </h1>
+                }
+              </div>
+              <div className="panel filterable">
+                { vendor.items && 
+                  <table className="table table-bordered table table-border">
+                    <tbody>
+                      <tr>
+                        <td>Vendor ID</td>
+                        <td>{vendor.items.id}</td>
+                      </tr>
+                      <tr>
+                        <td>Vendor Name</td>
+                        <td>{vendor.items.name}</td>
+                      </tr>
+                      <tr>
+                        <td>Vendor Address</td>
+                        <td>{vendor.items.address}</td>
+                      </tr>
+                      <tr>
+                        <td>Vendor Landmark</td>
+                        <td>{vendor.items.landmark}</td>
+                      </tr>
+                      <tr>
+                        <td>Vendor Zipcode</td>
+                        <td>{vendor.items.zipcode}</td>
+                      </tr>
+                      <tr>
+                        <td>Vendor City</td>
+                        <td>{vendor.items.city}</td>
+                      </tr>
+                      <tr>
+                        <td>Vendor State</td>
+                        <td>{vendor.items.state}</td>
+                      </tr>
+                      <tr>
+                        <td>Vendor Country</td>
+                        <td>{vendor.items.country}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                }
+              </div>
+            </div>
+          </div>
+          { vendor.items &&
+            <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div className="modal-box" role="document">
                             <div className="modal-content">
                               <div className="modal-header textdesign">
@@ -221,51 +264,8 @@ class VendorDetail extends React.Component {
                               </div>
                             </div>
                           </div>
-                      </div>
-                    </div>
-                  }
-                </div>
-                { vendor.items && 
-                  <table className="table table-bordered table table-border">
-                    <tbody>
-                      <tr>
-                        <td>Vendor ID</td>
-                        <td>{vendor.items.id}</td>
-                      </tr>
-                      <tr>
-                        <td>Vendor Name</td>
-                        <td>{vendor.items.name}</td>
-                      </tr>
-                      <tr>
-                        <td>Vendor Address</td>
-                        <td>{vendor.items.address}</td>
-                      </tr>
-                      <tr>
-                        <td>Vendor Landmark</td>
-                        <td>{vendor.items.landmark}</td>
-                      </tr>
-                      <tr>
-                        <td>Vendor Zipcode</td>
-                        <td>{vendor.items.zipcode}</td>
-                      </tr>
-                      <tr>
-                        <td>Vendor City</td>
-                        <td>{vendor.items.city}</td>
-                      </tr>
-                      <tr>
-                        <td>Vendor State</td>
-                        <td>{vendor.items.state}</td>
-                      </tr>
-                      <tr>
-                        <td>Vendor Country</td>
-                        <td>{vendor.items.country}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                }
-              </div>
             </div>
-          </div>
+          }
         </div>  
       );
     }

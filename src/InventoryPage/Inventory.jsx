@@ -17,73 +17,83 @@ class Inventory extends React.Component {
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
       console.log("allinventories*******************************", allinventories)
       return (
-        <div>
-          <Header />
-          <div className="container">
-            <div className="">
-              <div className="panel panel-primary filterable">
-                <div className="panel-heading">
-                  <h3 className="panel-title"> 
-                   Inventories
-                  </h3>
-                  <div className="pull-right category-position">
-                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        <b>+</b>Add New Inventory
+          <div>
+            <Header />
+            <div className="container">
+              <div>
+                <div className="page-header">
+                  <h1 className="page-title">
+                    Inventories
+                    <div className="pull-right">
+                      <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <i className="fa fa-plus" aria-hidden="true"></i> Add New Inventory
+                      </button>
+                    </div>
+                  </h1>
+                </div>
+                <div className="panel filterable">
+                  {allinventories.loading && <h5 className="loading-msg"><em>Loading All Inventory .....</em></h5>}
+                  <table className="table table-hover table-responsive">
+                    <thead>
+                      <tr className="filters">
+                        <th>S.No</th>
+                        <th>ID</th>
+                        <th>Wh id</th>
+                        <th>Product Name</th>
+                        <th>Batch No</th>
+                        <th>Qty</th>
+                        <th>Purchase Cost</th>
+                        <th>Sales Cost</th>
+                        <th>MRP Cost</th>
+                        <th>Special Cost</th>
+                        <th>Barcode</th>
+                        <th>Reference Number</th>
+                        <th>Remark</th>
+                      </tr>  
+                    </thead>
+                    
+                    { allinventories.items && allinventories.items.length > 0 &&
+                      <tbody>
+                      {allinventories.items.map((inventory, index) =>
+                        <tr key={inventory.id} >
+                          <td>{index + 1}</td>
+                          <td><Link to={"/inventory/" + inventory.id} onClick={this.forceUpdate}>{inventory.id}</Link></td>
+                          <td>{inventory.warehouse.id}</td>
+                          <td>{inventory.product.name}</td>
+                          <td>{inventory.batch}</td>
+                          <td>{inventory.quantity}</td>
+                          <td>{inventory.purchaseCost}</td>
+                          <td>{inventory.salesCost}</td>
+                          <td>{inventory.mrpCost}</td>
+                          <td>{inventory.specialCost}</td>
+                          <td>{inventory.barcode}</td>
+                          <td>{inventory.referenceNumber}</td>
+                          <td>{inventory.remark}</td>
+                        </tr>
+                        
+                      )}  
+                      </tbody>
+                    }  
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div className="modal-box" role="document">
+                <div className="modal-content">
+                  <div className="modal-header textdesign">
+                    <p style={{ fontWeight: 'bold' }}>Add New Inventory</p>
+                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
                     </button>
-                    <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div className="modal-box" role="document">
-                          <div className="modal-content">
-                            <div className="modal-header textdesign">
-                              <p style={{ fontWeight: 'bold' }}>Add New Inventory</p>
-                              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div className="modal-body">
-                              <NewInventory/>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                  </div>
+                  <div className="modal-body">
+                    <NewInventory/>
                   </div>
                 </div>
-                <h5 className="loading-msg">{allinventories.loading && <em>Loading All Inventory .....</em>}</h5>
-                <table className="table table-bordered table table-border">
-                  <thead>
-                    <tr className="filters">
-                      <th>S.No</th>
-                      <th>ID</th>
-                      <th>Product ID</th>
-                      <th>Product Name</th>
-                      <th>Warehouse Name</th>
-                      <th>Warehouse ID</th>
-                      <th>Qty</th>
-                      
-                    </tr>  
-                  </thead>
-                  
-                  { allinventories.items && allinventories.items.length > 0 &&
-                    <tbody>
-                    {allinventories.items.map((inventory, index) =>
-                      <tr key={inventory.id} >
-                        <td>{index + 1}</td>
-                        <td><Link to={"/inventory/" + inventory.id} onClick={this.forceUpdate}>{inventory.id}</Link></td>
-                        <td>{inventory.product.id}</td>
-                        <td>{inventory.product.name}</td>
-                        <td>{inventory.warehouse.name}</td>
-                        <td>{inventory.warehouse.id}</td>
-                        <td>{inventory.quantity}</td>
-                        
-                      </tr>
-                      
-                    )}  
-                    </tbody>
-                  }  
-                </table>
               </div>
             </div>
           </div>
-        </div>  
       );
     }
 }
