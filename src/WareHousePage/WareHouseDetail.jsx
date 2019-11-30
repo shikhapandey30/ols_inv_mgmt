@@ -6,6 +6,7 @@ import { userActions } from '../_actions';
 import { Footer } from '../Footer';
 import axios from 'axios';
 import config from 'config';
+import { WareHouseNewUser } from '../WareHousePage';
 
 
 class WareHouseDetail extends React.Component {
@@ -143,6 +144,11 @@ class WareHouseDetail extends React.Component {
                       &nbsp; <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         Edit
                       </button>
+                      &nbsp;
+                      <Link to={"/warehouse/" + warehouse.items.id + "/users"} onClick={this.forceUpdate} className="btn btn-primary" >Warehuse Users</Link>
+                       &nbsp; <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#addNewUser">
+                        Add New User
+                      </button>
                     </div>
                   </h1>
                 }
@@ -270,6 +276,21 @@ class WareHouseDetail extends React.Component {
                           </div>
             </div>
           }
+          <div className="modal fade" id="addNewUser" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-box" role="document">
+              <div className="modal-content">
+                <div className="modal-header textdesign">
+                  <p style={{ fontWeight: 'bold' }}>Add New WareHouse User</p>
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <WareHouseNewUser/>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>  
       );
     }

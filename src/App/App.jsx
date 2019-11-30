@@ -18,6 +18,7 @@ import { WareHouseDetail } from '../WareHousePage';
 import { ProductDetail } from '../ProductPage';
 import { WareHouseDelete } from '../WareHousePage';
 import { WareHouseEdit } from '../WareHousePage';
+import { WareHouseNewUser } from '../WareHousePage';
 import { Category } from '../CategoryPage';
 import { NewCategory } from '../CategoryPage';
 import { CategoryDetail } from '../CategoryPage';
@@ -81,6 +82,7 @@ class App extends React.Component {
                 
                 <PrivateRoute path="/warehouse/:id/edit" component={WareHouseEdit} />
                 <PrivateRoute path="/warehouse/:id" component={WareHouseDetail} />
+                <PrivateRoute path="/new-warehouse-user" component={WareHouseNewUser} />
                 <PrivateRoute path="/new-warehouse" component={NewWareHouse} />
                 <PrivateRoute path="/vendors" component={Vendor} />
                 <PrivateRoute path="/vendor/:id/edit" component={VendorEdit} />
