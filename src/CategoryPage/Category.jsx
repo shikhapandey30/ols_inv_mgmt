@@ -22,7 +22,7 @@ class Category extends React.Component {
             <div>
               <div className="page-header">
                 <h1 className="page-title">
-                  Categoriesss
+                  Categories
                   <div className="pull-right">
                     <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                       <i className="fa fa-plus" aria-hidden="true"></i> Add New Category
