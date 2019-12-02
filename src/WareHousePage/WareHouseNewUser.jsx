@@ -84,10 +84,6 @@ class WareHouseNewUser extends React.Component {
                 <div className="col-md-6">
                   <label htmlFor="warehousesuperAdmin" className="label">superAdmin</label>
                   <div>
-                    {submitted && !warehouse.superAdmin && 
-                      <div className="help-block required-msg"> Warehouse superAdmin is required</div>
-                    }
-                    
                     <select value={warehouse.superAdmin} onChange={this.handleChange} name="superAdmin" className="form-control select-field" >
                           <option key="1" value="true" >
                            True

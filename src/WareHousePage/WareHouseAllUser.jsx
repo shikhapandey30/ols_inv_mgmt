@@ -50,11 +50,6 @@ class WareHouseAllUser extends React.Component {
               <div className="page-header">
                 <h1 className="page-title">
                   Warehouse Users
-                  <div className="pull-right">
-                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                      <i className="fa fa-plus" aria-hidden="true"></i> Add New User
-                    </button>
-                  </div>
                 </h1>
               </div>
               <div className="panel filterable">
