@@ -7,6 +7,10 @@ import { Footer } from '../Footer';
 import axios from 'axios';
 import config from 'config';
 import { Route, Redirect } from 'react-router-dom';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from 'reactjs-places-autocomplete';
 
 
 class NewWareHouse extends React.Component {
@@ -15,19 +19,21 @@ class NewWareHouse extends React.Component {
         super(props);
         this.state = {
             warehouse: {
-                name: '',
-                city: '',
-                state: '',
-                address: '',
-                country: '',
-                zipcode: '',
-                landmark: '',
-                loaded: 0
+              name: '',
+              city: '',
+              state: '',
+              address: '',
+              country: '',
+              zipcode: '',
+              landmark: ''
             },
+            address: '',
             submitted: false
         };
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleGeocodeChange = this.handleGeocodeChange.bind(this);
     }
 
     handleChange(event) {
@@ -36,6 +42,35 @@ class NewWareHouse extends React.Component {
       this.setState({
           warehouse: { ...warehouse, [name]: value }
       });
+    }
+
+    handleGeocodeChange = address => {
+      this.setState({ address });
+    };
+
+    handleSelect = address => {
+      geocodeByAddress(address)
+        .then(results => getLatLng(results[0]))
+        .then(latLng => this.setaddress(latLng))
+        .catch(error => console.error('Error', error));
+
+    };
+
+    setaddress(latLng){
+       axios.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+latLng.lat+','+latLng.lng+'&sensor=true&key=AIzaSyAvuPSxdugPS2FJQibo-i78wVZHWgmKemk')
+      .then(response => {
+        this.setState({
+          warehouse: {
+            name: $("#warehousename").val(),
+            address: response.data.results[0].formatted_address,
+            landmark: response.data.results[0].address_components[2].long_name,
+            city: response.data.results[0].address_components[3].long_name,
+            zipcode: response.data.results[0].address_components[6].long_name,
+            state: response.data.results[0].address_components[4].long_name,
+            country: response.data.results[0].address_components[5].long_name
+          }
+        });
+      })
     }
 
     handleSubmit(event) {
@@ -47,7 +82,6 @@ class NewWareHouse extends React.Component {
       this.setState({ submitted: true });
       const { warehouse } = this.state;
       const { dispatch } = this.props;
-
       axios.post(`${config.apiUrl}/warehouses`, warehouse, {
       headers: headers
       })
@@ -69,7 +103,10 @@ class NewWareHouse extends React.Component {
       return (
         <div>
           <div className="container">
-            <form name="form" className="form-horizontal" role="form" onSubmit={this.handleSubmit}>
+
+          
+
+            <form name="form" autoComplete="off" className="form-horizontal" role="form" onSubmit={this.handleSubmit}>
               <div className="row">
                <div className="col-md-6">
                   <label htmlFor="warehousename" className="label">WareHouse Name</label>
@@ -86,7 +123,46 @@ class NewWareHouse extends React.Component {
                     {submitted && !warehouse.address && 
                       <div className="help-block required-msg"> Warehouse Address is required</div>
                     }
-                    <input type="text" id="warehouseaddress" className="form-control" placeholder="Address" name="address" value={warehouse.address} onChange={this.handleChange}  autoFocus />
+
+                    <PlacesAutocomplete
+                      value={this.state.address}
+                      onChange={this.handleGeocodeChange}
+                      onSelect={this.handleSelect}
+                    >
+                      {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                        <div>
+                          <input
+                            {...getInputProps({
+                              placeholder: 'Search Places ...',
+                              className: 'location-search-input form-control',
+                            })}
+                          />
+                          <div className="autocomplete-dropdown-container">
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map(suggestion => {
+                              const className = suggestion.active
+                                ? 'suggestion-item--active'
+                                : 'suggestion-item';
+                              const style = suggestion.active
+                                ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                              return (
+                                <div
+                                  {...getSuggestionItemProps(suggestion, {
+                                    className,
+                                    style,
+                                  })}
+                                >
+                                  <span>{suggestion.description}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
+                    </PlacesAutocomplete>
+                    <input type="hidden" id="warehouseaddress" name="address" value={warehouse.address} />
+
                   </div>
                 </div>
               </div><br/>  

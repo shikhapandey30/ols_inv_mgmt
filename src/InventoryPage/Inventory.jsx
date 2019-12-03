@@ -19,6 +19,7 @@ class Inventory extends React.Component {
               warehouse: '',
               loaded: 0
           },
+          allfilterinventories: [],
           inventoryfilterdata: [],
           submitted: false
         };
@@ -50,27 +51,34 @@ class Inventory extends React.Component {
       headers: headers
       })
       .then(response => {
-        this.setState({ inventoryfilterdata: response.data.data });
+        this.setState({ allfilterinventories: response.data });
       })
     }
 
-     switchVisible() {
-      if (document.getElementById('Div1')) {
-        if (document.getElementById('Div1').style.display == 'none') {
-            document.getElementById('Div1').style.display = 'block';
-            document.getElementById('Div2').style.display = 'none';
-        }
-        else {
-            document.getElementById('Div1').style.display = 'none';
-            document.getElementById('Div2').style.display = 'block';
-        }
-      }
-}
-
     componentDidMount() {
-      this.props.dispatch(userActions.getAllinventory());
+      this.getallInventoryDetails();
+
       this.props.dispatch(userActions.getAllproduct());
       this.props.dispatch(userActions.getAllwarehouse());
+    }
+
+
+    getallInventoryDetails(){
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+      }
+      axios.get(`${config.apiUrl}/inventories`, {
+      headers: headers
+    })
+    .then(response => {
+      this.setState({
+        allfilterinventories: response.data
+      }, () => {
+        console.log(this.state);
+      });
+    })
+    .catch(err => console.log(err));
     }
 
     render() {
@@ -83,18 +91,18 @@ class Inventory extends React.Component {
             <Header />
             <div className="container">
               <div className="filterinventory">
-                <form name="form" className="form-horizontal" role="form" onSubmit={this.handleSubmit} > 
+                <form name="form" className="form-horizontal" role="form" onSubmit={this.handleSubmit}  > 
                   <div className="row">
                     <div className="col-md-3">
                       <label htmlFor="filterinventoryproduct" className="label">Product</label>
                       <div>
                         { allproducts.items && allproducts.items.length > 0 &&
                           <select value={filterinventory.product} onChange={this.handleChange} name="product" className="form-control select-field" >
+                            <option>Select Product</option>
                             {allproducts.items.map((product, index) =>
                               <option key={index} value={product.id} >
                                 {product.name}
                               </option>
-                             
                             )}
                           </select>
                          }
@@ -105,6 +113,7 @@ class Inventory extends React.Component {
                       <div>
                         { allwarehouses.items && allwarehouses.items.length > 0 &&
                           <select value={filterinventory.warehouse} onChange={this.handleChange} name="warehouse" className="form-control select-field" >
+                            <option>Select Warehouse</option>
                             {allwarehouses.items.map((warehouse, index) =>
                               <option key={index} value={warehouse.id} >
                                 {warehouse.name}
@@ -115,58 +124,13 @@ class Inventory extends React.Component {
                       </div>
                     </div>
                     <div className="col-md-3">
-                       <button className="btn btn-primary filtersubmit" onClick={this.switchVisible}>Filter</button>
+                       <button className="btn btn-primary filtersubmit">Filter</button>
                     </div>
                   </div>  
                 </form>
               </div><br/>
-              <div id="Div2" >
-              { inventoryfilterdata &&
-                <div>
-                <h1> Inventories</h1>
-                  <table className="table table-hover table-responsive">
-                    <thead>
-                      <tr className="filters">
-                        <th>S.No</th>
-                        <th>ID</th>
-                        <th>Wh id</th>
-                        <th>Product Name</th>
-                        <th>Batch No</th>
-                        <th>Qty</th>
-                        <th>Purchase Cost</th>
-                        <th>Sales Cost</th>
-                        <th>MRP Cost</th>
-                        <th>Special Cost</th>
-                        <th>Barcode</th>
-                        <th>Reference Number</th>
-                        <th>Remark</th>
-                      </tr>  
-                    </thead>
-                      <tbody>
-                      {inventoryfilterdata.map((inventory_filter_data, index) =>
-                        <tr key={inventory_filter_data.id} >
-                          <td>{index + 1}</td>
-                          <td>{inventory_filter_data.id}</td>
-                          <td>{inventory_filter_data.warehouse.id}</td>
-                          <td>{inventory_filter_data.product.name}</td>
-                          <td>{inventory_filter_data.batch}</td>
-                          <td>{inventory_filter_data.quantity}</td>
-                          <td>{inventory_filter_data.purchaseCost}</td>
-                          <td>{inventory_filter_data.salesCost}</td>
-                          <td>{inventory_filter_data.mrpCost}</td>
-                          <td>{inventory_filter_data.specialCost}</td>
-                          <td>{inventory_filter_data.barcode}</td>
-                          <td>{inventory_filter_data.referenceNumber}</td>
-                          <td>{inventory_filter_data.remark}</td>
-                        </tr>
-                      )}  
-                      </tbody>
-                  </table>
-                </div>  
-              }
-              </div>  
               <p>
-                <div id="Div1">
+                <div>
                   <div className="page-header">
                     <h1 className="page-title">
                       Inventories
@@ -178,7 +142,7 @@ class Inventory extends React.Component {
                     </h1>
                   </div>
                   <div className="panel filterable">
-                    {allinventories.loading && <h5 className="loading-msg"><em>Loading All Inventory .....</em></h5>}
+                    {this.state.allfilterinventories.loading && <h5 className="loading-msg"><em>Loading All Inventory .....</em></h5>}
                     <table className="table table-hover table-responsive">
                       <thead>
                         <tr className="filters">
@@ -197,10 +161,9 @@ class Inventory extends React.Component {
                           <th>Remark</th>
                         </tr>  
                       </thead>
-                      
-                      { allinventories.items && allinventories.items.length > 0 &&
+                      { this.state.allfilterinventories.data && this.state.allfilterinventories.data.length > 0 &&
                         <tbody>
-                        {allinventories.items.map((inventory, index) =>
+                        {this.state.allfilterinventories.data.map((inventory, index) =>
                           <tr key={inventory.id} >
                             <td>{index + 1}</td>
                             <td><Link to={"/inventory/" + inventory.id} onClick={this.forceUpdate}>{inventory.id}</Link></td>

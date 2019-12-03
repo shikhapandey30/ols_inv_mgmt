@@ -19,6 +19,7 @@ import { ProductDetail } from '../ProductPage';
 import { WareHouseDelete } from '../WareHousePage';
 import { WareHouseEdit } from '../WareHousePage';
 import { WareHouseNewUser } from '../WareHousePage';
+import { AddressForm } from '../WareHousePage';
 import { Category } from '../CategoryPage';
 import { NewCategory } from '../CategoryPage';
 import { CategoryDetail } from '../CategoryPage';
@@ -27,6 +28,7 @@ import { Inventory } from '../InventoryPage';
 import { InventoryDetail } from '../InventoryPage';
 import { InventoryEdit } from '../InventoryPage';
 import { NewInventory } from '../InventoryPage';
+import { FilterInventory } from '../InventoryPage';
 import { Vendor } from '../VendorPage';
 import { VendorDetail } from '../VendorPage';
 import { NewVendor } from '../VendorPage';
@@ -74,7 +76,6 @@ class App extends React.Component {
                 <PrivateRoute path="/inventories" component={Inventory} />
                 <PrivateRoute path="/inventory/:id/edit" component={InventoryEdit} />
                 <PrivateRoute path="/inventory/:id" component={InventoryDetail} />
-                <PrivateRoute path="/new-inventory" component={NewInventory} />
                 
                 
                 <PrivateRoute path="/product/:id" component={ProductDetail} />
