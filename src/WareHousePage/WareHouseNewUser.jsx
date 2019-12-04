@@ -82,7 +82,7 @@ class WareHouseNewUser extends React.Component {
                   </div>
                 </div>
                 <div className="col-md-6">
-                  <label htmlFor="warehousesuperAdmin" className="label">superAdmin</label>
+                  <label htmlFor="warehousesuperAdmin" className="label">Super Admin</label>
                   <div>
                     <select value={warehouse.superAdmin} onChange={this.handleChange} name="superAdmin" className="form-control select-field" >
                           <option key="1" value="true" >
@@ -98,7 +98,7 @@ class WareHouseNewUser extends React.Component {
               <div className="row">
                 <input type="hidden" id="warehousetoken" className="form-control" placeholder="token" name="token" value={warehouse.token} onChange={this.handleChange}  autoFocus />
                 <div className="col-md-6">
-                  <label htmlFor="warehouseuserName" className="label">userName</label>
+                  <label htmlFor="warehouseuserName" className="label">User Name</label>
                   <div>
                     {submitted && !warehouse.userName && 
                       <div className="help-block required-msg"> Warehouse userName is required</div>
@@ -108,17 +108,16 @@ class WareHouseNewUser extends React.Component {
                 </div>
                 
                 <div className="col-md-6">
-                  <label htmlFor="warehousewarehouseAdmin" className="label">warehouseAdmin</label>
+                  <label htmlFor="warehousewarehouseAdmin" className="label">Warehouse Admin</label>
                   <div >
-                      <select value={warehouse.warehouseAdmin} onChange={this.handleChange} name="warehouseAdmin" className="form-control select-field" >
-                          <option key="1" value="true" >
-                           True
-                          </option>
-                          <option key="0" value="false" >
-                           False
-                          </option>
-                      </select>
-                     
+                    <select value={warehouse.warehouseAdmin} onChange={this.handleChange} name="warehouseAdmin" className="form-control select-field" >
+                        <option key="1" value="true" >
+                         True
+                        </option>
+                        <option key="0" value="false" >
+                         False
+                        </option>
+                    </select>
                   </div>
                 </div>
               </div><br/>  

@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 import { Header } from '../Header';
 import { userActions } from '../_actions';
 import { Footer } from '../Footer';
+import config from 'config';
 import { NewCategory } from '../CategoryPage';
+import MUIDataTable from "mui-datatables";
+import { Route, Redirect } from 'react-router-dom';
+require('react-dom');
 
 class Category extends React.Component {
     componentDidMount() {
@@ -15,6 +19,18 @@ class Category extends React.Component {
       const { user, allcategories } = this.props;
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
       console.log("allcategories*******************************", allcategories)
+      var columns = ["Name", "Company", "City", "State"];
+      var data = [
+       ["Joe James", "Test Corp", "Yonkers", "NY"],
+       ["John Walsh", "Test Corp", "Hartford", "CT"],
+       ["Bob Herm", "Test Corp", "Tampa", "FL"],
+       ["James Houston", "Test Corp", "Dallas", "TX"],
+      ];
+
+      var options = {
+        filterType: 'checkbox',
+      };
+
       return (
         <div>
           <Header />
@@ -40,7 +56,6 @@ class Category extends React.Component {
                       <th>Name</th>
                     </tr>  
                   </thead>
-                  
                   { allcategories.items && allcategories.items.length > 0 &&
                     <tbody>
                     {allcategories.items.map((category, index) =>

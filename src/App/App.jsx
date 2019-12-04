@@ -19,6 +19,7 @@ import { ProductDetail } from '../ProductPage';
 import { WareHouseDelete } from '../WareHousePage';
 import { WareHouseEdit } from '../WareHousePage';
 import { WareHouseNewUser } from '../WareHousePage';
+import { WareHouseUserDetail } from '../WareHousePage';
 import { AddressForm } from '../WareHousePage';
 import { Category } from '../CategoryPage';
 import { NewCategory } from '../CategoryPage';
@@ -66,6 +67,7 @@ class App extends React.Component {
                 <PrivateRoute path="/Header" component={Header} />
                 <PrivateRoute path="/Footer" component={Footer} />
                 <PrivateRoute path="/products" component={Product} />
+                <PrivateRoute path="/warehouses/:id/users/:id" component={WareHouseUserDetail} />
                 <PrivateRoute path="/warehouse/:id/users" component={WareHouseAllUser} />
                 <PrivateRoute path="/new-product" component={NewProduct} />
                 <PrivateRoute path="/product/:id/edit" component={ProductEdit} />
@@ -78,13 +80,14 @@ class App extends React.Component {
                 <PrivateRoute path="/inventory/:id" component={InventoryDetail} />
                 
                 
+                
                 <PrivateRoute path="/product/:id" component={ProductDetail} />
                 <PrivateRoute path="/warehouses" component={WareHouse} />
-                
                 <PrivateRoute path="/warehouse/:id/edit" component={WareHouseEdit} />
                 <PrivateRoute path="/warehouse/:id" component={WareHouseDetail} />
                 <PrivateRoute path="/new-warehouse-user" component={WareHouseNewUser} />
                 <PrivateRoute path="/new-warehouse" component={NewWareHouse} />
+
                 <PrivateRoute path="/vendors" component={Vendor} />
                 <PrivateRoute path="/vendor/:id/edit" component={VendorEdit} />
                 <PrivateRoute path="/vendor/:id" component={VendorDetail} />

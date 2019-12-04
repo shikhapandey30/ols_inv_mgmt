@@ -24,7 +24,7 @@ class Header extends React.Component {
               <div className="nav-xbootstrap" style={{zIndex:10}}>
                 <ul>
                   <li><a href="#">Dashboard</a></li>
-                  <li><a href="javascript:void(0)">Master<span className="glyphicon glyphicon-chevron-down iconsize"></span></a>
+                  <li><a>Master<span className="glyphicon glyphicon-chevron-down iconsize"></span></a>
                     <ul className="dropdown">
                       <li><a href="/warehouses">Warehouse</a></li>
                       <li><a href="/categories">Category</a></li>

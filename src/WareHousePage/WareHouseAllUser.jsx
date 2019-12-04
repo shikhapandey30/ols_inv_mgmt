@@ -78,7 +78,7 @@ class WareHouseAllUser extends React.Component {
                       <tr key={warehouseuser.id} >
                         <td>{index + 1}</td>
                         <td>{warehouseuser.id}</td>
-                        <td>{warehouseuser.userName}</td>
+                        <td><Link to={"/warehouses/" + warehouseuser.warehouse.id + "/users/" + warehouseuser.id} onClick={this.forceUpdate}>{warehouseuser.userName}</Link></td>
                         <td>{warehouseuser.warehouse.id}</td>
                         <td>{warehouseuser.warehouse.name}</td>
                         <td>{warehouseuser.warehouse.address}</td>
