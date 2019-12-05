@@ -10,7 +10,7 @@ import config from 'config';
 
 class PurchaseOrderDetail extends React.Component {
 
-     constructor(props){
+    constructor(props){
     super(props);
     this.state = {
       id:'',

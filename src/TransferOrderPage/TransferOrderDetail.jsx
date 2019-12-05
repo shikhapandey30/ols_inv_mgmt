@@ -9,8 +9,96 @@ import config from 'config';
 
 
 class TransferOrderDetail extends React.Component {
+
+    constructor(props){
+    super(props);
+    this.state = {
+      id:'',
+      itemid: '',
+      status: '',
+      destinationWarehouse: '',
+      sourceWarehouse: '',
+    }
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  componentWillMount(){
+    this.getTransferOrderDetails();
+  }
+
+  getTransferOrderDetails(){
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+    }
+    let transferorderId = this.props.match.params.id;
+    axios.get(`${config.apiUrl}/transfer_orders/${transferorderId}`, {
+      headers: headers
+    })
+    .then(response => {
+      this.setState({
+        id: response.data.data.id,
+        destinationWarehouse: response.data.data.destinationWarehouse,
+        status: response.data.data.status,
+        itemid: response.data.data.itemid,
+        sourceWarehouse: response.data.data.sourceWarehouse
+      }, () => {
+        console.log(this.state);
+      });
+    })
+    .catch(err => console.log(err));
+    }
+
+    editTransferOrder(transferorder){
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('user')).data.token
+    }
+    var transferorders = {id: transferorder.id, status: transferorder.status, items: [], destinationWarehouse: {id: transferorder.destinationWarehouse}, sourceWarehouse: {id: transferorder.sourceWarehouse}}
+    axios.put(`${config.apiUrl}/transfer_orders`, transferorders, {
+    headers: headers
+    })
+      .then(response => {
+        this.setState({ locations: response.data });
+        window.location = "/transfer-orders"
+      })
+    }
+
+    onSubmit(e){
+    const transferorder = {
+      id: this.refs.id.value,
+      destinationWarehouse: this.refs.destinationWarehouse.value,
+      status: this.refs.status.value,
+      itemid: this.refs.itemid.value,
+      sourceWarehouse: this.refs.sourceWarehouse.value
+    }
+    this.editTransferOrder(transferorder);
+    e.preventDefault();
+
+  }
+
+  handleInputChange(e){
+    const target = e.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+    handleChange(event) {
+      const { name, value } = event.target;
+      const { transferorder } = this.state;
+      this.setState({transferorder: event.target.value});
+      this.setState({
+          transferorder: { ...transferorder, [name]: value }
+      });
+    }
+
     componentDidMount(transferorder) {
       this.props.dispatch(userActions.gettransferorderdetail(this.props.match.params.id));
+      this.props.dispatch(userActions.getAllwarehouse());
     }
 
     transferorderDelete = (id) => {
@@ -29,7 +117,8 @@ class TransferOrderDetail extends React.Component {
     }
 
     render() {
-      const { user, transferorder } = this.props
+      const { user,allwarehouses, transferorder } = this.props;
+      const { submitted } = this.state;
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
       console.log("transferorder*******************************", transferorder)
       return (
@@ -150,7 +239,61 @@ class TransferOrderDetail extends React.Component {
                       </button>
                     </div>
                     <div className="modal-body">
-                      
+                      <form className="form-horizontal" onSubmit={this.onSubmit.bind(this)}>
+                        <div className="row">
+                          <div className="col-md-6">
+                            <label htmlFor="destinationWarehouse" className="label">destinationWarehouse</label>
+                            <div>
+
+                              { allwarehouses.items && allwarehouses.items.length > 0 &&
+                              <select name="destinationWarehouse" ref="destinationWarehouse" value={this.state.destinationWarehouse} onChange={this.handleInputChange} className="form-control select-field" >
+                                {allwarehouses.items.map((warehouse, index) =>
+                                  <option key={index} value={warehouse.id} >
+                                    {warehouse.name}
+                                  </option>
+                                )}
+                              </select>
+                            }
+                            </div>
+                          </div>
+                          <div className="col-md-6">
+                            <label htmlFor="status" className="label">Status</label>
+                            <div>
+                              <input className="form-control" type="text" name="status" ref="status" value={this.state.status} onChange={this.handleInputChange} />
+                            </div>
+                          </div>
+                        </div><br/>  
+                        <div className="row model-warehouse">
+                          <div className="col-md-6">
+                            <label htmlFor="itemid" className="label">itemid</label>
+                            <div>
+                              <input className="form-control" type="text" name="itemid" ref="itemid" value={this.state.itemid} onChange={this.handleInputChange} />
+                            </div>
+                          </div>
+                          <div className="col-md-6">
+                            <label htmlFor="sourceWarehouse" className="label">sourceWarehouse</label>
+                            <div>
+
+                            { allwarehouses.items && allwarehouses.items.length > 0 &&
+                              <select name="sourceWarehouse" ref="sourceWarehouse" value={this.state.sourceWarehouse} onChange={this.handleInputChange} className="form-control select-field" >
+                                {allwarehouses.items.map((warehouse, index) =>
+                                  <option key={index} value={warehouse.id} >
+                                    {warehouse.name}
+                                  </option>
+                                )}
+                              </select>
+                            }
+                            </div><br/>
+                          </div>
+                        </div><br/>  
+                        <input className="form-control" type="hidden" name="id" ref="id" value={transferorder.items.id} onChange={this.handleInputChange} />
+                        <div className="form-group">
+                          <div className="pull-right">
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
+                            <button className="btn btn-primary">Submit</button>
+                          </div>
+                        </div>
+                      </form> 
                     </div>
                   </div>
                 </div>
@@ -162,11 +305,12 @@ class TransferOrderDetail extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { transferorderid, transferorder, authentication } = state;
+  const { transferorderid,allwarehouses, transferorder, authentication } = state;
   const { user } = authentication;
   return {
     user,
-    transferorder
+    transferorder,
+    allwarehouses
   };
 }
 

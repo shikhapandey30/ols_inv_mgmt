@@ -10,31 +10,36 @@ import { Route, Redirect } from 'react-router-dom';
 
 
 class NewTransferOrder extends React.Component {
-    
+   
     constructor(props) {
         super(props);
         this.state = {
-          transferorders: {
-              destinationWarehouse: '',
-              itemid: '',
-              sourceWarehouse: '',
-              product: '',
-              quantity: '',
-              status: '',
-              loaded: 0
-          },
+          products_quantity: [{product:"", quantity:""}],
+          itemid: '',
+          status: '',
+          destinationWarehouse: '',
+          sourceWarehouse: '',
           submitted: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event) {
-      const { name, value } = event.target;
-      const { transferorders } = this.state;
-      this.setState({
-          transferorders: { ...transferorders, [name]: value }
-      });
+   
+
+    handleChange = (e) => {
+      if (["product", "quantity"].includes(e.target.className) ) {
+        let products_quantity = [...this.state.products_quantity]
+        products_quantity[e.target.dataset.id][e.target.className] = e.target.value.toUpperCase()
+        this.setState({ products_quantity }, () => console.log(this.state.products_quantity))
+      } else {
+        this.setState({ [e.target.name]: e.target.value.toUpperCase() })
+      }
+    }
+    addProductQuantity = (e) => {
+      this.setState((prevState) => ({
+        products_quantity: [...prevState.products_quantity, {product:"", quantity:""}],
+      }));
     }
 
     handleSubmit(event) {
@@ -44,9 +49,17 @@ class NewTransferOrder extends React.Component {
       }
       event.preventDefault();
       this.setState({ submitted: true });
-      const { transferorders } = this.state;
+      const { purchaseorders } = this.state;
       const { dispatch } = this.props;
-      var transferorder = { items: [{id: transferorders.itemid, product: {id: transferorders.product}, quantity: transferorders.quantity }],status: transferorders.status, destinationWarehouse: {id: transferorders.destinationWarehouse}, sourceWarehouse: {id: transferorders.sourceWarehouse}}
+
+
+      const { products_quantity } = this.state;
+
+      const product_ids = [];
+      {products_quantity.map((product_id) =>
+        product_ids.push({product: {id: product_id.product}, quantity: product_id.quantity})
+      )}
+      var transferorder = { items: product_ids,status: this.state.status, destinationWarehouse: {id: this.state.destinationWarehouse }, sourceWarehouse: {id: this.state.sourceWarehouse}}
       axios.post(`${config.apiUrl}/transfer_orders`, transferorder, {
       headers: headers
       })
@@ -68,21 +81,35 @@ class NewTransferOrder extends React.Component {
 
     render() {
       const { loggingIn, user, allproducts,allvendors, allwarehouses,allcategories } = this.props;
-      const { transferorders, category, submitted } = this.state;
+      const { purchaseorders, category, submitted } = this.state;
+      let { products_quantity, itemid, status, destinationWarehouse, sourceWarehouse} = this.state
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
       console.log("allproducts*******************************", allproducts)
       console.log("allwarehouses*******************************", allwarehouses)
       return (
         <div>
           <div className="container">
-          <form name="form" className="form-horizontal" role="form" onSubmit={this.handleSubmit}>
+           <form onSubmit={this.handleSubmit} onChange={this.handleChange} >
               <div className="row">
-
                 <div className="col-md-6">
-                  <label htmlFor="sourceWarehouse" className="label">Source Warehouse</label>
-                  <div >
-                    { allwarehouses.items && allwarehouses.items.length > 0 &&
-                      <select value={transferorders.sourceWarehouse} onChange={this.handleChange} name="sourceWarehouse" className="form-control select-field" >
+                  <label htmlFor="itemid" className="label">itemid</label>
+                  <div>
+                    <input type="text" className="form-control" placeholder="Item" name="itemid" id="itemid" value={itemid}  autoFocus />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="status" className="label">Status</label>
+                  <div>
+                    <input type="text" className="form-control" placeholder="Status" name="status" id="status" value={status} autoFocus />
+                  </div>
+                </div>
+              </div><br/>
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="destinationWarehouse" className="label">Vendor</label>
+                  <div>
+                      { allwarehouses.items && allwarehouses.items.length > 0 &&
+                      <select name="destinationWarehouse" id="destinationWarehouse" value={destinationWarehouse} className="form-control select-field" >
                         {allwarehouses.items.map((warehouse, index) =>
                           <option key={index} value={warehouse.id} >
                             {warehouse.name}
@@ -93,10 +120,10 @@ class NewTransferOrder extends React.Component {
                   </div>
                 </div>
                 <div className="col-md-6">
-                  <label htmlFor="destinationWarehouse" className="label">Destination Warehouse</label>
+                  <label htmlFor="sourceWarehouse" className="label">Warehouse</label>
                   <div>
                     { allwarehouses.items && allwarehouses.items.length > 0 &&
-                      <select value={transferorders.destinationWarehouse} onChange={this.handleChange} name="destinationWarehouse" className="form-control select-field" >
+                      <select name="sourceWarehouse" id="sourceWarehouse" value={sourceWarehouse} className="form-control select-field" >
                         {allwarehouses.items.map((warehouse, index) =>
                           <option key={index} value={warehouse.id} >
                             {warehouse.name}
@@ -106,67 +133,64 @@ class NewTransferOrder extends React.Component {
                      }
                   </div>
                 </div>
-              </div><br/>  
-              <div className="row">
-                <div className="col-md-6">
-                  <label htmlFor="productitemid" className="label">Item</label>
-                  <div>
-                    {submitted && !transferorders.itemid && 
-                      <div className="help-block required-msg"> Item is required</div>
-                    }
-                    <input type="text" id="purchaseorderitemid" className="form-control" placeholder="Item" name="itemid" value={transferorders.itemid} onChange={this.handleChange}  autoFocus />
-                  </div>
-                </div>
-
-                <div className="col-md-6">
-                  <label htmlFor="productstatus" className="label">Status</label>
-                  <div>
-                    {submitted && !transferorders.status && 
-                      <div className="help-block required-msg"> status is required</div>
-                    }
-                    <input type="text" id="transferorderstatus" className="form-control" placeholder="Status" name="status" value={transferorders.status} onChange={this.handleChange}  autoFocus />
-                  </div>
-                </div>
-              </div><br/>  
-              <div className="row model-warehouse">
-                <div className="col-md-6">
-                  <label htmlFor="productquantity" className="label">Quantity</label>
-                  <div>
-                    {submitted && !transferorders.quantity && 
-                      <div className="help-block required-msg"> quantity is required</div>
-                    }
-                    <input type="text" id="transferorderquantity" className="form-control" placeholder="Quantity" name="quantity" value={transferorders.quantity} onChange={this.handleChange}  autoFocus />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <label htmlFor="product" className="label">Product</label>
-                  <div>
-                    { allproducts.items && allproducts.items.length > 0 &&
-                      <select value={transferorders.product} onChange={this.handleChange} name="product" className="form-control select-field" >
-                        {allproducts.items.map((product, index) =>
-                          <option key={index} value={product.id} >
-                            {product.name}
-                          </option>
-                        )}
-                      </select>
-                     }
-                  </div><br/>
-                </div>
-                
-              </div><br/>  
+              </div><br/>
+             <div className="row addmoreproduct">
+                {
+                  products_quantity.map((val, idx)=> {
+                    let productId = `product-${idx}`, quantityId = `quantity-${idx}`
+                    return (
+                      <div key={idx}>
+                          <div className="col-md-6">
+                            <label htmlFor="{productId}" className="label">{`Product #${idx + 1}`}</label>
+                            <div>
+                              { allproducts.items && allproducts.items.length > 0 &&
+                                <select vname={productId}
+                                  data-id={idx}
+                                  id={productId}
+                                  value={products_quantity[idx].product}
+                                  className="product" >
+                                  {allproducts.items.map((product, index) =>
+                                    <option key={index} value={product.id} >
+                                      {product.name}
+                                    </option>
+                                  )}
+                                </select>
+                              }
+                            </div>  
+                          </div>
+                          <div className="col-md-6">
+                            <label htmlFor="{quantityId}" className="label">{`Quantity #${idx + 1}`}</label> 
+                            <div> 
+                              <input
+                                type="text"
+                                name={quantityId}
+                                data-id={idx}
+                                id={quantityId}
+                                value={products_quantity[idx].quantity}
+                                className="quantity"
+                              />
+                            </div>  
+                          </div>  
+                      </div>
+                    )
+                  })
+                }
+             </div><br/>
+             <center className="model-warehouse">
+               <a className="btn btn-primary" onClick={this.addProductQuantity}>Add New Product</a>
+              </center>  
               <div className="form-group">
-                <div className="pull-right">
-                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
-                  <button className="btn btn-primary">Submit</button>
+                  <div className="pull-right">
+                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>&nbsp;&nbsp;
+                    <button className="btn btn-primary">Submit</button>
+                  </div>
                 </div>
-              </div>
             </form>
           </div>
         </div>  
       );
     }
 }
-
 function mapStateToProps(state) {
   const { transferorders,allproducts,allwarehouses, allvendors, users, authentication } = state;
   const { user } = authentication;

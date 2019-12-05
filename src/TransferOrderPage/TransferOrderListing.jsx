@@ -75,7 +75,7 @@ class TransferOrderListing extends React.Component {
             <div className="modal-box" role="document">
               <div className="modal-content">
                 <div className="modal-header textdesign">
-                  <p style={{ fontWeight: 'bold' }}>Add New Purchase Order</p>
+                  <p style={{ fontWeight: 'bold' }}>Add New Transfer Order</p>
                   <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
