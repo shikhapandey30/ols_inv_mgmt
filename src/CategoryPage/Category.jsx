@@ -6,9 +6,7 @@ import { userActions } from '../_actions';
 import { Footer } from '../Footer';
 import config from 'config';
 import { NewCategory } from '../CategoryPage';
-import MUIDataTable from "mui-datatables";
 import { Route, Redirect } from 'react-router-dom';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { MDBDataTable } from 'mdbreact';
 
 
