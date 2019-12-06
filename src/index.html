@@ -12,13 +12,31 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAvuPSxdugPS2FJQibo-i78wVZHWgmKemk&libraries=places"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/jquery.geocomplete.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
   </head>
   <body>
     <div id="app"></div>
     <style>
+      tbody + thead{
+        display: none;
+      }
+      .dataTables_filter, .dataTables_info { display: none; }
+      .dataTables_length, .dataTables_info { display: none; }
       .nav-xbootstrap li:hover ul.dropdown{
         z-index: 9999;
       }
+      table.dataTable thead {
+        cursor: pointer;
+      }
+      .sorting_asc:before{
+        content: '\25B2';
+      }
+
+    .sorting_desc:before{
+      content: '\25BC';
+    }
       .autocomplete-dropdown-container{
         position: absolute;
         z-index: 9999;

@@ -8,7 +8,9 @@ import config from 'config';
 import { NewCategory } from '../CategoryPage';
 import MUIDataTable from "mui-datatables";
 import { Route, Redirect } from 'react-router-dom';
-require('react-dom');
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { MDBDataTable } from 'mdbreact';
+
 
 class Category extends React.Component {
     componentDidMount() {
@@ -19,18 +21,48 @@ class Category extends React.Component {
       const { user, allcategories } = this.props;
       const current_user = JSON.parse(localStorage.getItem('singleUser'))
       console.log("allcategories*******************************", allcategories)
-      var columns = ["Name", "Company", "City", "State"];
-      var data = [
-       ["Joe James", "Test Corp", "Yonkers", "NY"],
-       ["John Walsh", "Test Corp", "Hartford", "CT"],
-       ["Bob Herm", "Test Corp", "Tampa", "FL"],
-       ["James Houston", "Test Corp", "Dallas", "TX"],
-      ];
-
-      var options = {
-        filterType: 'checkbox',
+      const allrecord = [];
+      {allcategories.loading && <em>Loading allcategories</em>}
+      { allcategories.items && allcategories.items.length > 0 &&
+        <ul className="list-group">
+          {allcategories.items.map((category, index) =>
+            <div key={index}>
+              { allrecord.push({sn: index + 1, id: category.id, name: category.name, view: <Link to={"/category/" + category.id} onClick={this.forceUpdate}>View</Link>})
+              }
+            </div>
+          )}
+        </ul>
+      } 
+      this.state = { allrecord };
+      const data = {
+        columns: [
+          {
+            label: 'S No.',
+            field: 'sn',
+            width: 270
+          },
+          {
+            label: 'ID',
+            field: 'id',
+            sort: 'asc',
+            width: 270
+          },
+          {
+            label: 'Name',
+            field: 'name',
+            sort: 'asc',
+            width: 150
+          },
+          {
+            label: 'View',
+            field: 'view',
+            sort: 'false',
+            width: 150
+          },
+        ],
+        rows: allrecord
       };
-
+      
       return (
         <div>
           <Header />
@@ -47,27 +79,12 @@ class Category extends React.Component {
                 </h1>
               </div>
               <div className="panel filterable">
+                <MDBDataTable
+                  small
+                  hover
+                  data={data}
+                />
                 {allcategories.loading && <h5 className="loading-msg"><em>Loading All Categories .....</em></h5>}
-                <table className="table table-hover">
-                  <thead>
-                    <tr className="filters">
-                      <th>S.No</th>
-                      <th>ID</th>
-                      <th>Name</th>
-                    </tr>  
-                  </thead>
-                  { allcategories.items && allcategories.items.length > 0 &&
-                    <tbody>
-                    {allcategories.items.map((category, index) =>
-                      <tr key={category.id} >
-                        <td>{index + 1}</td>
-                        <td><Link to={"/category/" + category.id} onClick={this.forceUpdate}>{category.id}</Link></td>
-                        <td>{category.name}</td>
-                      </tr>
-                    )}  
-                    </tbody>
-                  }     
-                </table>
               </div>
             </div>
           </div>
