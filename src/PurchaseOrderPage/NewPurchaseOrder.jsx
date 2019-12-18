@@ -163,7 +163,7 @@ class NewPurchaseOrder extends React.Component {
                           </div>
                           <div className="col-md-6">
                             <label htmlFor="{quantityId}" className="label">{`Quantity #${idx + 1}`}</label> 
-                            <div> 
+                            <div className="quan"> 
                               <input
                                 type="text"
                                 name={quantityId}
